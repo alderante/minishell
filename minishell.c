@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/06/22 16:11:54 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:35:21 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ int main(void)
         printf("%s$ ", get_current_dir_name());
         input = readline("");
         if(input == NULL || *input == '\0')
+        {
+            printf("\n");
             free(input);
+        }    
         else
         {
             if (strcmp(input, "exit") == 0)

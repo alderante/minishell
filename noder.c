@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/06/22 15:18:27 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:49:39 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void    ft_node_deleter(t_lexer *first)
     node = first;
     while(first)
     {
-        free(first->arg);
         free(first->token);
         first = first->next;
         free(node);
@@ -35,9 +34,14 @@ void ft_final_stamper(t_lexer *first)
     node = first;
 	while (node)
     {
-        printf("Pos: %d\n", node->pos);
-        printf("Token: %s\n", node->token);
-        printf("Arg: %s\n", node->arg);
+        printf("\n _____INIZIO NODO___________________\n");
+        printf("|                                   |\n");
+        printf("|                                   |\n");
+        printf("|   Pos: %d                          |\n", node->pos);
+        printf("|   Token: %d                        |\n", node->type);
+        printf("|   Arg: %s                     |\n", node->token);
+        printf("|                                   |\n");
+        printf("|_____________________FINE NODO_____|\n\n");
         node = node->next;
         i++;
     }
@@ -49,70 +53,19 @@ t_lexer	*ft_newnode(char *row, int pos)
 
     node = malloc(sizeof(t_lexer) * 1);
     if (strcmp(row, "echo") == 0)
-    {
-        printf("ECHO\n");
-        node->token = "ECHO";
-    }
-    else if (strcmp(row, "|") == 0)
-    {   
-        printf("|\n");
-        node->token = row;
-    }
-    else if (strcmp(row, "<") == 0)
-    {   
-        printf("<\n");
-        node->token = row;
-    }
-    else if (strcmp(row, ">") == 0)
-    {   
-        printf(">\n");
-        node->token = row;
-    }
-    else if (strcmp(row, ">>") == 0)
-    {   
-        printf(">>\n");
-        node->token = row;
-    }
-    else if (strcmp(row, "<<") == 0)
-    {   
-        printf("<<\n");
-        node->token = row;
-    }
+        node->type = BUILTIN;
     else if (strcmp(row, "cd") == 0)
-    {   
-        printf("CD\n");
-        node->token = row;
-    }
+        node->type = BUILTIN;
     else if (strcmp(row, "pwd") == 0)
-    {   
-        printf("PWD\n");
-        node->token = row;
-    }
+        node->type = BUILTIN;
     else if (strcmp(row, "export") == 0)
-    {   
-        printf("EXPORT\n");
-        node->token = row;
-    }
+        node->type = BUILTIN;
     else if (strcmp(row, "unset") == 0)
-    {   
-        printf("UNSET\n");
-        node->token = row;
-    }
+        node->type = BUILTIN;
     else if (strcmp(row, "env") == 0)
-    {   
-        printf("ENV\n");
-        node->token = row;
-    }
-    else if (strcmp(row, "exit") == 0)
-    {   
-        printf("EXIT\n");
-        node->token = row;
-    }
+        node->type = BUILTIN;
     else
-    {
-        printf("ERROR\n");
-        node->token = row;
-    }
+        node->type = NON;
     node->pos = pos;
 	node->next = NULL;
 	return (node);
