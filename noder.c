@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/06/27 11:00:23 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:29:54 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_lexer	*ft_initialize(char **matrix)
 		node = node->next;
         i++;
 	}
-    //ft_final_stamper(first);
+    ft_final_stamper(first);
 	return (first);
 }
 
