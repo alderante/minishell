@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/06/23 11:35:21 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:47:26 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ char **easy_split(char *str)
                 {
                     i++;
                     while(str[i] != 34 && str[i] != 39)
-                    {
-                        tab[y][x] = str[i];
-                        i++;
-                        x++;
-                    }
-                    i++;
-                }
-                else if(str[i] == 124)
-                {
-                    //i++;
-                    while(str[i] > 32)
                     {
                         tab[y][x] = str[i];
                         i++;

@@ -6,16 +6,16 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/06/23 11:49:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:00:23 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    ft_node_deleter(t_lexer *first)
+void ft_node_deleter(t_lexer *first)
 {
     t_lexer *node;
-     
+
     node = first;
     while(first)
     {
@@ -35,13 +35,13 @@ void ft_final_stamper(t_lexer *first)
 	while (node)
     {
         printf("\n _____INIZIO NODO___________________\n");
-        printf("|                                   |\n");
-        printf("|                                   |\n");
-        printf("|   Pos: %d                          |\n", node->pos);
-        printf("|   Token: %d                        |\n", node->type);
-        printf("|   Arg: %s                     |\n", node->token);
-        printf("|                                   |\n");
-        printf("|_____________________FINE NODO_____|\n\n");
+        printf("|\n");
+        printf("|\n");
+        printf("|   Pos:   %d\n", node->pos);
+        printf("|   Type:  %d\n", node->type);
+        printf("|   Token: %s\n", node->token);
+        printf("|\n");
+        printf("|_____________________FINE NODO_____\n\n");
         node = node->next;
         i++;
     }
@@ -67,7 +67,11 @@ t_lexer	*ft_newnode(char *row, int pos)
     else
         node->type = NON;
     node->pos = pos;
-	node->next = NULL;
+    if(node->type == NON)
+        node->token = strdup(row);
+    else if(node->type == BUILTIN)
+        node->token = strdup(row);
+    node->next = NULL;
 	return (node);
 }
 
@@ -87,7 +91,7 @@ t_lexer	*ft_initialize(char **matrix)
 		node = node->next;
         i++;
 	}
-    ft_final_stamper(first);
+    //ft_final_stamper(first);
 	return (first);
 }
 
