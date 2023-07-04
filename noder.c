@@ -6,15 +6,15 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/06/27 11:29:54 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:30:04 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_node_deleter(t_lexer *first)
+void ft_node_deleter(t_token *first)
 {
-    t_lexer *node;
+    t_token *node;
 
     node = first;
     while(first)
@@ -26,11 +26,11 @@ void ft_node_deleter(t_lexer *first)
     }
 }
 
-void ft_final_stamper(t_lexer *first)
+void ft_final_stamper(t_token *first)
 {
 	int	i;
 	i = 0;
-    t_lexer *node;
+    t_token *node;
     node = first;
 	while (node)
     {
@@ -47,11 +47,12 @@ void ft_final_stamper(t_lexer *first)
     }
 }
 
-t_lexer	*ft_newnode(char *row, int pos)
+t_token	*ft_newnode(char *row, int pos)
 {
-	t_lexer		*node;
+	t_token		*node;
 
-    node = malloc(sizeof(t_lexer) * 1);
+    
+    node = malloc(sizeof(t_token) * 1);
     if (strcmp(row, "echo") == 0)
         node->type = BUILTIN;
     else if (strcmp(row, "cd") == 0)
@@ -67,54 +68,45 @@ t_lexer	*ft_newnode(char *row, int pos)
     else
         node->type = NON;
     node->pos = pos;
-    if(node->type == NON)
-        node->token = strdup(row);
-    else if(node->type == BUILTIN)
-        node->token = strdup(row);
+    node->token = strdup(row);
+   
+
+    //node->token = ft_strjoin(node->token, ";");
+        
     node->next = NULL;
 	return (node);
 }
 
-t_lexer	*ft_initialize(char **matrix)
+t_token	*ft_initialize(char **new_matrix)
 {
-    int i;
-    t_lexer	*node;
-    t_lexer	*first;
+    int     i;
+    t_token	*node;
+    t_token	*first;
+    t_command_line *cmd_line;
+
+    while(new_matrix)
+    {
+        cmd_line->new_matrix_string = new_matrix[i];
+        cmd_line = cmd_line->next;
+        i++;
+    }
+
+    // ora devo passare le singole new_matrix_string ad uno split che poi a sua volta passi ogni singolo aromento alla struct token che lo paragoni a tuttu
+    // i type possibili.
+
+
+
 
     i = 0;
-	node = ft_newnode(matrix[0], i + 1);
+	node = ft_newnode(new_matrix[0], i + 1);
     first = node;
     i++;
-    while (matrix[i])
+    while (new_matrix[i])
 	{
-		node->next = ft_newnode(matrix[i], i + 1);
+		node->next = ft_newnode(new_matrix[i], i + 1);
 		node = node->next;
         i++;
 	}
     ft_final_stamper(first);
 	return (first);
 }
-
-
-/*
-int     fd[2];
-
-pipe(fd);
-fork();
-fd[0] -> reading end;
-fd[1] -> writing end;
-
-
-
-fd = open(file2);
-
-old_stdout = dup(1);
-if(fd == -1)
-    error;
-else
-    dup2(fd, 1);
-    fd == 3 -> file2;
-    fd2 == 4 -> file2;
-    close(fd);
-    dup2(old_stdout, 1);
-*/
