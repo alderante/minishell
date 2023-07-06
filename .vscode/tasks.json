@@ -4,14 +4,14 @@
         {
             "label": "Build minishell",
             "type": "shell",
-            "command": "gcc -o minishell minishell.c -L/usr/include/readline -lreadline",
+            "command": "gcc minishell.c noder.c libft/libft.a -lreadline -o minishell",
             "group": "build",
             "problemMatcher": "$gcc"
         },
         {
             "label": "Clean minishell",
             "type": "shell",
-            "command": "rm -f minishell",
+            "command": "make clean",
             "group": "build"
         },
         {

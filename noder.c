@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/03 16:30:04 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:19:23 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,87 +26,106 @@ void ft_node_deleter(t_token *first)
     }
 }
 
-void ft_final_stamper(t_token *first)
+void ft_final_stamper(t_command_line *cmd_line)
 {
 	int	i;
 	i = 0;
     t_token *node;
-    node = first;
-	while (node)
+    node = cmd_line->single_token;
+	while (cmd_line)
     {
-        printf("\n _____INIZIO NODO___________________\n");
-        printf("|\n");
-        printf("|\n");
-        printf("|   Pos:   %d\n", node->pos);
-        printf("|   Type:  %d\n", node->type);
-        printf("|   Token: %s\n", node->token);
-        printf("|\n");
-        printf("|_____________________FINE NODO_____\n\n");
-        node = node->next;
-        i++;
+        while(node)
+		{
+			printf("\n __INIZIO NODO TOKEN_______________\n");
+			printf("|\n");
+			printf("|\n");
+			printf("|   Pos:   %d\n", node->pos);
+			printf("|   Type:  %d\n", node->type);
+			printf("|   Token: %s\n", node->token);
+			printf("|\n");
+			printf("|________________FINE NODO TOKEN___\n\n");
+			node = node->next;
+			i++;
+		}
     }
 }
 
-t_token	*ft_newnode(char *row, int pos)
+t_token	*ft_newnode(char *token, int pos)
 {
 	t_token		*node;
-
     
     node = malloc(sizeof(t_token) * 1);
-    if (strcmp(row, "echo") == 0)
+    if (strcmp(token, "echo") == 0)
         node->type = BUILTIN;
-    else if (strcmp(row, "cd") == 0)
+    else if (strcmp(token, "cd") == 0)
         node->type = BUILTIN;
-    else if (strcmp(row, "pwd") == 0)
+    else if (strcmp(token, "pwd") == 0)
         node->type = BUILTIN;
-    else if (strcmp(row, "export") == 0)
+    else if (strcmp(token, "export") == 0)
         node->type = BUILTIN;
-    else if (strcmp(row, "unset") == 0)
+    else if (strcmp(token, "unset") == 0)
         node->type = BUILTIN;
-    else if (strcmp(row, "env") == 0)
+    else if (strcmp(token, "env") == 0)
         node->type = BUILTIN;
     else
         node->type = NON;
     node->pos = pos;
-    node->token = strdup(row);
-   
-
+    node->token = ft_strdup(token);
     //node->token = ft_strjoin(node->token, ";");
-        
     node->next = NULL;
-	return (node);
+    return (node);
 }
 
-t_token	*ft_initialize(char **new_matrix)
+t_token	*ft_initialize(t_command_line *first_cmd)
 {
     int     i;
     t_token	*node;
-    t_token	*first;
-    t_command_line *cmd_line;
+    t_token	*first_token;
+	t_command_line	*temp;
+	char    **current_line;
 
-    while(new_matrix)
-    {
-        cmd_line->new_matrix_string = new_matrix[i];
-        cmd_line = cmd_line->next;
-        i++;
-    }
-
-    // ora devo passare le singole new_matrix_string ad uno split che poi a sua volta passi ogni singolo aromento alla struct token che lo paragoni a tuttu
-    // i type possibili.
-
-
-
-
-    i = 0;
-	node = ft_newnode(new_matrix[0], i + 1);
-    first = node;
-    i++;
-    while (new_matrix[i])
+    // printf("check actual line %s\n", first->new_matrix_string);
+    // printf("check next line   %s\n", first->next->new_matrix_string);
+	i = 0;
+	temp = first_cmd;
+	while(first_cmd)
 	{
-		node->next = ft_newnode(new_matrix[i], i + 1);
-		node = node->next;
-        i++;
+		printf("\n __NEW MATRIX STRING %d_____________\n", i);
+		printf("|\n");
+		printf("|   New Matrix String: %s\n", first_cmd->new_matrix_string);
+		printf("|__________________________________\n\n");
+        
+		i = 0;
+		
+		current_line = easy_split(first_cmd->new_matrix_string);
+        node = ft_newnode(current_line[i], i + 1);
+		first_token = node;
+	    //ft_final_stamper(first_token);
+		first_cmd->single_token = node;
+		i++;
+		printf("node is %s\n", node->token);
+		while(current_line[i])
+        {
+			node->next = ft_newnode(current_line[i], i + 1);
+			printf("node is %s\n", node->next->token);
+		//	ft_final_stamper(node);
+			node = node->next;
+			i++;
+        }
+        first_cmd = first_cmd->next;
+		i++;
 	}
-    ft_final_stamper(first);
-	return (first);
+    
+	first_cmd = temp;
+    node = first_token;
+
+	printf("1: %s\n", first_cmd->single_token->token);
+	printf("1: %u\n", first_cmd->single_token->type);
+	printf("2: %s\n", first_cmd->single_token->next->token);
+	printf("3: %s\n", first_cmd->next->single_token->token);
+	printf("4: %s\n", first_cmd->next->single_token->next->token);
+
+
+    //ft_final_stamper(first_cmd);
+	return (first_token);
 }

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/04 12:26:55 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/06 17:04:11 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,13 @@ int pipe_counter(char **matrix)
 }
 
 //  This fills new matrix_string in command line with the pipes as separators
-void    ft_new_matrix(char **matrix)
+t_command_line    *ft_new_matrix(char **matrix)
 {
     int     i;
-    t_command_line    *cmd_line;
-    t_command_line    *first_line;
+    //int     pipe_count;
     char    *temp;
+    t_command_line    *first_line;
+    t_command_line    *cmd_line;
 
     //questo va allocato in base al numero di pipe + 2 (3 pipe = 4 + la quinta NULL)
     //pipe_count = pipe_counter(matrix) + 2;
@@ -102,37 +103,36 @@ void    ft_new_matrix(char **matrix)
         while (matrix[i] && matrix[i][0] != '|')
         {
             cmd_line->new_matrix_string = ft_strjoin(temp, matrix[i]);
-            if(matrix[i + 1] != NULL)
+            if(matrix[i + 1] != NULL && matrix[i + 1][0] != '|')
                 cmd_line->new_matrix_string = ft_strjoin(cmd_line->new_matrix_string, " ");
             temp = cmd_line->new_matrix_string;
             i++;
-            printf("Passaggio %d: %s\n", i, cmd_line->new_matrix_string);
+            //printf("Passaggio %d: %s\n", i, cmd_line->new_matrix_string);
 
         }
         if (matrix[i] && matrix[i][0] == '|')
         {
             i++;
+            cmd_line->next = calloc(sizeof(t_command_line *), 1);
             cmd_line = cmd_line->next;
-            //cmd_line = calloc(1, 1);
-            cmd_line->new_matrix_string = malloc(sizeof(char *) * 1000);
         }
     }
-    cmd_line = cmd_line->next;
-    cmd_line = NULL;
+	cmd_line->next = NULL;
     cmd_line = first_line;
     while(cmd_line)
     {
-        printf("New line della new_matrix_string: %s\n", cmd_line->new_matrix_string);
+        printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
         cmd_line = cmd_line->next;
     }
-    free(temp);
+    //free(temp);
+    return(first_line);
 }
 
 void ft_lexer(char *input)
 {
     char *input_clone;
     char **matrix;
-    //char **new_matrix;
+    t_command_line *first;
     int i;
   
     //printf("Lexer ORIGINALE: %s\n", lexer);
@@ -147,10 +147,10 @@ void ft_lexer(char *input)
         printf("Easy split line %i: %s\n", i, matrix[i]);
         i++;
     }
-    //this is cleaning all rows of the matrix and joining them in one till the first pipe
-    ft_new_matrix(matrix);
+    first = malloc(sizeof(t_command_line));
+    first = ft_new_matrix(matrix);
     //questo is to initialize i nodi
-    //ft_initialize(new_matrix);
+    ft_initialize(first);
     //ft_node_deleter(first);
 
     //questo is to free the matrix
@@ -166,11 +166,13 @@ void ft_lexer(char *input)
 
 int main(int ac, char **av, char **envp)
 {
-    char *input;
+	char *input;
     (void)(ac);
     (void)(av);
-    (void)(envp);
-
+    
+	// questa gestisce le variabili ambientali
+	ft_env_noder(envp);
+	
     while (1)
     {
         //this is to print the prompt
@@ -184,13 +186,12 @@ int main(int ac, char **av, char **envp)
         }
         else
         {
-            /*
             if (strcmp(input, "exit") == 0)
             {
                 printf("exit\n");
                 exit(0);
             }
-            */
+            
             //printf("You entered: %s\n", input);
             ft_lexer(input);
             free(input);
