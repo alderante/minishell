@@ -1,84 +1,51 @@
-SRCS := libft/ft_isalpha.c \
-		libft/ft_isdigit.c \
-		libft/ft_isalnum.c \
-		libft/ft_isascii.c \
-		libft/ft_isprint.c \
-		libft/ft_strlen.c \
-		libft/ft_memset.c \
-		libft/ft_bzero.c \
-		libft/ft_memcpy.c \
-		libft/ft_memmove.c \
-		libft/ft_strlcpy.c \
-		libft/ft_strlcat.c \
-		libft/ft_toupper.c \
-		libft/ft_tolower.c \
-		libft/ft_strchr.c \
-		libft/ft_strrchr.c \
-		libft/ft_strncmp.c \
-		libft/ft_memchr.c \
-		libft/ft_memcmp.c \
-		libft/ft_strnstr.c \
-		libft/ft_atoi.c \
-		libft/ft_calloc.c \
-		libft/ft_strdup.c \
-		libft/ft_substr.c \
-		libft/ft_strjoin.c \
-		libft/ft_strtrim.c \
-		libft/ft_split.c \
-		libft/ft_itoa.c \
-		libft/ft_strmapi.c \
-		libft/ft_striteri.c \
-		libft/ft_putchar_fd.c \
-		libft/ft_putstr_fd.c \
-		libft/ft_putendl_fd.c \
-		libft/ft_putnbr_fd.c
-						
-BONUS := libft/ft_lstnew.c \
-		libft/ft_lstadd_front.c \
-		libft/ft_lstsize.c \
-		libft/ft_lstlast.c \
-		libft/ft_lstadd_back.c \
-		libft/ft_lstdelone.c \
-		libft/ft_lstclear.c \
-		libft/ft_lstiter.c \
-		libft/ft_lstmap.c
-		
-PTF	:= ft_printf/ft_printf.c \
-		ft_printf/ft_print_conv_chr.c \
-		ft_printf/ft_print_conv_str.c \
-		ft_printf/ft_print_conv_nbr.c \
-		ft_printf/ft_print_conv_hex_min.c \
-		ft_printf/ft_print_conv_hex_maj.c \
-		ft_printf/ft_print_conv_ptr.c \
-		ft_printf/ft_print_conv_uns.c
-		
-OBJS			= $(SRCS:.c=.o) $(PTF:.c=.o)
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/10/19 11:37:27 by rkhinchi          #+#    #+#              #
+#    Updated: 2023/03/15 17:44:16 by rkhinchi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+SRCS	=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
+		ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
+		ft_itoa.c ft_memcpy.c  ft_putendl_fd.c ft_strchr.c  ft_strlcpy.c \
+		ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c ft_memcpy.c \
+		ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
+		ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
+		ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_striteri.c \
+		get_next_line.c ft_strcmp.c \
 
-CC				= gcc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I.
+OBJS	=	$(SRCS:.c=.o)
 
-NAME			= libft.a
+BONUS	=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
+		ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
+		ft_lstmap.c ft_lstnew.c ft_lstsize.c
 
-all:			$(NAME)
+BOBJS	=	$(BONUS:.c=.o)
 
-$(NAME):		$(OBJS)
-				ar -rcs $@ $^
+CC	=	gcc
+CFLAGS	=	-Wall -Werror -Wextra
+RM	=	rm -f
+NAME	=	libft.a
 
-%.o:%.c
-			$(CC) -c $(CFLAGS) $< -o $@
+all:		$(NAME)
 
-bonus:			$(BONUS_OBJS)
-				ar -rcs $(NAME) $^
+$(NAME):	$(OBJS)
+			ar rcs $(NAME) $(OBJS)
+
+bonus:		$(OBJS) $(BOBJS)
+			ar rcs $(NAME) $(OBSJ) $(BOBJS)
+
 clean:
-				$(RM) libft/*.o
-				$(RM) ft_printf/*.o
+		$(RM) $(OBJS) $(BOBJS)
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:		clean
+			$(RM) $(NAME)
 
-re:				fclean all
+re:		fclean all
 
-.PHONY:			all clean fclean re bonus
+.PHONY:		all bonus clean fclean re bonus
