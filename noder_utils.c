@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 11:21:38 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 11:45:12 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:44:17 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_e_type ft_node_builtin_typer(char	*token)
     else if (ft_strcmp(token, "env") == 0)
         type = BUILTIN;
     else
-        type = NON;
+        return(1);
 return(type);
 }
 
@@ -58,6 +58,6 @@ t_e_type ft_node_redirect_typer(char *token)
     else if (ft_strcmp(token, ">>") == 0)
         type = WRITE_FILE;
     else
-        type = NON;
+        return(1);
 return(type);
 }

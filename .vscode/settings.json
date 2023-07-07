@@ -1,7 +1,8 @@
 {
     "files.associations": {
-        "readline.h": "c",
-        "history.h": "c",
-        "unistd.h": "c"
-    }
+		"readline.h": "c",
+		"history.h": "c",
+		"unistd.h": "c",
+		"string.h": "c"
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 12:03:46 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:48:35 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@
 
 typedef enum type
 {
-	NON,
-	ARG,			// ls -l o wc -l
-	BUILTIN,		// echo, cd, pwd, export, unset, env, exit
-	OPEN_FILE,		// <
-	HERE_DOC,		// <<
-	LIMITOR,		// |
-	CREAT_FILE,		// >
-	WRITE_FILE,		// >>
-	FILE_IN,		// ls -l < file.txt quindi il tipo del file.txt e' FILE_IN
-	FILE_OUT,		// ls -l > file.txt quindi il tipo del file.txt e' FILE_OUT
-	FILE_OUT_OVER,	// ls -l >> file.txt quindi il tipo del file.txt e' FILE_OUT_OVER
-	ENDS 			// ;
+	WRONG,			// 0 ERROR
+	NON,			// 1 BOOOOOOH
+	ARG,			// 2 ls -l o wc -l
+	BUILTIN,		// 3 echo, cd, pwd, export, unset, env, exit
+	OPEN_FILE,		// 4 <
+	HERE_DOC,		// 5 <<
+	LIMITOR,		// 6 |
+	CREAT_FILE,		// 7 >
+	WRITE_FILE,		// 8 >>
+	FILE_IN,		// 9 ls -l < file.txt quindi il tipo del file.txt e' FILE_IN
+	FILE_OUT,		// 10 ls -l > file.txt quindi il tipo del file.txt e' FILE_OUT
+	FILE_OUT_OVER,	// 11 ls -l >> file.txt quindi il tipo del file.txt e' FILE_OUT_OVER
+	ENDS 			// 12 ;
 }	t_e_type;
 
 typedef struct s_token
