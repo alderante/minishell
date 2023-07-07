@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:38:55 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:02:39 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -23,7 +23,7 @@
 // # include "parsing.h"
 // # include "exec.h"
 // # include "builtin.h"
-# include "libft/libft.h"
+# include "libft_R/libft.h"
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -42,7 +42,7 @@ typedef enum mod
 	ADD
 }			t_mod;
 
-typedef enum token
+typedef enum type
 {
 	NON,
 	ARG,
@@ -56,22 +56,22 @@ typedef enum token
 	FILE_OUT,
 	FILE_OUT_OVER, 
 	ENDS
-}				t_e_token;
+}				t_e_type;
 
 // cat file.txt
 // file.txt this should be str
 struct			s_token
 {
-	char		*str; //the file name for open function, in redirect file-in
-	t_e_token	type;
-	bool		expanded;
+	char		*token; //the file name for open function, in redirect file-in
+	t_e_type	type;
+	//bool		expanded;
 	t_token		*next;
 };
 
 struct				s_commande_line
 {
-	char			*string; //everything which is passed but till pipe
-	t_token			*original_token;
+	char			*new_matrix_string; //everything which is passed but till pipe
+	t_token			*single_token;
 	char			**envp;
 	char			**argv;
 	int				fd_in;

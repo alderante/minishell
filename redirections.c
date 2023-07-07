@@ -6,21 +6,21 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:34:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:01:59 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 int g_exit_status;
 
-int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_token type)
+int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_type type)
 {
 	if (type == FILE_OUT)
 	{
 		if ((*cmd)->fd_out != 1)
 			close((*cmd)->fd_out);
-		(*cmd)->fd_out = open(updated->str, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		(*cmd)->fd_out = open(updated->token, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if ((*cmd)->fd_out == -1)
 			return (-1);
 	}
@@ -28,24 +28,24 @@ int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_token type)
 	{
 		if ((*cmd)->fd_out != 1)
 			close((*cmd)->fd_out);
-		(*cmd)->fd_out = open(updated->str, O_CREAT | O_RDWR | O_APPEND, 0644);
+		(*cmd)->fd_out = open(updated->token, O_CREAT | O_RDWR | O_APPEND, 0644);
 		if ((*cmd)->fd_out == -1)
 			return (-1);
 	}
 	return (0);
 }
 
-int	redirect_file_in(t_command_line **cmd, t_token *updated, t_e_token type)
+int	redirect_file_in(t_command_line **cmd, t_token *updated, t_e_type type)
 {
 	if (type == FILE_IN)
 	{
 		if ((*cmd)->fd_in != 0)
 			close((*cmd)->fd_in);
-		(*cmd)->fd_in = open(updated->str, O_RDONLY);
+		(*cmd)->fd_in = open(updated->token, O_RDONLY);
 		if ((*cmd)->fd_in == -1)
 		{
 			write(1, "minishell: ", 11);
-			perror(updated->str);
+			perror(updated->token);
 			return (-1);
 		}
 	}
@@ -57,7 +57,7 @@ int redirections_fd(t_command_line **cmd)
 {
     t_token	*updated;
 
-	updated = (*cmd)->original_token;
+	updated = (*cmd)->single_token;
 	while (updated)
 	{
 		if (updated->type == FILE_IN || updated->type == LIMITOR)

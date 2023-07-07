@@ -6,11 +6,11 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:34:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:55:48 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 int g_exit_status;
 

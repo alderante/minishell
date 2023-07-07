@@ -6,11 +6,11 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:14:56 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:29:14 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:55:48 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 extern int	g_exit_status;
 
@@ -18,13 +18,13 @@ void	free_token(t_command_line **cmd_line)
 {
 	t_token	*tok;
 
-	while ((*cmd_line)->original_token)
+	while ((*cmd_line)->single_token)
 	{
-		tok = (*cmd_line)->original_token->next;
-		if ((*cmd_line)->original_token->str)
-			free((*cmd_line)->original_token->str);
-		free((*cmd_line)->original_token);
-		(*cmd_line)->original_token = tok;
+		tok = (*cmd_line)->single_token->next;
+		if ((*cmd_line)->single_token->str)
+			free((*cmd_line)->single_token->str);
+		free((*cmd_line)->single_token);
+		(*cmd_line)->single_token = tok;
 	}
 }
 
@@ -37,11 +37,11 @@ int	free_all(t_command_line **cmd_line)
 		while (*cmd_line)
 		{
 			tmp = (*cmd_line)->next;
-			if ((*cmd_line)->string)
-				free((*cmd_line)->string);
+			if ((*cmd_line)->new_matrix_string)
+				free((*cmd_line)->new_matrix_string);
 			if ((*cmd_line)->argv)
 				free((*cmd_line)->argv);
-			if ((*cmd_line)->original_token)
+			if ((*cmd_line)->single_token)
 				free_token(cmd_line);
 			if ((*cmd_line)->name_file)
 				free((*cmd_line)->name_file);
