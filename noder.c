@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 15:44:26 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:08:54 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_token	*ft_newnode(char *token, int pos)
 	else if (ft_node_redirect_typer(token) != 1)
 		node->type = ft_node_redirect_typer(token);
 	else
-		node->type = WRONG;
+		node->type = NON;
 	node->pos = pos;
 	node->token = ft_strdup(token);
 	//node->token = ft_strjoin(node->token, ";");

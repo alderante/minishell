@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 15:48:35 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:11:09 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@
 
 typedef enum type
 {
-	WRONG,			// 0 ERROR
 	NON,			// 1 BOOOOOOH
 	ARG,			// 2 ls -l o wc -l
 	BUILTIN,		// 3 echo, cd, pwd, export, unset, env, exit
 	OPEN_FILE,		// 4 <
 	HERE_DOC,		// 5 <<
-	LIMITOR,		// 6 |
+	LIMITOR,		// 6 ???
 	CREAT_FILE,		// 7 >
 	WRITE_FILE,		// 8 >>
 	FILE_IN,		// 9 ls -l < file.txt quindi il tipo del file.txt e' FILE_IN
 	FILE_OUT,		// 10 ls -l > file.txt quindi il tipo del file.txt e' FILE_OUT
 	FILE_OUT_OVER,	// 11 ls -l >> file.txt quindi il tipo del file.txt e' FILE_OUT_OVER
-	ENDS 			// 12 ;
+	ENDS 			// 12 ; ???
+	//WRONG,			// 0 ERROR
 }	t_e_type;
 
 typedef struct s_token
@@ -65,6 +65,8 @@ typedef struct s_command_line
 	char					*name_file;
 	struct s_command_line	*next;
 }	t_command_line;
+
+int	ft_strcmp(char *str1, char *str2);
 
 t_env			*ft_env_noder(char **envp);
 char			**easy_split(char *str);

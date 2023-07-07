@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 15:20:02 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/07 16:08:02 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,12 +156,13 @@ void	ft_lexer(char *input)
 
 int	main(int ac, char **av, char **envp)
 {
+	t_env	*env;
 	char	*input;
 
 	(void)(ac);
 	(void)(av);
 	// questa gestisce le variabili ambientali
-	ft_env_noder(envp);
+	env = ft_env_noder(envp);
 	while (1)
 	{
 		input = readline(ft_strjoin(getenv("PWD"), "%>"));
@@ -170,6 +171,14 @@ int	main(int ac, char **av, char **envp)
 		{
 			printf("\n");
 			free(input);
+		}
+		else if(ft_strcmp(input, "env") == 0)
+		{
+			while(env)
+			{
+				printf("%s=%s\n", env->name, env->value);
+				env = env->next;
+			}
 		}
 		else
 		{
