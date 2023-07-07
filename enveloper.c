@@ -6,23 +6,11 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/06 17:20:01 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:33:27 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-int	ft_strcmp(char *str1, char *str2)
-{
-	while(str1 && str2 && *str1 == *str2)
-	{
-		str1++;
-		str2++;
-	}
-	return(*str1 - *str2);
-}
-*/
 
 t_env	*noder(char *str)
 {

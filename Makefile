@@ -6,6 +6,7 @@ FLAGS = -Wall -Wextra -Werror -g
 
 SRC = minishell.c \
 		noder.c \
+		noder_utils.c \
 		enveloper.c
 
 LIBFT = libft/libft.a
