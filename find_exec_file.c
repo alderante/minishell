@@ -6,13 +6,13 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:03:11 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 15:55:48 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 17:55:40 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-extern int	g_exit_status;
+/* extern int	g_exit_status;
 
 char	*write_bad_cmd_free_split(char *str, char **split_path)
 {
@@ -92,7 +92,7 @@ char	*find_if_executable(char *str, char *path, int i)
 	write_bad_cmd_free_split(str, split_path);
 	g_exit_status = 127;
 	return (str);
-}
+} */
 
 //This function is used to search for an executable file in the directories listed in the PATH environment variable.
 /*The function original checks if the name of the command to execute contains a forward slash character (/). 

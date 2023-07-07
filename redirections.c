@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 16:01:59 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 17:53:45 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_type type)
 	{
 		if ((*cmd)->fd_out != 1)
 			close((*cmd)->fd_out);
-		(*cmd)->fd_out = open(updated->token, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		(*cmd)->fd_out = open(updated->token, O_CREAT | O_RDWR | O_TRUNC, 0777);
 		if ((*cmd)->fd_out == -1)
 			return (-1);
 	}
@@ -28,7 +28,7 @@ int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_type type)
 	{
 		if ((*cmd)->fd_out != 1)
 			close((*cmd)->fd_out);
-		(*cmd)->fd_out = open(updated->token, O_CREAT | O_RDWR | O_APPEND, 0644);
+		(*cmd)->fd_out = open(updated->token, O_CREAT | O_RDWR | O_APPEND, 0777);
 		if ((*cmd)->fd_out == -1)
 			return (-1);
 	}
@@ -53,9 +53,9 @@ int	redirect_file_in(t_command_line **cmd, t_token *updated, t_e_type type)
 	return (0);
 }
 
-int redirections_fd(t_command_line **cmd)
+int	redirections_fd(t_command_line **cmd)
 {
-    t_token	*updated;
+	t_token		*updated;
 
 	updated = (*cmd)->single_token;
 	while (updated)

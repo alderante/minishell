@@ -34,7 +34,7 @@ int	execution_builtin(char *str, char **args, t_command_line **original, pid_t *
 	else if (ft_strcmp("unset", str))
 		ft_built_in_unset(args);
 	free(pid);
-	func_2_free_all_env();
+	free_delete_add(NULL, FREE);
 	free_all(original);
 	return (0);
 }

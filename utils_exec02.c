@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:51:23 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 15:55:48 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 18:06:14 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	all_free_n_exit(t_command_line **cmd,
 	pid_t *pid, char **str)
 {
 	free_all(cmd);
-	func_2_free_all_env();
+	free_delete_add(NULL, FREE);
 	free(pid);
 	free(str);
 	exit(1);

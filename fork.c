@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 15:55:48 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 17:59:42 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int func_fork(t_command_line **cmd, pid_t *pid)
 		updated = updated->next;
 	}
 	updated = *cmd;
-	//Xno_forkingX
+	//Xno_fX
 	while (i < len)
 	{
 		process_forking(pid, i, cmd, &updated);
