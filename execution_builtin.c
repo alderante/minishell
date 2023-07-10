@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_builtin.c                                     :+:      :+:    :+:   */
+/*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 14:30:45 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:54:57 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
-int	execution_builtin(char *str, char **args, t_command_line **original, pid_t *pid)
+int	execution_builtin(char *str, char **args,
+		t_command_line **original, pid_t *pid)
 {
 	if (str == NULL)
 		return (0);
@@ -34,7 +35,7 @@ int	execution_builtin(char *str, char **args, t_command_line **original, pid_t *
 	else if (ft_strcmp("unset", str))
 		ft_built_in_unset(args);
 	free(pid);
-	func_2_free_all_env();
+	free_delete_add(NULL, FREE);
 	free_all(original);
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:52:44 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:34:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:51:18 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 int	g_exit_status;
 
@@ -37,19 +37,19 @@ int	using_pipe(int **nfd, int i, t_command_line *updated)
 }
 
 // total nfd will be needed, depending on the process
-int piping(t_command_line **cmd)
+int	piping(t_command_line **cmd)
 {
-	t_command_line	*updated;
-	int				**nfd; // number of fd, nfd[0][0], *nfd[0][1]
-	int				i;
-	int				rtrn;
+	int					i;
+	int					rtrn;
+	t_command_line		*updated;
+	int					**nfd; // number of fd, nfd[0][0], *nfd[0][1]
 
 	i = 0;
 	updated = *cmd;
 	nfd = malloc(sizeof(int *) * (command_len(updated) + 1));
 	if (nfd == NULL)
 		return (50);
-	nfd[command_len(updated)] = NULL; //last nfd is NULL;
+	nfd[command_len(updated)] = NULL;
 	while (updated)
 	{
 		rtrn = using_pipe(nfd, i, updated);

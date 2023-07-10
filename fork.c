@@ -6,25 +6,24 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:34:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:32:21 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
-int g_exit_status;
-
-int	process_forking(pid_t *pid, int i, t_command_line **cmd, t_command_line **updated)
+int	process_forking(pid_t *pid, int i, t_command_line **cmd, 
+			t_command_line **updated)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	/* signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN); */
 	pid[i] = fork();
 	if (pid[i] == -1)
 		exit(1);
 	if (pid[i] == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		/* signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL); */
 		big_executor(updated, cmd, pid);
 	}
 	if ((*updated)->fd_in != 0)
@@ -37,7 +36,7 @@ int	process_forking(pid_t *pid, int i, t_command_line **cmd, t_command_line **up
 //open fd for redirections
 // Command_len how many commands are there
 
-int func_fork(t_command_line **cmd, pid_t *pid)
+int	func_fork(t_command_line **cmd, pid_t *pid)
 {
 	int				len;
 	int				i;
@@ -52,7 +51,7 @@ int func_fork(t_command_line **cmd, pid_t *pid)
 		updated = updated->next;
 	}
 	updated = *cmd;
-	//Xno_forkingX
+	//Xno_fX
 	while (i < len)
 	{
 		process_forking(pid, i, cmd, &updated);

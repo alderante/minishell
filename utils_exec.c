@@ -6,11 +6,11 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:53:37 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/06 16:34:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:55:48 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 void	all_fd_close(t_command_line **cmd)
 {
