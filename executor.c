@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 18:08:25 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:26:13 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 	//name_of_file_free((*cmd)->name_file);
 	if ((*cmd)->fd_in < 0 || (*cmd)->fd_out < 0)
 		all_free_n_exit(original, pid, str);
-	if (cmd_is_builtin((*cmd)->argv[0]))
+	if (cmd_is_builtin((*cmd)->argv[0]t_env01			*env_list;))
 		execute_builtin(str, cmd, original, pid);
 	else
 		execution_execve(cmd, original, str, pid);
@@ -75,12 +75,14 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 
 void	execution(t_command_line **cmd_line)
 {
+	t_env01			*env_list;
 	t_command_line	*updated;
 	pid_t			*pid;
 	int				rtrn;
 
 	updated = *cmd_line;
 	rtrn = piping(cmd_line);
+	env_list = convert_env_to_list(updated->envp);
 	if (rtrn == 0)
 		pid = malloc(sizeof(pid_t) * command_len(updated)); 
 	else

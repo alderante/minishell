@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:31:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 18:51:59 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:12:37 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 	char			*str;
 	int				declare;
 	struct s_env	*next;
-}				t_env;
+}				t_env01;
  */
-t_env	*create_env_node(char *str, int declare)
+t_env01	*create_env_node(char *str, int declare)
 {
-	t_env	*node;
+	t_env01	*node;
 
-	node = (t_env *)malloc(sizeof(t_env));
+	node = (t_env01 *)malloc(sizeof(t_env01));
 	if (node)
 	{
 		node->str = strdup(str);
@@ -33,9 +33,9 @@ t_env	*create_env_node(char *str, int declare)
 	return (node);
 }
 
-void	add_env_node(t_env **env_list, char *str, int declare)
+void	add_env_node(t_env01 **env_list, char *str, int declare)
 {
-	t_env	*node;
+	t_env01	*node;
 
 	node = create_env_node(str, declare);
 	if (node)
@@ -45,9 +45,9 @@ void	add_env_node(t_env **env_list, char *str, int declare)
 	}
 }
 
-t_env	*convert_env_to_list(char **env)
+t_env01	*convert_env01_to_list(char **env)
 {
-	t_env	*env_list;
+	t_env01	*env_list;
 	int		i;
 
 	i = 0;
@@ -57,15 +57,15 @@ t_env	*convert_env_to_list(char **env)
 		while (env[i] != NULL)
 		{
 			add_env_node(&env_list, env[i], 1);
+			i++;
 		}
-		i++;
 	}
 	return (env_list);
 }
 
-void	free_env_list(t_env *env_list)
+void	free_env_list(t_env01 *env_list)
 {
-	t_env	*temp;
+	t_env01	*temp;
 
 	temp = env_list;
 	while (env_list)
@@ -77,7 +77,7 @@ void	free_env_list(t_env *env_list)
 	}
 }
 
-void	print_env_list(t_env *env_list)
+/* void	print_env01_list(t_env01 *env_list)
 {
 	while (env_list)
 	{
@@ -88,8 +88,8 @@ void	print_env_list(t_env *env_list)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_env	*env_list = convert_env_to_list(env);
-	print_env_list(env_list);
+	t_env01	*env_list = convert_env01_to_list(env);
+	print_env01_list(env_list);
 	free_env_list(env_list);
 	return 0;
-}
+} */

@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:14:56 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 17:58:28 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/07 18:56:27 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	free_token(t_command_line **cmd_line)
 	while ((*cmd_line)->single_token)
 	{
 		tok = (*cmd_line)->single_token->next;
-		if ((*cmd_line)->single_token->str)
-			free((*cmd_line)->single_token->str);
+		if ((*cmd_line)->single_token->token)
+			free((*cmd_line)->single_token->token);
 		free((*cmd_line)->single_token);
 		(*cmd_line)->single_token = tok;
 	}

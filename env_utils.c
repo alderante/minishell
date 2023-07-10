@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:14:47 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 17:59:22 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:17:07 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 	free_delete_add(NULL, FREE);
 } */
 
-void	free_all_env(t_env **env)
+void	free_all_env(t_env01 **env)
 {
-	t_env	*cpy;
-	t_env	*tmp;
+	t_env01	*cpy;
+	t_env01	*tmp;
 
 	cpy = *env;
 	tmp = cpy;
@@ -33,7 +33,7 @@ void	free_all_env(t_env **env)
 	}
 }
 
-void	particular_env_free(t_env *env)
+void	particular_env_free(t_env01 *env)
 {
 	free(env->str);
 	free(env);

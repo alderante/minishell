@@ -6,25 +6,25 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:06:51 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/07 16:29:05 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:16:17 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-t_env	**get_adress_env(void)
+t_env01	**get_adress_env(void)
 {
-	static t_env	*new = NULL;
+	static t_env01	*new = NULL;
 
 	return (&new);
 }
 
 //matrix_from_env convert a linked list of environment variables to a two-dimensional array of strings
 
-char	**matrix_from_env(t_env **envp)
+char	**matrix_from_env(t_env01 **envp)
 {
 	char	**new;
-	t_env	*updated;
+	t_env01	*updated;
 	int		i;
 
 	i = 0;
@@ -49,7 +49,7 @@ char	**matrix_from_env(t_env **envp)
 
 int	free_delete_add(char *str, int mode)
 {
-	t_env	**env_list;
+	t_env01	**env_list;
 
 	env_list = address_of_env();
 	if (mode == DELETE)
