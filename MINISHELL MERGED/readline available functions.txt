@@ -1,0 +1,53 @@
+access              Checks whether a file exists and whether the user has permission to access it.
+add_history			Adds a line of text to the command history maintained by the GNU readline library.
+chdir				Changes the current working directory.
+close				Closes a file descriptor.
+closedir			Closes a directory.
+dup				    Duplicates a file descriptor.
+dup2				Duplicates a file descriptor, replacing an existing file descriptor if necessary.
+execve				Replaces the current process with a new process, loaded from an executable file.
+exit				Terminates the calling process.
+fork				Creates a new process by duplicating the calling process.
+free				Frees a block of memory previously allocated with malloc.
+fstat				Gets information about a file descriptor.
+getenv				Gets the value of an environment variable.
+getcwd				Gets the current working directory.
+ioctl				Performs a low-level I/O operation on a file descriptor.
+isatty				Checks whether a file descriptor refers to a terminal.
+kill				Sends a signal to a process.
+lstat				Gets information about a file, without following symbolic links.
+malloc				Allocates a block of memory on the heap.
+opendir				Opens a directory for reading.
+open				Opens a file for reading or writing.
+perror				Prints a string describing an error code, along with a custom error message.
+pipe				Creates a pipe for interprocess communication.
+printf				Prints formatted output to the console.
+read				Reads data from a file descriptor.
+readdir				Reads the next entry from a directory.
+readline			Reads a line of input from the user, using the GNU readline library. This function provides advanced line editing features, such as command history and tab completion.
+rl_clear_history	Clears the command history maintained by the GNU readline library.
+rl_on_new_line		Notifies the GNU readline library that the cursor has moved to a new line.
+rl_redisplay		Redraws the current input line, using the GNU readline library.
+rl_replace_line		Replaces the current input line with a new line of text.
+sigaction			Installs a signal handler for a specific signal, with more advanced options than signal.
+sigaddset			Adds a signal to a signal set.
+sigemptyset			Initializes a signal set to be empty.
+signal				Installs a signal handler for a specific signal.
+stat				Gets information about a file.
+strerror			Gets a string describing an error code.
+tcgetattr			Gets the terminal attributes for a file descriptor.
+tcsetattr			Sets the terminal attributes for a file descriptor.
+tgetent				Initializes the terminfo database.
+tgetflag			Gets the value of a boolean capability from the terminfo database.
+tgetnum				Gets the value of a numeric capability from the terminfo database.
+tgetstr				Gets the value of a string capability from the terminfo database.
+tgoto				Formats a cursor movement sequence for the terminfo database.
+tputs				Outputs a terminfo string to the terminal.
+ttyname				Gets the name of the terminal associated with a file descriptor.
+ttyslot				Gets the index of the terminal associated with a file descriptor.
+unlink				Deletes a file.
+wait				Waits for a child process to terminate.
+wait3				Waits for a child process to terminate and returns resource usage information.
+wait4				Waits for a specific child process to terminate and returns resource usage information.
+waitpid				Waits for a specific child process to terminate.
+write				Writes data to a file descriptor.
