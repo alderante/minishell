@@ -1,0 +1,59 @@
+-----------------------------------------------EXIT_STATUS($?)-----------------------------------------
+When a process finishes execution it will "return" an integer that corresponds to it's exit status, this int will be the number that was inside the return in its main function when it executed or the number that was inside the exit() function it used to finish execution.
+
+This number can be read by the wait() function if it is given an int * as input, to witch it will write the exit status, the exit status however still needs to be interpreted, we can do this using the macros WIFEXITED(), and WEXITSTATUS().
+
+WIFEXITED will read the int your wait function wrote to and return true if the process terminated by itself or false if the process was truncated via the use of signals like : ctrl-C, ctrl-V, etc...
+
+WEXITSTATUS will take the int the wait function took as a parameter and will return it's corresponding 
+exit status.
+------------------------------------------------------------------------------------------------------
+
+---------------------------------------DUP(),DUP2()---------------------------------------------------
+The dup and dup2 functions are used to operate on the file descriptors your program wants to use.
+the dup function takes an opened fd as an argument and duplicates it by creating a different fd that points to the same file.
+
+the dup2 function also takes an integer as an argument that will be the new fd that the function creates, if the new fd already existed the dup2 function will close it and replace it with a new identical one that corresponds to the new file passed as the first parameter.
+------------------------------------------------------------------------------------------------------
+
+------------------------------------------WAITPID()---------------------------------------------------
+The waitpid function behaves similarly to the wait function, however it will take more arguments and allow for more options when executing.
+
+The waitpid function will take, the pid of the process that you want to finish executing as the first parameter, it will take -1 if it should wait for any child process or 0 if it should wait for any child process with the same group id of the calling process.
+
+any other input will be interpreted as the pid of the process it has to wait the execution of, if an negative integer is used a parameter the it will be interpreted as it's absolute value.
+The second parameter will be a pointer to an integer and will behave exactly like the parameter for the wait function.
+
+the third parameter will be a flag from the following list :
+
+WNOHANG:
+return immediately if no child has exited.
+
+WUNTRACED:
+also return if a child has stopped (but not traced via ptrace(2)). Status for traced children which have stopped is provided even if this option is not specified.
+
+WCONTINUED:
+also return if a stopped child has been resumed by delivery of SIGCONT. 
+
+If status is not NULL, wait() and waitpid() store status information in the int to which it points. This integer can be inspected with the following macros (which take the integer itself as an argument, not a pointer to it, as is done in wait() and waitpid()!):
+
+WIFEXITED:
+returns true if the child terminated normally, that is, by calling exit(3) or _exit(2), or by returning from main().
+
+WEXITSTATUS:
+returns the exit status of the child. This consists of the least significant 8 bits of the status argument that the child specified in a call to exit(3) or _exit(2) or as the argument for a return statement in main(). This macro should only be employed if WIFEXITED returned true.
+
+WIFSIGNALED:
+returns true if the child process was terminated by a signal.
+
+WTERMSIG:
+returns the number of the signal that caused the child process to terminate. This macro should only be employed if WIFSIGNALED returned true.
+
+WCOREDUMP:
+returns true if the child produced a core dump. This macro should only be employed if WIFSIGNALED returned true. This macro is not specified in POSIX.1-2001 and is not available on some UNIX implementations (e.g., AIX, SunOS). Only use this enclosed in #ifdef WCOREDUMP ... #endif.
+
+WIFSTOPPED:
+returns true if the child process was stopped by delivery of a signal; this is only possible if the call was done using WUNTRACED or when the child is being traced (see ptrace(2)).
+
+WSTOPSIG:
+returns the number of the signal which caused the child to stop. This macro should only be employed if WIFSTOPPED returned true. 
