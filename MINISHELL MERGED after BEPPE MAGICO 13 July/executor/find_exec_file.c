@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:03:11 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 18:35:32 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:32:48 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 extern int	g_exit_status;
 
-char	*write_bad_cmd_free_split(char *str, char **split_path)
+char	*cmd_not_found_free_split(char *str, char **split_path)
 {
 	free_split(split_path);
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
-	write(2, " : commande introuvable\n",
-		ft_strlen(" : commande introuvable\n"));
+	write(2, " : command not found\n",
+		ft_strlen(" : command not found\n"));
 	return (NULL);
 }
 
-char	*write_bad_cmd_free(char *str)
+char	*cmd_not_found_free(char *str)
 {
 	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
-	write(2, " : commande introuvable\n",
-		ft_strlen(" : commande introuvable\n"));
+	write(2, " : command not found\n",
+		ft_strlen(" : command not found\n"));
 	free(str);
 	return (NULL);
 }
@@ -71,11 +71,23 @@ char	*find_if_executable(char *str, char *path, int i)
 	char	**split_path;
 	char	*try;
 
+	/* write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
+	write(1, path, ft_strlen(path));
+	write(1, "\n", 1); */
 	if (str && (str[0] == '.' || str[0] == '/'))
 		return (str);
-	split_path = ft_strsplit(path, ':');
+	split_path = ft_strsplit(path);
+	/* write(1, str, ft_strlen(str));
+	write(1, "\n", 1); */
 	if (split_path == NULL)
-		return (write_bad_cmd_free(str));
+		return (cmd_not_found_free(str));
+	
+/* 	for (int i = 0; split_path[i]; i++)
+	{
+		printf("%s\n", split_path[i]);
+	} */
+	
 	while (split_path[i] && str[0] != '\0')
 	{
 		ret = try_acces(str, split_path[i]);
@@ -83,13 +95,15 @@ char	*find_if_executable(char *str, char *path, int i)
 		{
 			try = get_acces(str, split_path[i]);
 			free_split(split_path);
+			/* write(1, try, ft_strlen(try));
+			write(1, "\n", 1); */
 			return (try);
 		}
 		if (ret == 50)
 			return (free_split_ret_null(split_path));
 		i++;
 	}
-	write_bad_cmd_free_split(str, split_path);
+	cmd_not_found_free_split(str, split_path);
 	g_exit_status = 127;
 	return (str);
 }

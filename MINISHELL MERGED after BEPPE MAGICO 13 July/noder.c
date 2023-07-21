@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/18 15:24:38 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:35:22 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,15 +155,12 @@ t_token	*ft_initialize(t_command_line *first_cmd)
 	{
 		i = 0;
 		current_line = cleaner_split(first_cmd->new_matrix_string);
-		printf("%p\n", node);
-		printf("current_line: %s\n", current_line[i]);
 		node = ft_newnode(current_line[i], i + 1);
 		first_token = NULL;
 		first_cmd->single_token = node;
 		i++;
 		while (current_line[i])
 		{
-			printf("current_line: %s\n", current_line[i]);
 			node->next = ft_newnode(current_line[i], i + 1);
 			node = node->next;
 			i++;

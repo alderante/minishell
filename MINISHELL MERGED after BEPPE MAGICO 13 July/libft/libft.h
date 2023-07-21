@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:35:03 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/18 16:54:17 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:20:45 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)
 						(void *), void (*del)(void *));
-char				**ft_strsplit(char const *s, char c);
+char				**ft_strsplit(char const *s);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 // ------------------------------------------------------------------------
 int					ft_printf(const char *str, ...);

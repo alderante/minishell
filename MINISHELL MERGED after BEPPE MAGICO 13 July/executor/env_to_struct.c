@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:31:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 16:34:27 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:02:32 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 	struct s_env	*next;
 }				t_env01;
  */
-/* t_env01	*create_env_node(char *str, int declare)
+t_env01	*create_env_node(char *str, int declare)
 {
 	t_env01	*node;
 
@@ -63,7 +63,7 @@ t_env01	*convert_env_to_list(char **env)
 	return (env_list);
 }
 
-void	free_env_list(t_env01 *env_list)
+/* void	free_env_list(t_env01 *env_list)
 {
 	t_env01	*temp;
 
