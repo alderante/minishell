@@ -6,14 +6,14 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:14:08 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/04 16:16:23 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:54:58 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "stdio.h"
 
-static int	ft_count_words(const char *s, char c)
+/* static int	ft_count_words(const char *s, char c)
 {
 	int		number;
 	int		i;
@@ -68,4 +68,61 @@ char	**ft_strsplit(char const *s, char c)
 		return (NULL);
 	spliting(words, s, c, tab);
 	return (tab);
+} */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char	**continue_strsplit(const char *path, char	**result)
+{
+	char	*copy;
+	char	*token;
+	int		i;
+
+	copy = strdup(path);
+	token = strtok(copy, ":");
+	i = 0;
+	while (token != NULL)
+	{
+		result[i] = strdup(token);
+		token = strtok(NULL, ":");
+		i++;
+	}
+	result[i] = NULL;
+	free(copy);
+	return (result);
 }
+
+char	**ft_strsplit(const char *path)
+{
+	int		count;
+	int		i;
+	char	**result;
+
+	count = 1;
+	i = 0;
+	if (path == NULL)
+		return (NULL);
+	while (path[i] != '\0')
+	{
+		if (path[i] == ':')
+		{
+			count++;
+		}
+		i++;
+	}
+	result = (char **)malloc((count + 1) * sizeof(char *));
+	if (result == NULL)
+	{
+		perror("Error: Memory allocation failed.");
+		exit(1);
+	}
+	result = continue_strsplit(path, result);
+	return (result);
+}
+
+// Count the number of ':' occurrences to determine the array size
+// Allocate memory for the array of strings
+// Copy each path component to the array
+// Free the temporary copy of the PATH string

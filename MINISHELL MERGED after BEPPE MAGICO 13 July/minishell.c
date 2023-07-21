@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/18 15:25:11 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:50:21 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_command_line    *ft_new_matrix(char **matrix)
 	return (first_line);
 }
 
-void	ft_lexer(char *input, char **av)
+void	ft_lexer(char *input, char **av, char **envp)
 {
 	int				i;
 	char			*input_clone;
@@ -148,7 +148,7 @@ void	ft_lexer(char *input, char **av)
 	first = ft_new_matrix(matrix);
 	ft_initialize(first);
 	//eventualmente METTERE QUI LA FUNZIONE DI ROHIT ALLA QUALE PASSARE FIRST
-	execution(&first, av);
+	execution(&first, av, envp);
 	//ft_node_deleter(first);
 	i = 0;
 	while (matrix[i])
@@ -193,7 +193,7 @@ int	main(int ac, char **av, char **envp)
 				printf("exit\n");
 				exit(0);
 			}
-			ft_lexer(input, av);
+			ft_lexer(input, av, envp);
 
 			//free(input);
 		}

@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/11 15:14:44 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:56:09 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_strcmp(char *str1, char *str2);
 
 t_env			*ft_env_noder(char **envp);
 char			**easy_split(char *str);
-void			ft_lexer(char *input, char **av);
+void			ft_lexer(char *input, char **av, char **env);
 t_token			*ft_newnode(char *token, int pos);
 t_token			*ft_initialize(t_command_line *first);
 void			ft_final_stamper(t_command_line *cmd_line);

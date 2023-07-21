@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 18:52:43 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:01:18 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*ft_get_str_of_env(t_env01 **env, char *str)
 
 char	*ft_get_str(char *str)
 {
-	t_env01	**env_list;
-
+	t_env01		**env_list;
+	
 	env_list = address_of_env();
 	return (ft_get_str_of_env(env_list, str));
 }
@@ -131,10 +131,13 @@ int	execution_execve(t_command_line **cmd, t_command_line **original,
 	exit(g_exit_status); */
 	return (0);
 }
-
-int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
+t_env01			*env_list;
+int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid, char **envp)
 {
 	char		**str;
+	t_env01		*env_list;
+
+	env_list = convert_env_to_list(envp);
 	(void)(pid);
 	dup2((*cmd)->fd_in, STDIN_FILENO);
 	dup2((*cmd)->fd_out, STDOUT_FILENO);
@@ -146,9 +149,9 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 	{
 		if ((*cmd)->argv[0] == NULL)
 			all_free_n_exit(original, pid, str);
-		/* (*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
-				ft_get_env("PATH"), 0);  */
-		(*cmd)->argv[0] = "/bin/ls";
+		(*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
+				ft_get_value_of_env(&env_list, "PATH"), 0);
+		//(*cmd)->argv[0] = "/bin/ls";
 	}
 	/* if ((*cmd)->argv[0] == NULL)
 		str_n_fd_free_n_exit(str, original);
@@ -157,8 +160,9 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 		all_free_n_exit(original, pid, str); */
 	if (cmd_is_builtin((*cmd)->argv[0]))
 		execute_builtin(cmd, original, pid);
-	else
+	else {
 		execution_execve(cmd, original, str, pid);
+	}
 	return (0);
 }
 
@@ -166,23 +170,27 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 // function to set up pipes for inter-process communication
 //for each command in the commad line
 
-int	execution(t_command_line **cmd_line, char **av)
+int	execution(t_command_line **cmd_line, char **av, char **envp)
 {
-	//t_env01			*env_list;
 	t_command_line	*updated;
 	pid_t			*pid;
 	int				rtrn;
 
 	updated = *cmd_line;
 	rtrn = piping(cmd_line);
-	//env_list = convert_env_to_list(updated->envp);
+	int i = 0;
+	while (updated->envp)
+	{
+		printf("%s", updated->envp[i]);
+		i++;
+	}
 	if (rtrn == 0)
 		pid = malloc(sizeof(pid_t) * command_len(updated)); 
 	else
 		return (rtrn);
 	if (pid == NULL)
 		return (50);
-	func_fork(cmd_line, pid, av);
+	func_fork(cmd_line, pid, av, envp);
 	/* signal(SIGINT, signal_cmd_2);
 	signal(SIGQUIT, SIG_IGN); */
 	wait_pid(cmd_line, pid);

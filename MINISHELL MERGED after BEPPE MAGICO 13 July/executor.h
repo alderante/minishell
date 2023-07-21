@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 18:22:30 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:55:55 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct s_env01
 }				t_env01;
 
 //executor.c
-int		big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid);
-int		execution(t_command_line **cmd_line, char **av);
+int		big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid, char **envp);
+int		execution(t_command_line **cmd_line, char **av, char **envp);
 
 //utils_exec.c
 void	all_fd_close(t_command_line **cmd);
@@ -123,8 +123,8 @@ int		piping(t_command_line **cmd);
 
 //fork.c
 int		process_forking(pid_t *pid, int i, t_command_line **cmd, 
-			t_command_line **updated);
-int		func_fork(t_command_line **cmd, pid_t *pid, char **av);
+			t_command_line **updated, char **envp);
+int		func_fork(t_command_line **cmd, pid_t *pid, char **av, char **envp);
 
 //redirection.c
 int		redirections_fd(t_command_line **cmd);
