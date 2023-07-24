@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/21 18:01:18 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:18:35 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int	execution(t_command_line **cmd_line, char **av, char **envp)
 	/* signal(SIGINT, signal_cmd_2);
 	signal(SIGQUIT, SIG_IGN); */
 	wait_pid(cmd_line, pid);
-	/* signal(SIGINT, signal_cmd);
-	signal(SIGQUIT, SIG_IGN); */
+	signal(SIGINT, signal_cmd);
+	signal(SIGQUIT, SIG_IGN);
 	return (0);
 }

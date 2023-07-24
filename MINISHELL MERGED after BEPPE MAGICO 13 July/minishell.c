@@ -6,12 +6,14 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/21 17:50:21 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:44:44 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include <string.h>
+
+extern int	g_exit_status;
 
 char	**easy_split(char *str)
 {
@@ -168,6 +170,9 @@ int	main(int ac, char **av, char **envp)
 	(void)(ac);
 	(void)(av);
 	// questa gestisce le variabili ambientali
+	g_exit_status = 0;
+	signal(SIGINT, signal_cmd);
+	signal(SIGQUIT, SIG_IGN);
 	env = ft_env_noder(envp);
 	while (1)
 	{
@@ -175,8 +180,9 @@ int	main(int ac, char **av, char **envp)
 		add_history(input);
 		if (input == NULL || *input == '\0')
 		{
-			printf("\n");
+			printf("exit\n");
 			free(input);
+			break;
 		}
 		else if(ft_strcmp(input, "env") == 0)
 		{

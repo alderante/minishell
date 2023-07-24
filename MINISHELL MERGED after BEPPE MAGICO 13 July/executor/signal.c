@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:23:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 16:35:02 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:44:38 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	signal_cmd(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (sig == SIGQUIT)
+	/* if (sig == SIGQUIT)
 	{
 		write(2, "Quit (core dumped)\n", ft_strlen("Quit (core dumped)\n"));
 		exit (1);
-	}
+	} */
 }
 
 void	signal_cmd_2(int sig)

@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/21 17:52:40 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:54:30 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ int	no_func_fork(t_command_line **cmd, pid_t *pid)
 int	process_forking(pid_t *pid, int i, t_command_line **cmd, 
 			t_command_line **updated, char **envp)
 {
-	/* signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN); */
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	pid[i] = fork();
 	if (pid[i] == -1)
 		exit(1);
 	if (pid[i] == 0)
 	{
-		/* signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL); */
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		big_executor(updated, cmd, pid, envp);
 	}
 	/* else	
