@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/24 16:18:35 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:03:19 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,26 +131,36 @@ int	execution_execve(t_command_line **cmd, t_command_line **original,
 	exit(g_exit_status); */
 	return (0);
 }
+
 t_env01			*env_list;
+
 int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid, char **envp)
 {
 	char		**str;
-	t_env01		*env_list;
+	static t_env01		*env_list;
 
 	env_list = convert_env_to_list(envp);
 	(void)(pid);
 	dup2((*cmd)->fd_in, STDIN_FILENO);
 	dup2((*cmd)->fd_out, STDOUT_FILENO);
 	all_fd_close(original);
-	str = matrix_from_env(address_of_env());
-	// if (str == NULL)
-	// 	all_fd_close_n_exit(original);
+	str = matrix_from_env(&env_list);
+	
+	/* for (int i = 0; str[i] != NULL; i++)
+    {
+        printf("%s", str[i]);
+    } */
+
+	if (str == NULL)
+		all_fd_close_n_exit(original);
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
 		if ((*cmd)->argv[0] == NULL)
 			all_free_n_exit(original, pid, str);
 		(*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
 				ft_get_value_of_env(&env_list, "PATH"), 0);
+		/* (*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
+				ft_get_env("PATH"), 0); */
 		//(*cmd)->argv[0] = "/bin/ls";
 	}
 	/* if ((*cmd)->argv[0] == NULL)

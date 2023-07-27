@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/24 16:44:46 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:00:18 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	execution_builtin(char *str, char **args,
 		exit_bltin(args, original, pid);
 		return (free_in_builin(original, pid, 1));
 	} */
-	// if (ft_strcmp("cd", str))
-	// 	ft_built_in_cd(args);
-	else if (ft_strcmp("echo", str))
+	if (ft_strcmp01("cd", str))
+		builtin_cd(args);
+	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo(args);
-	// else if (ft_strcmp("env", str))
-	// 	ft_built_in_env(args);
+	/* else if (ft_strcmp01("env", str))
+	 	ft_built_in_env(args); */
 	else if (ft_strcmp01("pwd", str))
 		ft_built_in_pwd(args);
-	// else if (ft_strcmp("export", str))
+	// else if (ft_strcmp01("export", str))
 	// 	ft_built_in_export(args);
-	// else if (ft_strcmp("unset", str))
+	// else if (ft_strcmp01("unset", str))
 	// 	ft_built_in_unset(args);
 	free(pid);
 	free_delete_add(NULL, FREE);
