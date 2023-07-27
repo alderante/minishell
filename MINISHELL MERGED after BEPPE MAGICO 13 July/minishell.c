@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/24 16:44:44 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:02:32 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	ft_lexer(char *input, char **av, char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_env	*env;
+	//t_env	*env;
 	char	*input;
 
 	(void)(ac);
@@ -173,7 +173,7 @@ int	main(int ac, char **av, char **envp)
 	g_exit_status = 0;
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
-	env = ft_env_noder(envp);
+	//env = ft_env_noder(envp);
 	while (1)
 	{
 		input = readline("%>"); //ft_strjoin(getenv("PWD"), "%>")
@@ -184,14 +184,14 @@ int	main(int ac, char **av, char **envp)
 			free(input);
 			break;
 		}
-		else if(ft_strcmp(input, "env") == 0)
+		/* else if(ft_strcmp(input, "env") == 0)
 		{
 			while(env)
 			{
 				printf("%s=%s\n", env->name, env->value);
 				env = env->next;
 			}
-		}
+		} */
 		else
 		{
 			if (strcmp(input, "exit") == 0)

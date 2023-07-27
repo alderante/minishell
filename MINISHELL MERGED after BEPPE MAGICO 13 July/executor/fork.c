@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/24 15:54:30 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:00:45 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	execution_bd_fd(char *str, char **args,
 		builtin_cd(args);
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo_fd(args, (*original)->fd_out);
-	/* else if (ft_strcmp01("env", str))
-		ft_built_in_env_fd(args, (*original)->fd_out); */
+	else if (ft_strcmp01("env", str))
+		ft_built_in_env_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("pwd", str))
 		ft_built_in_pwd_fd(args, (*original)->fd_out);
 	/* else if (ft_strcmp01("export", str))

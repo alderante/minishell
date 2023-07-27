@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/21 17:55:55 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:59:08 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,4 +159,8 @@ int		wait_pid(t_command_line **cmd, pid_t *pid);
 
 //organise_arg.c
 int		organise_arg(t_command_line **cmd);
+
+//builtin_env
+int		ft_built_in_env_fd(char **str, int fd);
+void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 #endif
