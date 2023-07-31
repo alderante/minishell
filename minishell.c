@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/31 17:23:02 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:47:12 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	easy_split_rows_counter(char *input)
 	return (rows);
 }
 
-char	**easy_split(char *str)
+char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 {
 	int		i;
 	int		y;
@@ -86,16 +86,16 @@ char	**easy_split(char *str)
 	//printf("this is counter %d\n", easy_split_rows_counter(str));
 	while (str[i] != '\0')
 	{
-		if (str[i] > 32)
+		if (str[i] != '\0' && str[i] > 32)
 		{
 			x = 0;
-			tab[y] = ft_calloc((strlen(str)), sizeof(char));
-			while (str[i] > 32)
+			tab[y] = ft_calloc((strlen(str) + 1), sizeof(char));
+			while (str[i] != '\0' && str[i] > 32)
 			{
 				check = ft_check_quote (str[i]);
 				if (check == 1 || check == 2)
 				{	
-					while(check == 1 || check == 2)
+					while(str[i] != '\0' && (check == 1 || check == 2))
 					{
 						tab[y][x] = str[i];
 						i++;
@@ -195,11 +195,11 @@ t_command_line    *ft_new_matrix(char **matrix)
 	}
 	cmd_line->next = NULL;
 	cmd_line = first_line;
-	while (cmd_line)
+	/* while (cmd_line)
 	{
 		printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 		cmd_line = cmd_line->next;
-	}
+	} */
 	//free(temp);
 	return (first_line);
 }
@@ -214,12 +214,13 @@ void	ft_lexer(char *input, t_env01 *env_list)
 
 	input_clone = strdup(input);
 	matrix = easy_split(input_clone);
+
 	i = 0;
-	while (matrix[i])
+/* 	while (matrix[i])
 	{
 		printf("Easy split line %i: %s\n", i, matrix[i]);
 		i++;
-	}
+	} */
 	first = malloc(sizeof(t_command_line));
 	first = ft_new_matrix(matrix);
 	ft_initialize(first, env_list);

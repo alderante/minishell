@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/31 17:18:57 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:17:35 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 	i = 0;
 	y = 0;
 	tab = ft_calloc((ft_strlen(str) + 1), sizeof(char *));
-	
 	(void)(env_list);
 	// printf("expander result is %d", expander(str, env_list));
 	while (str[i] != '\0')
@@ -182,6 +181,7 @@ t_token	*ft_newnode(char *token, int pos)
 	else
 		node->type = ARG;
 	node->pos = pos;
+	printf("%s\n", token);
 	node->token = strdup(token);
 	node->next = NULL;
 	return (node);
@@ -205,7 +205,7 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 		i = 0;
 		current_line = quote_cleaner_split(first_cmd->new_matrix_string, env_list);
 		//printf("%p\n", node);
-		//printf("current_line: %s\n", current_line[i]);
+		printf("current_line: %s\n", current_line[i]);
 		node = ft_newnode(current_line[i], i + 1);
 		first_token = NULL;
 		first_cmd->env_list = env_list;
@@ -232,6 +232,6 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 	}
 	free(current_line);
 	
-	ft_final_stamper(first_cmd);
+	//ft_final_stamper(first_cmd);
 	return (first_token);
 }

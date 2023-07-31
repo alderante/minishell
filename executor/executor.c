@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/31 16:48:09 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:42:38 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,13 @@ t_env01			*env_list;
 
 int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 {
-	//char		**str;
+	char		**str;
 	
 	(void)(pid);
 	dup2((*cmd)->fd_in, STDIN_FILENO);
 	dup2((*cmd)->fd_out, STDOUT_FILENO);
 	all_fd_close(original);
-	//str = matrix_from_env(&env_list);
+	str = matrix_from_env(&(*cmd)->env_list);
 	
 	/* for (int i = 0; str[i] != NULL; i++)
     {
@@ -153,8 +153,8 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 		all_fd_close_n_exit(original); */
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
-		/* if ((*cmd)->argv[0] == NULL)
-			all_free_n_exit(original, pid, str); */
+		if ((*cmd)->argv[0] == NULL)
+			all_free_n_exit(original, pid, str);
 		(*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
 				ft_get_value_of_env(&(*cmd)->env_list, "PATH"), 0);
 		/* (*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
@@ -169,7 +169,7 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 	if (cmd_is_builtin((*cmd)->argv[0]))
 		execute_builtin(cmd, original, pid);
 	else {
-		execution_execve(cmd, original, NULL, pid);
+		execution_execve(cmd, original, str, pid);
 	}
 	return (0);
 }
