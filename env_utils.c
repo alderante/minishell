@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 11:41:30 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/13 17:38:36 by cpopolan         ###   ########.fr       */
+/*   Created: 2023/07/06 16:14:47 by rkhinchi          #+#    #+#             */
+/*   Updated: 2023/07/10 16:03:15 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "executor.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+/* void	func_2_free_all_env(void)
 {
-	char			*str;
-	unsigned int	i;
+	free_delete_add(NULL, FREE);
+} */
 
-	str = strdup(s);
-	if (!s || !f || !str)
-		return (0);
-	i = 0;
-	while (str[i])
+void	free_all_env(t_env **env)
+{
+	t_env	*cpy;
+	t_env	*tmp;
+
+	cpy = *env;
+	tmp = cpy;
+	while (cpy)
 	{
-		str[i] = f(i, str[i]);
-		i++;
+		tmp = cpy;
+		cpy = cpy->next;
+		free(tmp->name);
+		free(tmp);
 	}
-	return (str);
+}
+
+void	particular_env_free(t_env01 *env)
+{
+	free(env->str);
+	free(env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42firenze.it>   +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:35:03 by cpopolan          #+#    #+#             */
-/*   Updated: 2022/10/16 15:10:16 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:20:45 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <string.h>
 
 typedef struct s_list
 {
@@ -37,7 +38,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *big,
 						const char *little, size_t len);
-//int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strcmp01(char *str, char *in);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 int					ft_isalpha(int c);
@@ -70,6 +71,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)
 						(void *), void (*del)(void *));
+char				**ft_strsplit(char const *s);
+char				*ft_strsub(char const *s, unsigned int start, size_t len);
 // ------------------------------------------------------------------------
 int					ft_printf(const char *str, ...);
 // ------------------------------------------------------------------------

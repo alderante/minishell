@@ -15,6 +15,7 @@ SRCS := libft/ft_isalpha.c \
 		libft/ft_strchr.c \
 		libft/ft_strrchr.c \
 		libft/ft_strncmp.c \
+		libft/ft_strcmp01.c \
 		libft/ft_memchr.c \
 		libft/ft_memcmp.c \
 		libft/ft_strnstr.c \
@@ -31,7 +32,9 @@ SRCS := libft/ft_isalpha.c \
 		libft/ft_putchar_fd.c \
 		libft/ft_putstr_fd.c \
 		libft/ft_putendl_fd.c \
-		libft/ft_putnbr_fd.c
+		libft/ft_putnbr_fd.c \
+		libft/str_sub.c	\
+		libft/strsplit.c
 						
 BONUS := libft/ft_lstnew.c \
 		libft/ft_lstadd_front.c \

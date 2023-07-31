@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 10:24:13 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/18 16:50:02 by rkhinchi         ###   ########.fr       */
+/*   Created: 2023/07/06 16:14:47 by rkhinchi          #+#    #+#             */
+/*   Updated: 2023/07/18 18:21:09 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../executor.h"
 
-char	*ft_strchr(const char *s, int c)
+/* void	func_2_free_all_env(void)
 {
-	while (*s != '\0' && c != *s)
-		s++;
-	if (c == *s)
-		return ((char *)s);
-	return (0);
+	free_delete_add(NULL, FREE);
+} */
+
+void	free_all_env(t_env01 **env)
+{
+	t_env01	*cpy;
+	t_env01	*tmp;
+
+	cpy = *env;
+	tmp = cpy;
+	while (cpy)
+	{
+		tmp = cpy;
+		cpy = cpy->next;
+		free(tmp->str);
+		free(tmp);
+	}
+}
+
+void	particular_env_free(t_env01 *env)
+{
+	free(env->str);
+	free(env);
 }

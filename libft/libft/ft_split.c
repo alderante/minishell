@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:40:10 by cpopolan          #+#    #+#             */
-/*   Updated: 2022/10/16 15:41:38 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:59:55 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	**ft_split(char const *s, char c)
 	int		j;
 
 	count = ft_str_count(s, c);
-	mat = malloc(sizeof(char *) * (count + 1));
+	mat = ft_calloc((count + 1), sizeof(char *));
 	i = 0;
 	j = 0;
 	while (j < count)

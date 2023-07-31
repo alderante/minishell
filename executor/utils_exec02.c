@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   utils_exec02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 10:24:13 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/18 16:50:02 by rkhinchi         ###   ########.fr       */
+/*   Created: 2023/07/04 16:51:23 by rkhinchi          #+#    #+#             */
+/*   Updated: 2023/07/18 16:35:14 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../executor.h"
 
-char	*ft_strchr(const char *s, int c)
+void	all_free_n_exit(t_command_line **cmd,
+	pid_t *pid, char **str)
 {
-	while (*s != '\0' && c != *s)
-		s++;
-	if (c == *s)
-		return ((char *)s);
-	return (0);
+	free_all(cmd);
+	free_delete_add(NULL, FREE);
+	free(pid);
+	free(str);
+	exit(1);
 }

@@ -6,11 +6,11 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 11:21:38 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 15:44:17 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:11:25 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 int	ft_strcmp(char *str1, char *str2)
 {

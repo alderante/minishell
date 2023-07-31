@@ -6,11 +6,11 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 16:02:54 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:15:49 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
 
 t_env	*noder(char *str)
 {
@@ -23,7 +23,7 @@ t_env	*noder(char *str)
 	node = malloc(sizeof(t_env));
 	node->name = ft_substr(str, 0, i);
 	node->value = ft_substr(str, i + 1, ft_strlen(str));
-	node->exp = 1;
+	//node->exp = 1;
 	node->next = NULL;
 	return(node);
 }

@@ -6,11 +6,112 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/07 16:08:54 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:59:44 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "executor.h"
+
+
+
+int expander(char*str, t_env *env)
+{
+	int	check;
+	char *searchname;
+	int	i;
+	int	n;
+
+	i = 0;
+	while(str)
+	{
+		check = ft_check_quote (str[i]);
+		if (check == 2 && check != 1)
+		{
+			if(str[i] == '$')
+			{
+				n = 0;
+				while(str[i] > 32)
+				{
+					n++;
+					i++;
+				}
+				searchname = calloc((sizeof(char) * n) + 1, 1);
+				i -= n;
+				searchname[n++] = '\0';
+			}
+			//qui metto funzione che compari name a tutti i name in env e se lo trova, mi restituisce il relativo value
+			while(env->next != NULL)
+			{
+				if(strcmp(searchname, env->name) == 0)
+					return(1);
+				env = env->next;
+			}
+		}
+		else
+			i++;
+	}
+	return(0);
+}
+
+char	**quote_cleaner_split(char *str, t_env01 *env_list)
+{
+	int		i;
+	int		y;
+	int		x;
+	char	**tab;
+
+	i = 0;
+	y = 0;
+	tab = ft_calloc((ft_strlen(str) + 1), sizeof(char *));
+	
+	(void)(env_list);
+	// printf("expander result is %d", expander(str, env_list));
+	while (str[i] != '\0')
+	{
+		if (str[i] > 32)
+		{
+			x = 0;
+			tab[y] = ft_calloc((ft_strlen(str) + 1), sizeof(char));
+			while (str[i] > 32)
+			{
+				if (str[i] == 34 && str[i + 1] != '\0')
+				{
+					i++;
+					while (str[i] != 34)
+					{
+						tab[y][x] = str[i];
+						i++;
+						x++;
+					}
+					i++;
+				}
+				else if (str[i] == 39 && str[i + 1] != '\0')
+				{
+					i++;
+					while (str[i] != 39)
+					{
+						tab[y][x] = str[i];
+						i++;
+						x++;
+					}
+					i++;
+				}
+				else
+				{
+					tab[y][x] = str[i];
+					i++;
+					x++;
+				}
+			}
+			tab[y][x] = '\0';
+			y++;
+		}
+		else
+			i++;
+	}
+	tab[y] = NULL;
+	return (tab);
+}
 
 void	ft_node_deleter(t_token *first)
 {
@@ -63,21 +164,24 @@ t_token	*ft_newnode(char *token, int pos)
 {
 	t_token		*node;
 
-	node = malloc(sizeof(t_token) * 1);
+	node = (t_token *)malloc(sizeof(t_token));
 	if (ft_node_builtin_typer(token) != 1)
+	{
 		node->type = ft_node_builtin_typer(token);
+	}
 	else if (ft_node_redirect_typer(token) != 1)
+	{
 		node->type = ft_node_redirect_typer(token);
+	}
 	else
-		node->type = NON;
+		node->type = ARG;
 	node->pos = pos;
-	node->token = ft_strdup(token);
-	//node->token = ft_strjoin(node->token, ";");
+	node->token = strdup(token);
 	node->next = NULL;
 	return (node);
 }
 
-t_token	*ft_initialize(t_command_line *first_cmd)
+t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 {
 	int				i;
 	t_token			*node;
@@ -87,17 +191,25 @@ t_token	*ft_initialize(t_command_line *first_cmd)
 
 	i = 0;
 	temp = first_cmd;
+	node = NULL;
+	first_token = NULL;
+	current_line = NULL;
 	while (first_cmd)
 	{
 		i = 0;
-		current_line = easy_split(first_cmd->new_matrix_string);
+		current_line = quote_cleaner_split(first_cmd->new_matrix_string, env_list);
+		//printf("%p\n", node);
+		//printf("current_line: %s\n", current_line[i]);
 		node = ft_newnode(current_line[i], i + 1);
-		first_token = node;
+		first_token = NULL;
+		first_cmd->env_list = env_list;
 		first_cmd->single_token = node;
 		i++;
 		while (current_line[i])
 		{
+			//printf("current_line: %s\n", current_line[i]);
 			node->next = ft_newnode(current_line[i], i + 1);
+			first_cmd->env_list = env_list;
 			node = node->next;
 			i++;
 		}
@@ -106,6 +218,14 @@ t_token	*ft_initialize(t_command_line *first_cmd)
 	}
 	first_cmd = temp;
 	node = first_token;
+	i = 0;
+	while (current_line[i])
+	{
+		free(current_line[i]);
+		i++;
+	}
+	free(current_line);
+	
 	ft_final_stamper(first_cmd);
 	return (first_token);
 }
