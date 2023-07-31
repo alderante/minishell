@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/31 15:59:44 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:18:57 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int expander(char*str, t_env *env)
 	char *searchname;
 	int	i;
 	int	n;
+	int res;
 
 	i = 0;
 	while(str)
@@ -30,6 +31,7 @@ int expander(char*str, t_env *env)
 			if(str[i] == '$')
 			{
 				n = 0;
+				i++;
 				while(str[i] > 32)
 				{
 					n++;
@@ -40,17 +42,21 @@ int expander(char*str, t_env *env)
 				searchname[n++] = '\0';
 			}
 			//qui metto funzione che compari name a tutti i name in env e se lo trova, mi restituisce il relativo value
+			res = 0;
 			while(env->next != NULL)
 			{
 				if(strcmp(searchname, env->name) == 0)
-					return(1);
+				{
+					res = 1;
+					break;
+				}
 				env = env->next;
 			}
 		}
 		else
 			i++;
 	}
-	return(0);
+	return(res);
 }
 
 char	**quote_cleaner_split(char *str, t_env01 *env_list)

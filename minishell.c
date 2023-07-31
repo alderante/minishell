@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/31 15:54:34 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/07/31 17:23:02 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,14 +260,14 @@ int	main(int ac, char **av, char **envp)
 			free(input);
 			break;
 		}
-		// else if(ft_strcmp(input, "env") == 0)
-		// {
-		// 	while(env)
-		// 	{
-		// 		printf("%s=%s\n", env->name, env->value);
-		// 		env = env->next;
-		// 	}
-		// }
+		else if(ft_strcmp(input, "env") == 0)
+		{
+			while(env_list)
+			{
+				printf("%s\n", env_list->str);
+				env_list = env_list->next;
+			}
+		}
 		else
 		{
 			if (strcmp(input, "exit") == 0)
