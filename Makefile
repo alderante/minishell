@@ -5,51 +5,63 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/06/07 15:52:56 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/07/04 15:57:32 by rkhinchi         ###   ########.fr        #
+#    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
+#    Updated: 2023/07/27 17:57:53 by rkhinchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC = cc
 
-SRCS	= main.c
+NAME = minishell
 
-LIBFT	= libft/libft.a
+FLAGS = -Wall -Wextra -Werror -g
 
-OBJS	= $(SRCS:.c=.o)
+SRC = minishell.c \
+		builtin/execution_builtin.c \
+		builtin/builtin_pwd.c \
+		builtin/builtin_echo.c \
+		builtin/builtin_cd.c \
+		builtin/builtin_env.c \
+		executor/env_to_struct.c \
+		executor/env_utils.c \
+		executor/env.c \
+		executor/executor.c \
+		executor/find_exec_file.c \
+		executor/fork.c \
+		executor/piping.c \
+		executor/redirections.c \
+		executor/signal.c \
+		executor/utils_exec.c \
+		executor/utils_exec01.c \
+		executor/utils_exec02.c \
+		executor/organise_arg.c \
+		noder.c \
+		noder_utils.c \
+		enveloper.c \
 
-NAME	= minishell
 
-LIBFT	= libft/libft.a
+LIBFT = libft/libft.a
 
-CLANG	= clang
+all: $(NAME)
 
-FLAGS	= -Wall -Wextra -Werror
+#-fsanitize=address
 
-INCLUDE	= -L libft -lft
+$(NAME):
+	make -C libft
+	$(CC) $(FLAGS) $(SRC) $(LIBFT) $(LIBFT2) -lreadline -o $(NAME);\
+	echo "\e[92m$(NAME) compiled\e[0m";\
 
-
-
-
-all:	$(NAME)
-
-.PHONY:	clean fclean re bonus bench bclean
-
-$(NAME): $(OBJS)
-	cd libft && $(MAKE)
-	$(CLANG) $(FLAGS) -o $(NAME) $(OBJS) $(INCLUDE) $(LIBFT)
+re:	fclean all
 
 clean:
-	rm -f $(OBJS) $(B_OBJS)
-	cd libft && $(MAKE) clean
+	make clean -C libft
+	@echo "\e[90mNothing to clean\e[0m"
 
-fclean: clean
-	rm -f $(NAME) $(BONUS)
-	cd libft && $(MAKE) fclean
+fclean:
+	make fclean -C libft
+	rm -rf $(NAME);\
+	echo "\e[92m$(NAME) removed\e[0m";\
 
-re: fclean all
+.PHONY: all re clean fclean bonus
 
-%.o: %.c
-	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
-
-
-# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./minishell
+.SILENT:
