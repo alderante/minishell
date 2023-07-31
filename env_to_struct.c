@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:31:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/10 14:12:37 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/07/10 15:56:16 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 	struct s_env	*next;
 }				t_env01;
  */
-t_env01	*create_env_node(char *str, int declare)
+/* t_env01	*create_env_node(char *str, int declare)
 {
 	t_env01	*node;
 
@@ -45,7 +45,7 @@ void	add_env_node(t_env01 **env_list, char *str, int declare)
 	}
 }
 
-t_env01	*convert_env01_to_list(char **env)
+t_env01	*convert_env_to_list(char **env)
 {
 	t_env01	*env_list;
 	int		i;
@@ -75,7 +75,7 @@ void	free_env_list(t_env01 *env_list)
 		free(temp->str);
 		free(temp);
 	}
-}
+} */
 
 /* void	print_env01_list(t_env01 *env_list)
 {
