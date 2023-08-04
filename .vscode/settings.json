@@ -4,9 +4,6 @@
 		"history.h": "c",
 		"unistd.h": "c",
 		"string.h": "c",
-		"libft.h": "c",
-		"stdio.h": "c",
-		"stdlib.h": "c",
-		"executor.h": "c"
+		"type_traits": "c"
 	}
 }

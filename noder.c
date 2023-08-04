@@ -3,61 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   noder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/31 19:17:35 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:09:12 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-
-
-
-int expander(char*str, t_env *env)
-{
-	int	check;
-	char *searchname;
-	int	i;
-	int	n;
-	int res;
-
-	i = 0;
-	while(str)
-	{
-		check = ft_check_quote (str[i]);
-		if (check == 2 && check != 1)
-		{
-			if(str[i] == '$')
-			{
-				n = 0;
-				i++;
-				while(str[i] > 32)
-				{
-					n++;
-					i++;
-				}
-				searchname = calloc((sizeof(char) * n) + 1, 1);
-				i -= n;
-				searchname[n++] = '\0';
-			}
-			//qui metto funzione che compari name a tutti i name in env e se lo trova, mi restituisce il relativo value
-			res = 0;
-			while(env->next != NULL)
-			{
-				if(strcmp(searchname, env->name) == 0)
-				{
-					res = 1;
-					break;
-				}
-				env = env->next;
-			}
-		}
-		else
-			i++;
-	}
-	return(res);
-}
 
 char	**quote_cleaner_split(char *str, t_env01 *env_list)
 {
@@ -69,8 +22,7 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 	i = 0;
 	y = 0;
 	tab = ft_calloc((ft_strlen(str) + 1), sizeof(char *));
-	(void)(env_list);
-	// printf("expander result is %d", expander(str, env_list));
+	str = expander(str, env_list);
 	while (str[i] != '\0')
 	{
 		if (str[i] > 32)
@@ -231,7 +183,6 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 		i++;
 	}
 	free(current_line);
-	
 	//ft_final_stamper(first_cmd);
 	return (first_token);
 }

@@ -6,10 +6,9 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/31 15:58:42 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:10:25 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
@@ -142,8 +141,8 @@ t_env01	*convert_env_to_list(char **env);
 char	*find_if_executable(char *str, char *path, int i);
 
 //execute_builtin.c
-int	execute_builtin(t_command_line **cmd,
-	t_command_line **original, pid_t *pid);
+int		execute_builtin(t_command_line **cmd,
+			t_command_line **original, pid_t *pid);
 
 //BUILTIN
 int		ft_built_in_pwd(char **str);
