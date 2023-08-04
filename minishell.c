@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/04 09:38:15 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:04:25 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,22 @@ int	easy_split_rows_counter(char *input)
 			{
 				check = ft_check_quote (input[i], check);
 				if (check == 1 || check == 2)
-				{	
-					while(check == 1 || check == 2)
+				{
+					while (check == 1 || check == 2)
 					{
 						rows++;
 						check = ft_check_quote (input[i], check);
-						if(check == 0)
+						if (check == 0)
 							i++;
 					}
 				}
 				else if (input[i] == 124)
 				{
-					if(input[i - 1] == 32)
+					if (input[i - 1] == 32)
 						rows--;
 					rows++;
 					i++;
-					break;
+					break ;
 				}
 				else
 					i++;
@@ -81,6 +81,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 
 	i = 0;
 	y = 0;
+	check = 0;
 	tab = ft_calloc((easy_split_rows_counter(str)), sizeof(char *));
 	//printf("this is counter %d\n", easy_split_rows_counter(str));
 	while (str[i] != '\0')
@@ -93,14 +94,14 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 			{
 				check = ft_check_quote (str[i], check);
 				if (check == 1 || check == 2)
-				{	
-					while(str[i] != '\0' && (check == 1 || check == 2))
+				{
+					while (str[i] != '\0' && (check == 1 || check == 2))
 					{
 						tab[y][x] = str[i];
 						i++;
 						x++;
 						check = ft_check_quote (str[i], check);
-						if(check == 0)
+						if (check == 0)
 						{
 							tab[y][x] = str[i];
 							i++;
@@ -108,16 +109,16 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 						}
 					}
 				}
-				else if (str[i] == 124)
+				else if (str[i] == '|')
 				{
-					if(tab[y][0] == 0)
+					if (tab[y][0] == 0)
 						y--;
 					y++;
 					tab[y] = ft_calloc(2, 1);
 					tab[y][0] = '|';
 					x = 0;
 					i++;
-					break;
+					break ;
 				}
 				else
 				{
@@ -167,9 +168,9 @@ t_command_line    *ft_new_matrix(char **matrix)
 	t_command_line	*first_line;
 	t_command_line	*cmd_line;
 
-	//questo va allocato in base al numero di pipe + 2 (3 pipe = 4 + la quinta NULL)
-	pipe_count = pipe_counter(matrix) + 2;
-	cmd_line = malloc(sizeof(char *) * pipe_count);
+	//questo va allocato in base al numero di pipe + 1 (3 pipe = 4 + la quinta NULL che aggiungo al malloc di cmd_line
+	pipe_count = pipe_counter(matrix) + 1;
+	cmd_line = malloc(sizeof(char *) * pipe_count + 2);
 	//cmd_line = ft_calloc(1, 1);
 	first_line = cmd_line;
 	i = 0;
@@ -194,7 +195,7 @@ t_command_line    *ft_new_matrix(char **matrix)
 	}
 	cmd_line->next = NULL;
 	cmd_line = first_line;
-	 while (cmd_line)
+	while (cmd_line)
 	{
 		printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 		cmd_line = cmd_line->next;
@@ -209,11 +210,9 @@ void	ft_lexer(char *input, t_env01 *env_list)
 	char			*input_clone;
 	char			**matrix;
 	t_command_line	*first;
-	
 
 	input_clone = strdup(input);
 	matrix = easy_split(input_clone);
-
 	i = 0;
 	while (matrix[i])
 	{
@@ -238,9 +237,8 @@ void	ft_lexer(char *input, t_env01 *env_list)
 
 int	main(int ac, char **av, char **envp)
 {
-	//t_env01	*env;
 	char	*input;
-	t_env01		*env_list;
+	t_env01	*env_list;
 
 	(void)(ac);
 	(void)(av);
@@ -258,11 +256,11 @@ int	main(int ac, char **av, char **envp)
 		{
 			printf("\n");
 			free(input);
-			break;
+			break ;
 		}
-		else if(ft_strcmp(input, "env") == 0)
+		else if (ft_strcmp(input, "env") == 0)
 		{
-			while(env_list)
+			while (env_list)
 			{
 				printf("%s\n", env_list->str);
 				env_list = env_list->next;
@@ -276,7 +274,6 @@ int	main(int ac, char **av, char **envp)
 				exit(0);
 			}
 			ft_lexer(input, env_list);
-
 			//free(input);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:06:51 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/10 16:02:35 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:35:36 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,3 @@ int	free_delete_add(char *str, int mode)
 	} */
 	return (0);
 }
-
