@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/07/31 18:47:12 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/04 09:38:15 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 extern int	g_exit_status;
 
-int	ft_check_quote (char c)
+int	ft_check_quote (char c, int check)
 {
-	static int	check;
-	
 	if (c == '\"' && check != 1)
 		check = 2 - check;
 	else if (c == '\'' && check != 2)
@@ -34,19 +32,20 @@ int	easy_split_rows_counter(char *input)
 
 	i = 0;
 	rows = 0;
+	check = 0;
 	while (input[i] != '\0')
 	{
 		if (input[i] > 32)
 		{
 			while (input[i] > 32)
 			{
-				check = ft_check_quote (input[i]);
+				check = ft_check_quote (input[i], check);
 				if (check == 1 || check == 2)
 				{	
 					while(check == 1 || check == 2)
 					{
 						rows++;
-						check = ft_check_quote (input[i]);
+						check = ft_check_quote (input[i], check);
 						if(check == 0)
 							i++;
 					}
@@ -92,7 +91,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 			tab[y] = ft_calloc((strlen(str) + 1), sizeof(char));
 			while (str[i] != '\0' && str[i] > 32)
 			{
-				check = ft_check_quote (str[i]);
+				check = ft_check_quote (str[i], check);
 				if (check == 1 || check == 2)
 				{	
 					while(str[i] != '\0' && (check == 1 || check == 2))
@@ -100,7 +99,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 						tab[y][x] = str[i];
 						i++;
 						x++;
-						check = ft_check_quote (str[i]);
+						check = ft_check_quote (str[i], check);
 						if(check == 0)
 						{
 							tab[y][x] = str[i];
@@ -195,11 +194,11 @@ t_command_line    *ft_new_matrix(char **matrix)
 	}
 	cmd_line->next = NULL;
 	cmd_line = first_line;
-	/* while (cmd_line)
+	 while (cmd_line)
 	{
 		printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 		cmd_line = cmd_line->next;
-	} */
+	}
 	//free(temp);
 	return (first_line);
 }
@@ -216,11 +215,11 @@ void	ft_lexer(char *input, t_env01 *env_list)
 	matrix = easy_split(input_clone);
 
 	i = 0;
-/* 	while (matrix[i])
+	while (matrix[i])
 	{
 		printf("Easy split line %i: %s\n", i, matrix[i]);
 		i++;
-	} */
+	}
 	first = malloc(sizeof(t_command_line));
 	first = ft_new_matrix(matrix);
 	ft_initialize(first, env_list);
@@ -239,18 +238,18 @@ void	ft_lexer(char *input, t_env01 *env_list)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_env	*env;
+	//t_env01	*env;
 	char	*input;
 	t_env01		*env_list;
 
 	(void)(ac);
 	(void)(av);
-	// questa gestisce le variabili ambientali
 	g_exit_status = 0;
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
-	env = ft_env_noder(envp);
-	env_list = convert_env_to_list(envp);
+	//env = ft_env_noder(envp);
+	env_list = ft_env_noder(envp);
+	//env_list = convert_env_to_list(envp);
 	while (1)
 	{
 		input = readline("%>"); //ft_strjoin(getenv("PWD"), "%>")
@@ -271,7 +270,7 @@ int	main(int ac, char **av, char **envp)
 		}
 		else
 		{
-			if (strcmp(input, "exit") == 0)
+			if (ft_strcmp(input, "exit") == 0)
 			{
 				printf("exit\n");
 				exit(0);

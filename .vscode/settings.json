@@ -3,6 +3,7 @@
 		"readline.h": "c",
 		"history.h": "c",
 		"unistd.h": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"type_traits": "c"
 	}
 }

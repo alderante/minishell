@@ -38,6 +38,7 @@ SRC = minishell.c \
 		noder.c \
 		noder_utils.c \
 		enveloper.c \
+		expander.c
 
 
 LIBFT = libft/libft.a
