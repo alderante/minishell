@@ -72,6 +72,7 @@ typedef struct s_command_line
 	int						fd_in;
 	int						fd_out;
 	char					*name_file;
+	char					*heredoc_delimiter;
 	struct s_command_line	*next;
 }	t_command_line;
 
