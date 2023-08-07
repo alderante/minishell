@@ -14,7 +14,7 @@
 
 int g_exit_status;
 
-int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_type type)
+/* int	redirect_file_out(t_command_line **cmd, t_token *updated, t_e_type type)
 {
 	if (type == FILE_OUT)
 	{
@@ -52,10 +52,72 @@ int	redirect_file_in(t_command_line **cmd, t_token *updated, t_e_type type)
 	//Xcreate_heredoc_fdX
 	return (0);
 }
+ */
+
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+
+int handle_input_redirection(t_command_line **cmd) {
+    if ((*cmd)->fd_in != 0) {
+        close((*cmd)->fd_in);
+    }
+
+    t_token *token = (*cmd)->single_token;
+    while (token) {
+        if (strcmp(token->token, "<") == 0) {
+            if (token->next && token->next->token) {
+                int fd = open(token->next->token, O_RDONLY);
+                if (fd == -1) {
+                    return -1;
+                }
+                (*cmd)->fd_in = fd;
+                token->token = NULL;
+                token->next->token = NULL;
+                break;
+            } else {
+                return -1;
+            }
+        }
+        token = token->next;
+    }
+
+    return 0;
+}
+
+int handle_output_redirection(t_command_line **cmd) {
+    if ((*cmd)->fd_out != 1) {
+        close((*cmd)->fd_out);
+    }
+
+    t_token *token = (*cmd)->single_token;
+    while (token) {
+        if (strcmp(token->token, ">") == 0) {
+            if (token->next && token->next->token) {
+                int fd = open(token->next->token, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+                if (fd == -1) {
+                    return -1;
+                }
+                (*cmd)->fd_out = fd;
+                token->token = NULL;
+                token->next->token = NULL;
+                break;
+            } else {
+                return -1;
+            }
+        }
+        token = token->next;
+    }
+
+    return 0;
+}
 
 int	redirections_fd(t_command_line **cmd)
 {
-	t_token		*updated;
+	t_command_line	*tmp;
+	tmp = *cmd;
+	/* t_token		*updated;
 
 	updated = (*cmd)->single_token;
 	while (updated)
@@ -67,6 +129,7 @@ int	redirections_fd(t_command_line **cmd)
 			if (redirect_file_out(cmd, updated, updated->type) == -1)
 				return (-1);
 		updated = updated->next;
-	}
+	} */
+	handle_output_redirection(&tmp);
 	return (0);
 }

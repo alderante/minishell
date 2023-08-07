@@ -71,7 +71,7 @@ int	easy_split_rows_counter(char *input)
 	return (rows);
 }
 
-char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
+char	**easy_split(char *str)
 {
 	int		i;
 	int		y;
