@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/09 12:06:00 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:17:10 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,8 @@ void ft_built_in_export(char **tab, t_env01 **first)
 	while(*tab)
 	{
 		env_list = ft_env_search(env_list, name);
-		printf("//////////////////////////////////111\n");
 		if(env_list != NULL)
 		{	
-			printf("//////////////////////////////////%s\n", env_list->str);
 			free(env_list->str);
 			env_list->str = ft_strdup(*tab);
 		}
@@ -111,11 +109,13 @@ void ft_built_in_export(char **tab, t_env01 **first)
 			else
 			{
 				while(env_list->next)
+				{
 					env_list = env_list->next;
-				env_list->next = malloc(sizeof(t_env01));
-				env_list = env_list->next;
-				env_list->str = ft_strdup(*tab);
-				env_list->next = NULL;
+					env_list->next = malloc(sizeof(t_env01));
+					env_list = env_list->next;
+					env_list->str = ft_strdup(*tab);
+					env_list->next = NULL;
+				}
 			}
 		}
 		tab++;

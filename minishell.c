@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 13:08:06 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:17:55 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ t_command_line    *ft_new_matrix(char **matrix)
 	cmd_line = ft_calloc(sizeof(t_command_line), 1);
 	first_line = cmd_line;
 	i = 0;
-	printf("la iesima riga di matrix is %s\n", matrix[i]);
 	while (matrix[i])
 	{
 		cmd_line->new_matrix_string = malloc(sizeof(char *) * ft_strlen(matrix[i]));
@@ -182,19 +181,11 @@ t_command_line    *ft_new_matrix(char **matrix)
 		while (matrix[i] && matrix[i][0] != '|')
 		{
 			cmd_line->new_matrix_string = ft_strjoin(temp, matrix[i]);
-			printf("3 la iesima riga di matrix is %s\n", matrix[i]);
-
 			if (matrix[i + 1] != NULL && matrix[i + 1][0] != '|')
-			{
-				printf("NEW cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 				cmd_line->new_matrix_string = ft_strjoin(cmd_line->new_matrix_string, " ");
-			}
 			temp = cmd_line->new_matrix_string;
-			printf("3.5 la iesima riga di matrix is %s\n", matrix[i]);
 			i++;
 		}
-		printf("3.7 la iesima riga di matrix is %s\n", matrix[i]);
-
 		if (matrix[i] && matrix[i][0] == '|')
 		{
 			i++;
