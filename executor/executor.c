@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/31 18:42:38 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:31:28 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 
 	/* if (str == NULL)
 		all_fd_close_n_exit(original); */
+		
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
 		if ((*cmd)->argv[0] == NULL)
