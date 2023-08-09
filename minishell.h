@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/04 12:11:15 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:05:49 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ t_command_line	*ft_new_matrix(char **matrix);
 t_e_type		ft_node_builtin_typer(char	*token);
 t_e_type		ft_node_redirect_typer(char *token);
 char			*expander(char*str, t_env01 *env_list);
+t_env01			*ft_env_search(t_env01 *env_list, char *searchname);
 
 #endif

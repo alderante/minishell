@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/01 10:47:07 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:57:57 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,13 @@ t_env01	*ft_env_noder(char **envp)
 	}
 	return(temp);
 }
+
+// void ft_export(char *env, t_env01 *env_list)
+// {
+	
+// }
+
+// void ft_unset(char *env, t_env01 *env_list)
+// {
+
+// }

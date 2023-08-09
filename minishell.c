@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/04 12:04:25 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:51:51 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*input;
 	t_env01	*env_list;
+	t_env01	*first;
 
 	(void)(ac);
 	(void)(av);
@@ -260,22 +261,25 @@ int	main(int ac, char **av, char **envp)
 		}
 		else if (ft_strcmp(input, "env") == 0)
 		{
+			first = env_list;
 			while (env_list)
 			{
 				printf("%s\n", env_list->str);
 				env_list = env_list->next;
 			}
+			env_list = first;
+		}
+		else if (ft_strcmp(input, "exit") == 0)
+		{
+			printf("exit\n");
+			//free(input);
+			exit(0);
 		}
 		else
 		{
-			if (ft_strcmp(input, "exit") == 0)
-			{
-				printf("exit\n");
-				exit(0);
-			}
 			ft_lexer(input, env_list);
-			//free(input);
 		}
 	}
+	//free(input);
 	return (0);
 }
