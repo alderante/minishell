@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 12:26:14 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:21:39 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ t_token	*ft_newnode(char *token, int pos)
 	t_token		*node;
 
 	node = (t_token *)malloc(sizeof(t_token));
-	printf("Stampami il token attuale sono in newnode start %s\n", token);
 	if (ft_node_builtin_typer(token) != 1)
 	{
 		node->type = ft_node_builtin_typer(token);
@@ -136,7 +135,6 @@ t_token	*ft_newnode(char *token, int pos)
 	node->pos = pos;
 	node->token = strdup(token);
 	node->next = NULL;
-	printf("Stampami il token attuale sono in newnode end %s\n", token);
 	return (node);
 }
 
