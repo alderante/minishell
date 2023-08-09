@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noder_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 11:21:38 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 12:29:46 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:42:09 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ t_e_type	ft_node_redirect_typer(char *token)
 	t_e_type	type;
 
 	if (ft_strcmp(token, "<") == 0)
-		type = OPEN_FILE;
+		type = FILE_IN;
 	else if (ft_strcmp(token, "<<") == 0)
 		type = HERE_DOC;
-	else if (ft_strcmp(token, "|") == 0)
-		type = LIMITOR;
+	/* else if (ft_strcmp(token, "|") == 0)
+		type = LIMITOR; */
 	else if (ft_strcmp(token, ">") == 0)
-		type = CREAT_FILE;
+		type = FILE_OUT;
 	else if (ft_strcmp(token, ">>") == 0)
-		type = WRITE_FILE;
+		type = FILE_OUT_OVER;
 	else
 		return (1);
 	return (type);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/09 13:27:55 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:42:03 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ int	redirections_fd(t_command_line **cmd)
 	updated = (*cmd)->single_token;
 	while (updated)
 	{
-		if (updated->type == FILE_IN || updated->type == LIMITOR)
+		if (updated->type == FILE_IN || updated->type == HERE_DOC)
 			handle_input_redirection(tmp);
 		if (updated->type == FILE_OUT || updated->type == FILE_OUT_OVER)
 			handle_output_redirection(tmp);
