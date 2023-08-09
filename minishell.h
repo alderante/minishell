@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/07 11:05:49 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:20:55 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef enum type
 {
 	NON,			// 0 BOOOOOOH
-	ARG,			// 1 ls -l o wc -l
+	ARG,			// 1 ls -l o wc -l cat
 	BUILTIN,		// 2 echo, cd, pwd, export, unset, env, exit
 	OPEN_FILE,		// 3 <
 	HERE_DOC,		// 4 <<
@@ -72,6 +72,7 @@ typedef struct s_command_line
 	int						fd_in;
 	int						fd_out;
 	char					*name_file;
+	char					*heredoc_delimiter;
 	struct s_command_line	*next;
 }	t_command_line;
 
