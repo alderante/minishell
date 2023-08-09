@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/07 11:57:21 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/09 12:06:00 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void ft_built_in_export(char **tab, t_env01 **first)
 	printf("/after gn\n");
 	value = ft_givecontent(offset, *tab);
 	printf("/after gc\n");
-	while(tab && *tab)
+	while(*tab)
 	{
 		env_list = ft_env_search(env_list, name);
 		printf("//////////////////////////////////111\n");
@@ -118,9 +118,10 @@ void ft_built_in_export(char **tab, t_env01 **first)
 				env_list->next = NULL;
 			}
 		}
-		free(name);
-		free(value);
+		tab++;
 	}
+	free(name);
+	free(value);
 }
 
 int	execution_builtin(char *str, char **args,
