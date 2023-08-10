@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 14:21:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:50:33 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,10 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 
 void	ft_node_deleter(t_token *first)
 {
-	t_token	*node;
-
-	node = first;
-	while (first)
-	{
-		free(first->token);
-		first = first->next;
-		free(node);
-		node = first;
-	}
+	if (first->next)
+		ft_node_deleter(first->next);
+	free(first->token);
+	free(first);
 }
 
 void	ft_final_stamper(t_command_line *cmd_line)

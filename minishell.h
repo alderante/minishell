@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 12:20:55 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:05:12 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_command_line
 	t_token					*single_token;
 	//t_env					*env;
 	t_env01					*env_list;
-	char					**envp;
+	//char					**envp;
 	char					**argv;
 	int						fd_in;
 	int						fd_out;
@@ -79,6 +79,7 @@ typedef struct s_command_line
 int	ft_strcmp(char *str1, char *str2);
 
 t_env01			*ft_env_noder(char **envp);
+void			ft_env_deleter(t_env01 *first);
 int				ft_check_quote (char c, int check);
 void			ft_lexer(char *input, t_env01 *env_list);
 t_token			*ft_newnode(char *token, int pos);
@@ -91,5 +92,9 @@ t_e_type		ft_node_builtin_typer(char	*token);
 t_e_type		ft_node_redirect_typer(char *token);
 char			*expander(char*str, t_env01 *env_list);
 t_env01			*ft_env_search(t_env01 *env_list, char *searchname);
+void			ft_built_in_env(t_env01 *my_env);
+
+
+
 
 #endif

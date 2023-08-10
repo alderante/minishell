@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/09 11:57:08 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:02:39 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	execution_bd_fd(char *str, char **args,
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("env", str))
-		ft_built_in_env_fd(args, (*original)->fd_out);
+		ft_built_in_env_fd((*original)->env_list, (*original)->fd_out);
 	else if (ft_strcmp01("pwd", str))
 		ft_built_in_pwd_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("export", str))

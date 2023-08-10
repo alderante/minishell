@@ -6,11 +6,19 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/04 15:57:57 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:06:13 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+
+void	ft_env_deleter(t_env01 *first)
+{
+	if (first->next)
+		ft_env_deleter(first->next);
+	free(first->str);
+	free(first);
+}
 
 t_env01	*noder(char *str)
 {
@@ -22,15 +30,22 @@ t_env01	*noder(char *str)
 			i++;
 	node = malloc(sizeof(t_env01));
 	node->str = ft_substr(str, 0, i);
-	//node->value = ft_substr(str, i + 1, ft_strlen(str));
-	//node->exp = 1;
 	node->next = NULL;
 	return(node);
 }
 
-
-void	ft_print_env(t_env01 *my_env)
+void	ft_built_in_env(t_env01 *my_env)
 {
+	while(my_env)
+	{
+		printf("%s\n", my_env->str);
+		my_env = my_env->next;
+	}
+}
+
+void	ft_built_in_env_fd(t_env01 *my_env, int fd)
+{
+	(void)(fd);
 	while(my_env)
 	{
 		printf("%s\n", my_env->str);
@@ -56,17 +71,6 @@ t_env01	*ft_env_noder(char **envp)
 			node = node->next;
 			j++;
 		}
-		//ft_print_env(temp);
 	}
 	return(temp);
 }
-
-// void ft_export(char *env, t_env01 *env_list)
-// {
-	
-// }
-
-// void ft_unset(char *env, t_env01 *env_list)
-// {
-
-// }

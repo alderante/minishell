@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 14:17:55 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:09:56 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,14 +163,10 @@ int	pipe_counter(char **matrix)
 t_command_line    *ft_new_matrix(char **matrix)
 {
 	int				i;
-	//int				pipe_count;
 	char			*temp;
 	t_command_line	*first_line;
 	t_command_line	*cmd_line;
 
-	//questo va allocato in base al numero di pipe + 1 (3 pipe = 4 + la quinta NULL che aggiungo al malloc di cmd_line
-	//pipe_count = pipe_counter(matrix) + 1;
-	//cmd_line = malloc(sizeof(char *) * (pipe_count + 1));
 	cmd_line = ft_calloc(sizeof(t_command_line), 1);
 	first_line = cmd_line;
 	i = 0;
@@ -200,7 +196,6 @@ t_command_line    *ft_new_matrix(char **matrix)
 		printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 		cmd_line = cmd_line->next;
 	}
-	//free(temp);
 	return (first_line);
 }
 
@@ -223,7 +218,7 @@ void	ft_lexer(char *input, t_env01 *env_list)
 	first = ft_new_matrix(matrix);
 	ft_initialize(first, env_list);
 	execution(&first);
-	//ft_node_deleter(first);
+	ft_node_deleter(first->single_token);
 	i = 0;
 	while (matrix[i])
 	{
@@ -239,8 +234,7 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*input;
 	t_env01	*env_list;
-	t_env01	*first;
-
+	
 	(void)(ac);
 	(void)(av);
 	g_exit_status = 0;
@@ -248,38 +242,28 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGQUIT, SIG_IGN);
 	//env = ft_env_noder(envp);
 	env_list = ft_env_noder(envp);
-	//env_list = convert_env_to_list(envp);
 	while (1)
 	{
-		input = readline("%>"); //ft_strjoin(getenv("PWD"), "%>")
-		add_history(input);
-		if (input == NULL || *input == '\0')
+		input = readline("%>");
+		if (input == NULL)
 		{
 			printf("\n");
 			free(input);
 			break ;
 		}
-		else if (ft_strcmp(input, "env") == 0)
-		{
-			first = env_list;
-			while (env_list)
-			{
-				printf("%s\n", env_list->str);
-				env_list = env_list->next;
-			}
-			env_list = first;
-		}
 		else if (ft_strcmp(input, "exit") == 0)
 		{
 			printf("exit\n");
-			//free(input);
+			free(input);
 			exit(0);
 		}
-		else
+		else if (*input)
 		{
+			add_history(input);
 			ft_lexer(input, env_list);
+			free(input);
 		}
 	}
-	//free(input);
+	ft_env_deleter(env_list);
 	return (0);
 }

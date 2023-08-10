@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/09 14:17:10 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 10:59:58 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,12 @@ void ft_built_in_export(char **tab, t_env01 **first)
 	
 	env_list = *first;
 	tab++;
-	printf("/1\n");
 	offset = ft_offset(*tab);
-	printf("/after offset\n");
+	printf("%d\n", offset);
 	name = ft_givename(offset, *tab);
-	printf("/after gn\n");
+	printf("name is %s\n", name);
 	value = ft_givecontent(offset, *tab);
-	printf("/after gc\n");
+	printf("value is %s\n", value);
 	while(*tab)
 	{
 		env_list = ft_env_search(env_list, name);
@@ -138,11 +137,10 @@ int	execution_builtin(char *str, char **args,
 		builtin_cd(args);
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo(args);
-	/* else if (ft_strcmp01("env", str))
-	 	ft_built_in_env(args); */
+	else if (ft_strcmp01("env", str))
+	 	ft_built_in_env((*original)->env_list);
 	else if (ft_strcmp01("pwd", str))
 		ft_built_in_pwd(args);
-	
 	else if (ft_strcmp01("export", str))
 		ft_built_in_export(args, &(*original)->env_list);
 	

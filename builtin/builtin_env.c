@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:54:21 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/27 19:13:14 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:06:59 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_is_equal(char *str)
 	return (0);
 }
 
-int	ft_built_in_env_fd(char **str, int fd)
+/* int	ft_built_in_env_fd(char **str, int fd)
 {
 	t_env01 **env;
 
@@ -35,7 +35,7 @@ int	ft_built_in_env_fd(char **str, int fd)
 	env = address_of_env();
 	ft_built_in_show_env_fd(env, fd);
 	return (0);
-}
+} */
 
 void	ft_built_in_show_env_fd(t_env01 **env, int fd)
 {

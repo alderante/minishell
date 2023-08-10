@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/09 12:00:14 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:05:46 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int		wait_pid(t_command_line **cmd, pid_t *pid);
 int		organise_arg(t_command_line **cmd);
 
 //builtin_env
-int		ft_built_in_env_fd(char **str, int fd);
+void	ft_built_in_env_fd(t_env01 *my_env, int fd);
 void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 
 void	ft_built_in_export(char **tab, t_env01 **first);
