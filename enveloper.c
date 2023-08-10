@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/10 11:06:13 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:12:34 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,9 @@ void	ft_env_deleter(t_env01 *first)
 t_env01	*noder(char *str)
 {
 	t_env01	*node;
-	int		i;
 
-	i = 0;
-	while(str[i])
-			i++;
 	node = malloc(sizeof(t_env01));
-	node->str = ft_substr(str, 0, i);
+	node->str = ft_strdup(str);
 	node->next = NULL;
 	return(node);
 }

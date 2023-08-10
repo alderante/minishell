@@ -6,121 +6,89 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/10 10:59:58 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:58:34 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-int	ft_offset(char *str)
+int	ft_export_checker(char *tab, int equal)
 {
-	int		x;
-	int		offset;
-	int		eq_offset;
-
-	x = 0;
-	offset = 0;
-	eq_offset = 0;
-	while (str[x])
-	{
-		if (str[x] == 34 || str[x] == 39)
-			offset++;
-		else if (str[x] == '=' && !eq_offset)
-			eq_offset++;
-		x++;
-	}
-	return (offset + eq_offset);
-}
-
-char	*ft_givename(int x, char *str)
-{
-	char	*name;
-	int		i;
+	int	i;
 
 	i = 0;
-	name = malloc(sizeof(char) * x + 1);
-	while (str[i] && str[i] != '=')
+	if(equal < 3)
+		return(1);
+	if(ft_isalpha(tab[i]) != 1)
+		return(1);
+	while(tab[i] != '=')
 	{
-		name[i] = str[i];
+		if(ft_isalnum(tab[i]) != 1)
+			return(1);
 		i++;
 	}
-	name[x] = '\0';
-	return (name);
+	return(0);
 }
 
-char	*ft_givecontent(int x, char *str)
+int ft_input_equal_position(char *tab)
 {
-	char	*content;
-	int		i;
-	int		z;
+	int	equal;
+	int	i;
 
 	i = 0;
-	z = 0;
-	content = malloc(sizeof(char) * x + 1);
-	while (str[i] && str[i] != '=')
-		i++;
-	if (str[i] == '=')
-		i++;
-	if (str[i] == 34 || str[i] == 39)
-		i++;
-	while (str[i] != '\0' && (str[i] != 34 && str[i] != 39))
+	equal = 0;
+	while(tab)
 	{
-		content[z] = str[i];
-		z++;
+		if(tab[i] == '=')
+			return(i);
 		i++;
 	}
-	content[x] = '\0';
-	return (content);
+	return(equal);
 }
 
 void ft_built_in_export(char **tab, t_env01 **first)
 {
 	char *value;
 	char *name;
-	int	offset;
+	int	equal;
 	t_env01	*env_list;
 	
 	env_list = *first;
 	tab++;
-	offset = ft_offset(*tab);
-	printf("%d\n", offset);
-	name = ft_givename(offset, *tab);
-	printf("name is %s\n", name);
-	value = ft_givecontent(offset, *tab);
-	printf("value is %s\n", value);
-	while(*tab)
+	equal = ft_input_equal_position(*tab);
+	if (ft_export_checker(*tab, equal) == 0)
 	{
-		env_list = ft_env_search(env_list, name);
-		if(env_list != NULL)
-		{	
-			free(env_list->str);
-			env_list->str = ft_strdup(*tab);
-		}
-		else
+		name = ft_substr(*tab, 0, equal);
+		value = ft_substr(*tab, equal + 1, ft_strlen(*tab));
+		while(*tab)
 		{
-			env_list = *first;
-			if(env_list == NULL)
+			env_list = ft_env_search(env_list, name);
+			if(env_list != NULL)
 			{	
-				env_list = malloc(sizeof(t_env01));
+				free(env_list->str);
 				env_list->str = ft_strdup(*tab);
-				env_list->next = NULL;
-			}	
+			}
 			else
 			{
-				while(env_list->next)
-				{
-					env_list = env_list->next;
-					env_list->next = malloc(sizeof(t_env01));
-					env_list = env_list->next;
+				env_list = *first;
+				if(env_list == NULL)
+				{	
+					env_list = malloc(sizeof(t_env01));
 					env_list->str = ft_strdup(*tab);
 					env_list->next = NULL;
+				}	
+				else
+				{
+					while(env_list->next)
+						env_list = env_list->next;
+					env_list->next = noder(*tab);
 				}
 			}
+			free(name);
+			free(value);
+			tab++;
 		}
-		tab++;
 	}
-	free(name);
-	free(value);
 }
 
 int	execution_builtin(char *str, char **args,
@@ -151,7 +119,6 @@ int	execution_builtin(char *str, char **args,
 	free_all(original);
 	return (0);
 }
-
 
 int	execute_builtin(t_command_line **cmd,
 	t_command_line **original, pid_t *pid)

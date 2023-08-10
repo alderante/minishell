@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/10 11:05:12 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:43:39 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ t_e_type		ft_node_redirect_typer(char *token);
 char			*expander(char*str, t_env01 *env_list);
 t_env01			*ft_env_search(t_env01 *env_list, char *searchname);
 void			ft_built_in_env(t_env01 *my_env);
-
-
-
+char			*ft_value_extractor(t_env01 *env_list);
+int				ft_env_list_equal_position(t_env01 *env_list);
+char			*ft_value_extractor(t_env01 *env_list);
 
 #endif
