@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 16:19:19 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:11:06 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_check_quote (char c, int check)
 	return (check);
 }
 
-int	easy_split_rows_counter(char *input)
+int	ft_easy_split_rows_counter(char *input)
 {
 	int		i;
 	int		check;
@@ -45,7 +45,7 @@ int	easy_split_rows_counter(char *input)
 					while (check == 1 || check == 2)
 					{
 						rows++;
-						check = ft_check_quote (input[i], check);
+						check = ft_check_quote(input[i], check);
 						if (check == 0)
 							i++;
 					}
@@ -82,7 +82,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 	i = 0;
 	y = 0;
 	check = 0;
-	tab = ft_calloc((easy_split_rows_counter(str)), sizeof(char *));
+	tab = ft_calloc((ft_easy_split_rows_counter(str) + 1), sizeof(char *));
 	//printf("this is counter %d\n", easy_split_rows_counter(str));
 	while (str[i] != '\0')
 	{
@@ -92,7 +92,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 			tab[y] = ft_calloc((strlen(str) + 1), sizeof(char));
 			while (str[i] != '\0' && str[i] > 32)
 			{
-				check = ft_check_quote (str[i], check);
+				check = ft_check_quote(str[i], check);
 				if (check == 1 || check == 2)
 				{
 					while (str[i] != '\0' && (check == 1 || check == 2))
@@ -100,7 +100,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 						tab[y][x] = str[i];
 						i++;
 						x++;
-						check = ft_check_quote (str[i], check);
+						check = ft_check_quote(str[i], check);
 						if (check == 0)
 						{
 							tab[y][x] = str[i];
@@ -114,6 +114,7 @@ char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
 					if (tab[y][0] == 0)
 						y--;
 					y++;
+					free(tab[y]);
 					tab[y] = ft_calloc(2, 1);
 					tab[y][0] = '|';
 					x = 0;
@@ -221,8 +222,6 @@ void	ft_lexer(char *input, t_env01 *env_list)
 	}
 	// first = malloc(sizeof(t_command_line));
 	first = ft_new_matrix(matrix);
-	ft_initialize(first, env_list);
-	execution(&first);
 	//ft_node_deleter(first->single_token);
 	i = 0;
 	while (matrix[i])
@@ -231,6 +230,8 @@ void	ft_lexer(char *input, t_env01 *env_list)
 		i++;
 	}
 	free(matrix);
+	ft_initialize(first, env_list);
+	execution(&first);
 	free_all(&first);
 	// free_end(&first, NULL);
 	//free(input_clone);

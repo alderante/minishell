@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 16:38:40 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:26:36 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 
 	i = 0;
 	y = 0;
-	tab = ft_calloc((ft_strlen(str) + 1), sizeof(char *));	// input="echo ciao" bisogna allocare di 2 (numero di stringhe + '\0') e non il numero di caratteri (ft_strlen(str))
+	tab = ft_calloc((ft_easy_split_rows_counter(str) + 1), sizeof(char *));
 	str = expander(str, env_list);
 	while (str[i] != '\0')
 	{
@@ -136,6 +136,7 @@ t_token	*ft_newnode(char *token, int pos)
 t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 {
 	int				i;
+	int				j;
 	t_token			*node;
 	t_token			*first_token;
 	t_command_line	*temp;
@@ -150,7 +151,6 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 	{
 		i = 0;
 		current_line = quote_cleaner_split(first_cmd->new_matrix_string, env_list);
-		//printf("%p\n", node);
 		printf("current_line: %s\n", current_line[i]);
 		node = ft_newnode(current_line[i], i + 1);
 		first_token = NULL;
@@ -159,24 +159,23 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 		i++;
 		while (current_line[i])
 		{
-			//printf("current_line: %s\n", current_line[i]);
 			node->next = ft_newnode(current_line[i], i + 1);
 			first_cmd->env_list = env_list;
 			node = node->next;
 			i++;
 		}
 		first_cmd = first_cmd->next;
+		j = 0;
+		while (current_line[j])
+		{
+			free(current_line[j]);
+			j++;
+		}
+		free(current_line);
 		i++;
 	}
 	first_cmd = temp;
 	node = first_token;
-	i = 0;
-	while (current_line[i])
-	{
-		free(current_line[i]);
-		i++;
-	}
-	free(current_line);
 	ft_final_stamper(first_cmd);
 	return (first_token);
 }
