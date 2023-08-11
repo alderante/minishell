@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 15:14:03 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:55:51 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ char	*expander(char *str, t_env01 *env_list)
 			{
 				value = ft_value_extractor(ft_env_search(env_list, searchname));
 				printf("Value is %s\n", value);
+				new_str[new_len] = '\0';
 				ft_strlcat(&new_str[new_len], value, ft_strlen(value) + 1);
 				new_len += ft_strlen(value);
 				printf("ESPANSIONE la stringa che ora is %s\n", new_str);
