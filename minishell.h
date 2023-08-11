@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/10 11:43:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:11:50 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_command_line
 
 int	ft_strcmp(char *str1, char *str2);
 
+int				ft_easy_split_rows_counter(char *input);
 t_env01			*ft_env_noder(char **envp);
 void			ft_env_deleter(t_env01 *first);
 int				ft_check_quote (char c, int check);

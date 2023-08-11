@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 16:12:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:41:37 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,19 @@ int	execution_builtin(char *str, char **args,
 		ft_built_in_pwd(args);
 	else if (ft_strcmp01("export", str))
 		ft_built_in_export(args, &(*original)->env_list);
-	
+	// if (pid == NULL)
+	// {
+	// 	free(pid);
+	// 	free_delete_add(NULL, FREE);
+	// 	free_all(original);
+	// 	exit (0);
+	// }
 	// else if (ft_strcmp01("unset", str))
 	// 	ft_built_in_unset(args);
-	free(pid);
-	free_delete_add(NULL, FREE);
-	free_all(original);
+	// free(pid);
+	// free_delete_add(NULL, FREE);
+	// free_all(original);
+	(void)pid;
 	return (0);
 }
 
@@ -126,8 +133,6 @@ int	execute_builtin(t_command_line **cmd,
 	t_command_line **original, pid_t *pid)
 {
 	//free(str);
-	if (execution_builtin((*cmd)->argv[0], (*cmd)->argv, original, pid) == 2)
-		exit(1);
-	exit(0);
+	execution_builtin((*cmd)->argv[0], (*cmd)->argv, original, pid);
 	return (0);
 }

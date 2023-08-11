@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 16:31:05 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:55:37 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	execution_execve(t_command_line **cmd, t_command_line **original,
 	// struct stat	buff;
 
 	execve((*cmd)->argv[0], (*cmd)->argv, str);
-	write(2, "minishell: execve FAILED", ft_strlen("minishell: execve FAILED"));
+	write(2, "minishell: execve FAILED\n", ft_strlen("minishell: execve FAILED\n"));
 	// if (stat((*cmd)->argv[0], &buff) == -1)
 	// {
 	// 	write(2, "minishell: ", ft_strlen("minishell: "));
@@ -124,10 +124,8 @@ int	execution_execve(t_command_line **cmd, t_command_line **original,
 	// 		ft_strlen(": No such file or directory\n"));
 	// 	exit(126);
 	// }
-	free_all(original);
-	free(str);
-	free(pid);
-	free_delete_add(NULL, FREE);
+	(void)(original);
+	(void)(pid);
 	/* g_exit_status = 127;
 	exit(g_exit_status); */
 	return (0);
@@ -152,9 +150,19 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 
 	/* if (str == NULL)
 		all_fd_close_n_exit(original); */
-		
+	
+	/*
+		24 bytes in 1 blocks are definitely lost in loss record 13 of 68
+==502183==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==502183==    by 0x404C38: ft_newnode (noder.c:119)
+==502183==    by 0x404D70: ft_initialize (noder.c:155)
+==502183==    by 0x401B20: ft_lexer (minishell.c:233)
+==502183==    by 0x401C2E: main (minishell.c:271)
+	*/
+
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
+		printf("this is argv[0] %s\n", (*cmd)->argv[0]);
 		if ((*cmd)->argv[0] == NULL)
 			all_free_n_exit(original, pid, str);
 		(*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
@@ -173,6 +181,12 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 	else {
 		execution_execve(cmd, original, str, pid);
 	}
+	free(str);
+	free(pid);
+	free_delete_add(NULL, FREE);
+	ft_env_deleter((*original)->env_list);
+	free_all(original);
+	exit(0);
 	return (0);
 }
 
