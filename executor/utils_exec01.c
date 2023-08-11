@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:14:56 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 16:35:11 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:24:11 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,20 @@ int	free_all(t_command_line **cmd_line)
 				free_token(cmd_line);
 			if ((*cmd_line)->name_file)
 				free((*cmd_line)->name_file);
+			if ((*cmd_line)->heredoc_delimiter)
+				free((*cmd_line)->heredoc_delimiter);
 			free((*cmd_line));
 			*cmd_line = tmp;
 		}
 	}
 	return (1);
+}
+
+void	free_end(t_command_line **cmd, char *str)
+{
+	if (str)
+		free(str);
+	free_all(cmd);
 }
 
 /* void	all_free_n_exit(t_command_line **cmd,

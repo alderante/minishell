@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/10 11:02:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:36:00 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	process_forking(pid_t *pid, int i, t_command_line **cmd,
 		return (-1);
 	while (i < size) 
 	{
-		(*cmd)->argv[i] = strdup(av[i]);
+		(*cmd)->argv[i] = ft_strdup(av[i]);
 		if ((*cmd)->argv[i] == NULL)
 			return (-1);
 		i++;

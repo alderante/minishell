@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/09 14:33:50 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:14:03 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char *ft_value_extractor(t_env01 *env_list)
 	return (value);
 }
 
-char	*expander(char*str, t_env01 *env_list)
+char	*expander(char *str, t_env01 *env_list)
 {
 	char	*value;
 	int		check;
@@ -61,6 +61,7 @@ char	*expander(char*str, t_env01 *env_list)
 	int		new_len;
 	int		initial;
 	char	*searchname;
+	char	*new_str;
 
 	i = 0;
 	new_len = 0;
@@ -99,11 +100,12 @@ char	*expander(char*str, t_env01 *env_list)
 		}
 	}
 	printf("new_len is %d\n", new_len);
-	i = 0;
-	char *new_str = malloc(sizeof(char) * new_len + 1);
+
+	new_str = malloc(sizeof(char) * new_len + 1);
 	new_str[new_len] = '\0';
 	new_len = 0;
 	check = 0;
+	i = 0;
 	while (str[i])
 	{
 		check = ft_check_quote(str[i], check);

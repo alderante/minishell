@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/10 15:58:34 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:12:07 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int ft_input_equal_position(char *tab)
 
 	i = 0;
 	equal = 0;
-	while(tab)
+	if (!tab)
+		return (equal);
+	while(tab[i])
 	{
 		if(tab[i] == '=')
 			return(i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:31:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/10 15:56:16 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:36:00 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 	node = (t_env01 *)malloc(sizeof(t_env01));
 	if (node)
 	{
-		node->str = strdup(str);
+		node->str = ft_strdup(str);
 		node->declare = declare;
 		node->next = NULL;
 	}

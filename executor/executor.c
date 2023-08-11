@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 12:09:24 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:31:05 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,17 +112,18 @@ int	wait_pid(t_command_line **cmd, pid_t *pid)
 int	execution_execve(t_command_line **cmd, t_command_line **original,
 	char **str, pid_t *pid)
 {
-	struct stat	buff;
+	// struct stat	buff;
 
 	execve((*cmd)->argv[0], (*cmd)->argv, str);
-	if (stat((*cmd)->argv[0], &buff) == -1)
-	{
-		write(2, "minishell: ", ft_strlen("minishell: "));
-		write(2, (*cmd)->argv[0], ft_strlen((*cmd)->argv[0]));
-		write(2, ": No such file or directory\n",
-			ft_strlen(": No such file or directory\n"));
-		exit(126);
-	}
+	write(2, "minishell: execve FAILED", ft_strlen("minishell: execve FAILED"));
+	// if (stat((*cmd)->argv[0], &buff) == -1)
+	// {
+	// 	write(2, "minishell: ", ft_strlen("minishell: "));
+	// 	write(2, (*cmd)->argv[0], ft_strlen((*cmd)->argv[0]));
+	// 	write(2, ": No such file or directory\n",
+	// 		ft_strlen(": No such file or directory\n"));
+	// 	exit(126);
+	// }
 	free_all(original);
 	free(str);
 	free(pid);
@@ -205,5 +206,7 @@ int	execution(t_command_line **cmd_line)
 	wait_pid(cmd_line, pid);
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
+	//free_command_line(*cmd_line);
+	free(pid);
 	return (0);
 }

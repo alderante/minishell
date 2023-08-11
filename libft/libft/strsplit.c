@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:14:08 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/21 18:54:58 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:36:00 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ char	**continue_strsplit(const char *path, char	**result)
 	char	*token;
 	int		i;
 
-	copy = strdup(path);
+	copy = ft_strdup(path);
 	token = strtok(copy, ":");
 	i = 0;
 	while (token != NULL)
 	{
-		result[i] = strdup(token);
+		result[i] = ft_strdup(token);
 		token = strtok(NULL, ":");
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/10 11:37:56 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:19:19 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,23 +163,26 @@ int	pipe_counter(char **matrix)
 t_command_line    *ft_new_matrix(char **matrix)
 {
 	int				i;
-	char			*temp;
+	//char			*temp;
 	t_command_line	*first_line;
 	t_command_line	*cmd_line;
 
 	cmd_line = ft_calloc(sizeof(t_command_line), 1);
 	first_line = cmd_line;
+	cmd_line->new_matrix_string = NULL;
 	i = 0;
 	while (matrix[i])
 	{
-		cmd_line->new_matrix_string = malloc(sizeof(char *) * ft_strlen(matrix[i]));
-		temp = ft_calloc(1, 1);
+		// if (cmd_line->new_matrix_string)
+		// 	free(cmd_line->new_matrix_string);
+		// cmd_line->new_matrix_string = malloc(sizeof(char) * ft_strlen(matrix[i]) + 1);
+		//temp = NULL;
 		while (matrix[i] && matrix[i][0] != '|')
 		{
-			cmd_line->new_matrix_string = ft_strjoin(temp, matrix[i]);
+			cmd_line->new_matrix_string = ft_strjoin01(cmd_line->new_matrix_string, matrix[i]);
 			if (matrix[i + 1] != NULL && matrix[i + 1][0] != '|')
-				cmd_line->new_matrix_string = ft_strjoin(cmd_line->new_matrix_string, " ");
-			temp = cmd_line->new_matrix_string;
+				cmd_line->new_matrix_string = ft_strjoin01(cmd_line->new_matrix_string, " ");
+			//temp = cmd_line->new_matrix_string;
 			i++;
 		}
 		if (matrix[i] && matrix[i][0] == '|')
@@ -196,29 +199,31 @@ t_command_line    *ft_new_matrix(char **matrix)
 		printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 		cmd_line = cmd_line->next;
 	}
+	// if (temp)
+	// 	free(temp);
 	return (first_line);
 }
 
 void	ft_lexer(char *input, t_env01 *env_list)
 {
 	int				i;
-	char			*input_clone;
+	// char			*input_clone;
 	char			**matrix;
 	t_command_line	*first;
 
-	input_clone = strdup(input);
-	matrix = easy_split(input_clone);
+	// input_clone = ft_strdup(input);
+	matrix = easy_split(input);
 	i = 0;
 	while (matrix[i])
 	{
 		printf("Easy split line %i: %s\n", i, matrix[i]);
 		i++;
 	}
-	first = malloc(sizeof(t_command_line));
+	// first = malloc(sizeof(t_command_line));
 	first = ft_new_matrix(matrix);
 	ft_initialize(first, env_list);
 	execution(&first);
-	ft_node_deleter(first->single_token);
+	//ft_node_deleter(first->single_token);
 	i = 0;
 	while (matrix[i])
 	{
@@ -226,6 +231,8 @@ void	ft_lexer(char *input, t_env01 *env_list)
 		i++;
 	}
 	free(matrix);
+	free_all(&first);
+	// free_end(&first, NULL);
 	//free(input_clone);
 	//free(first);
 }
@@ -234,7 +241,7 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*input;
 	t_env01	*env_list;
-	
+
 	(void)(ac);
 	(void)(av);
 	g_exit_status = 0;
@@ -242,29 +249,28 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGQUIT, SIG_IGN);
 	//env = ft_env_noder(envp);
 	env_list = ft_env_noder(envp);
+	input = NULL;
 	while (1)
 	{
+		free(input);
 		input = readline("%>");
 		if (input == NULL)
 		{
 			printf("\n");
-			free(input);
 			break ;
 		}
 		else if (ft_strcmp(input, "exit") == 0)
 		{
 			printf("exit\n");
-			free(input);
-			exit(0);
+			break ;
 		}
 		else if (*input)
 		{
 			add_history(input);
 			ft_lexer(input, env_list);
-			free(input);
 		}
 	}
 	ft_env_deleter(env_list);
-	free(add_history);
+	free(input);
 	return (0);
 }
