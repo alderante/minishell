@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/10 15:13:41 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 12:34:03 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,4 +164,9 @@ int		organise_arg(t_command_line **cmd);
 void	ft_built_in_env_fd(t_env01 *my_env, int fd);
 void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 void	ft_built_in_export(char **tab, t_env01 **first);
+
+//free
+void free_command_line(t_command_line *cmd);
+void	free_end(t_command_line **cmd, char *str);
+
 #endif

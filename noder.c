@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/10 10:50:33 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:38:40 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 
 	i = 0;
 	y = 0;
-	tab = ft_calloc((ft_strlen(str) + 1), sizeof(char *));
+	tab = ft_calloc((ft_strlen(str) + 1), sizeof(char *));	// input="echo ciao" bisogna allocare di 2 (numero di stringhe + '\0') e non il numero di caratteri (ft_strlen(str))
 	str = expander(str, env_list);
 	while (str[i] != '\0')
 	{
@@ -67,6 +67,7 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 			i++;
 	}
 	tab[y] = NULL;
+	free(str);
 	return (tab);
 }
 
@@ -127,7 +128,7 @@ t_token	*ft_newnode(char *token, int pos)
 	else
 		node->type = ARG;
 	node->pos = pos;
-	node->token = strdup(token);
+	node->token = ft_strdup(token);
 	node->next = NULL;
 	return (node);
 }

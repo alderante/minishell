@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/09 14:42:03 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:58:18 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int handle_output_redirection(t_command_line **cmd)
 				    return (-1);
 				(*cmd)->fd_out = fd;
 				next_token = token->next;
+				free(token->token);
 				token->token = NULL;
 				token->next = next_token->next;
 				free(next_token->token);
@@ -185,6 +186,7 @@ int handle_output_redirection(t_command_line **cmd)
 				    return (-1);
 				(*cmd)->fd_out = fd;
 				next_token = token->next;
+				free(token->token);
 				token->token = NULL;
 				token->next = next_token->next;
 				free(next_token->token);

@@ -11,7 +11,7 @@
    Memcheck:Leak
    ...
    ...
-   fun:main
+   fun:rl_initialize
    fun:readline
 }
 {

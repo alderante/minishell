@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:31:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/24 16:44:48 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/11 16:36:00 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_env01	*create_env_node(char *str, int declare)
 	node = (t_env01 *)malloc(sizeof(t_env01));
 	if (node)
 	{
-		node->str = strdup(str);
+		node->str = ft_strdup(str);
 		node->declare = declare;
 		node->next = NULL;
 	}
