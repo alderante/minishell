@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 16:58:18 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 13:43:39 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ int g_exit_status;
 #include <stdlib.h>
 #include <string.h>
 
+
 int create_heredoc_fd(t_command_line **cmd, t_token **token)
 {
-	int fd;
-	char *line;
-	size_t len;
-	size_t heredoc_len;
-	char *delimiter;
+	int		fd;
+	size_t	heredoc_len;
+	char	*delimiter;
+	char	*line;
 
 	line = NULL;
-	len = 0;
+	fd = 0;
 	if (!(*cmd)->heredoc_delimiter)
 		return (-1);
 
@@ -47,29 +47,26 @@ int create_heredoc_fd(t_command_line **cmd, t_token **token)
 	}
 
 	heredoc_len = ft_strlen(delimiter);
-	write(1, "> ", 2);
 
 	while (1)
 	{
-		ssize_t bytes_read = read(0, line, len);
-		if (bytes_read == -1)
+		line = readline("> ");
+		if (line == NULL)
+		{
+			printf("\n");
+			break ;
+		}
+		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
-			free(delimiter);
-			return (-1);
+			break ;
 		}
-		if (bytes_read == 0)
-			break;
 
-		line[bytes_read] = '\0';
-		if (ft_strcmp01(line, delimiter) == 0 || ft_strncmp(line, delimiter, heredoc_len) == 0)
-			break;
-
-		write(fd, line, bytes_read);
-		write(1, "> ", 2);
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
 	}
 
-	free(line);
 	free(delimiter);
 	close(fd);
 
@@ -81,9 +78,9 @@ int create_heredoc_fd(t_command_line **cmd, t_token **token)
 
 int handle_input_redirection(t_command_line **cmd)
 {
-	t_token *token;
-	t_token *prev_token;
-	int 	fd;
+	t_token		*token;
+	t_token		*prev_token;
+	int			fd;
 
 	if ((*cmd)->fd_in != 0) 
 		close((*cmd)->fd_in);
@@ -92,13 +89,14 @@ int handle_input_redirection(t_command_line **cmd)
 	prev_token = NULL;
 	while (token)
 	{
-		if (ft_strcmp01(token->token, "<") == 0) 
+		if (ft_strcmp01(token->token, "<") == 1) 
 		{
+			printf("TOKEN01 << : %s\n", token->token);
 			if (token->next && token->next->token)
 			{
 				fd = open(token->next->token, O_RDONLY);
 				if (fd == -1)
-					return -1;
+					return (-1);
 				(*cmd)->fd_in = fd;
 				if (prev_token)
 				{
@@ -116,55 +114,54 @@ int handle_input_redirection(t_command_line **cmd)
 					free(token->next);
 					token = (*cmd)->single_token;
 				}
-				break;
+				break ;
 			}
 			else
-				return -1;
+				return (-1);
 		}
-		else if (ft_strcmp01(token->token, "<<") == 0)
+		else if (ft_strcmp01(token->token, "<<") == 1)
 		{
-            if (token->next && token->next->token)
+			if (token->next && token->next->token)
 			{
+				printf("TOKEN02 << : %s\n", token->token);
 				(*cmd)->heredoc_delimiter = ft_strdup(token->next->token);
+				printf("heredoc_delimiter %s\n", (*cmd)->heredoc_delimiter);
 				(*cmd)->fd_in = create_heredoc_fd(cmd, &token);
 				if ((*cmd)->fd_in == -1)
-					return -1;
-                break;
+					return (-1);
+				break ;
 			}
 			else
-				return -1;
+				return (-1);
 		}
 		prev_token = token;
 		token = token->next;
 	}
-	return 0;
+	return (0);
 }
-
-
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
 
 int handle_output_redirection(t_command_line **cmd)
 {
-	t_token *token;
-	int		fd;
-	t_token *next_token;
+	t_token		*token;
+	int			fd;
+	t_token		*next_token;
 
 	if ((*cmd)->fd_out != 1)
 		close((*cmd)->fd_out);
 
 	token = (*cmd)->single_token;
+	printf("token->next->token %s\n",token->next->token);
 	while (token)
 	{
-		if (strcmp(token->token, ">") == 0)
+		if (ft_strcmp(token->token, ">") == 0)
 		{
+			printf("token->next->token %s\n",token->next->token);
 			if (token->next && token->next->token)
 			{
-				fd = open(token->next->token, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+				fd = open(token->next->token, O_WRONLY
+						| O_CREAT | O_TRUNC, 0666);
 				if (fd == -1)
-				    return (-1);
+					return (-1);
 				(*cmd)->fd_out = fd;
 				next_token = token->next;
 				free(token->token);
@@ -172,18 +169,19 @@ int handle_output_redirection(t_command_line **cmd)
 				token->next = next_token->next;
 				free(next_token->token);
 				free(next_token);
-				break;
+				break ;
 			}
 			else
 				return (-1);
 		}
-		else if (strcmp(token->token, ">>") == 0)
+		else if (ft_strcmp(token->token, ">>") == 0)
 		{
 			if (token->next && token->next->token)
 			{
-				fd = open(token->next->token, O_WRONLY | O_CREAT | O_APPEND, 0666);
+				fd = open(token->next->token, O_WRONLY
+						| O_CREAT | O_APPEND, 0666);
 				if (fd == -1)
-				    return (-1);
+					return (-1);
 				(*cmd)->fd_out = fd;
 				next_token = token->next;
 				free(token->token);
@@ -191,35 +189,23 @@ int handle_output_redirection(t_command_line **cmd)
 				token->next = next_token->next;
 				free(next_token->token);
 				free(next_token);
-				break;
+				break ;
 			}
 			else
 				return (-1);
 		}
 		token = token->next;
-    }
+	}
 	return (0);
 }
 
-/*int redirections_fd(t_command_line **cmd)
-{
-    t_command_line **tmp;
-    tmp = cmd;
-
-    handle_output_redirection(tmp);
-
-    //tmp = *cmd;
-    handle_input_redirection(tmp);
-
-    return (0);
-}*/
-
 int	redirections_fd(t_command_line **cmd)
 {
-	t_token		*updated;
-	t_command_line **tmp;
-    tmp = cmd;
+	t_token			*updated;
+	t_command_line	**tmp;
 
+
+	tmp = cmd;
 	updated = (*cmd)->single_token;
 	while (updated)
 	{
