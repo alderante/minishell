@@ -140,11 +140,11 @@ int	func_fork(t_command_line **cmd, pid_t *pid)
 	}
 	//av_to_struct(cmd, av);
 	organise_arg(cmd);
-	if ((*cmd)->argv)
+	/* if ((*cmd)->argv)
 	{
 		printf("this is argv(organise): %s\n", (*cmd)->argv[0]);
 		printf("this is argv(organise01): %s\n", (*cmd)->argv[1]);
-	}
+	} */
 	updated = *cmd;
 	if (len == 1 && cmd_is_builtin(updated->argv[0]))
 	{
