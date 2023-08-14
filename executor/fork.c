@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 16:35:43 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:58:23 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,6 @@ int	process_forking(pid_t *pid, int i, t_command_line **cmd,
 		signal(SIGQUIT, SIG_DFL);
 		big_executor(updated, cmd, pid);
 	}
-	/* else	
-	{	
-		big_executor(updated, cmd, pid);
-		//exit(0);
-	} */
 	if ((*updated)->fd_in != 0)
 		close((*updated)->fd_in);
 	if ((*updated)->fd_out != 1)
@@ -138,13 +133,7 @@ int	func_fork(t_command_line **cmd, pid_t *pid)
 		redirections_fd(&updated);
 		updated = updated->next;
 	}
-	//av_to_struct(cmd, av);
 	organise_arg(cmd);
-	/* if ((*cmd)->argv)
-	{
-		printf("this is argv(organise): %s\n", (*cmd)->argv[0]);
-		printf("this is argv(organise01): %s\n", (*cmd)->argv[1]);
-	} */
 	updated = *cmd;
 	if (len == 1 && cmd_is_builtin(updated->argv[0]))
 	{

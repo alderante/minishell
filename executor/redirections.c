@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 13:43:39 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:59:31 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ int handle_input_redirection(t_command_line **cmd)
 	return (0);
 }
 
-int handle_output_redirection(t_command_line **cmd, t_token *updated, t_e_type type)
+int	handle_output_redirection(t_command_line **cmd,
+		t_token *updated, t_e_type type)
 {
 	t_token		*token;
 	int			fd;

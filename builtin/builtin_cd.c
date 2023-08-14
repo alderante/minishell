@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:36:53 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/24 16:44:47 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:38:04 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ int	builtin_cd(char **args)
 
 	if (args[1] == NULL)
 		path = get_home_directory();
+	if (args[2])
+	{
+		write(STDERR_FILENO, "Minishell: cd: too many arguments\n",
+			ft_strlen("Minishell: cd: too many arguments\n"));
+		return (1);
+	}
 	else
 		path = args[1];
 

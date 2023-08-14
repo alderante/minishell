@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 16:48:38 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 00:03:42 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,56 @@ typedef enum mod
 	ADD
 }			t_mod;
 
-// str: a pointer to a string that represents the name and value of the environment variable, in the format name=value.
-// declare: an integer that indicates whether the environment variable is declared or not. 
-// 	If declare is set to 1, the variable is declared; if it is set to 0, the variable is not declared.
-// next: a pointer to the next s_env struct in a linked list of environment variables.
+/*
+typedef enum type
+{
+	NON,
+	ARG,
+	BUILTIN,
+	OPEN_FILE,
+	HERE_DOC,
+	LIMITOR, 
+	CREAT_FILE,
+	WRITE_FILE,
+	FILE_IN, 
+	FILE_OUT,
+	FILE_OUT_OVER, 
+	ENDS
+}				t_e_type;
+
+// cat file.txt
+// file.txt this should be str
+//token, sthe file name for open function, in redirect file-in
+struct			s_token
+{
+	char		*token;
+	t_e_type	type;
+	//bool		expanded;
+	t_token		*next;
+};
+
+struct				s_commande_line
+{
+	char			*new_matrix_string; //everything which is passed but till pipe
+	t_token			*single_token;
+	char			**envp;
+	char			**argv;
+	int				fd_in;
+	int				fd_out;
+	char			*name_file;
+	t_command_line	*next;
+};
+
+*/
+
+/* str: a pointer to a string that represents the name and 
+value of the environment variable, in the format name=value.
+declare: an integer that indicates 
+whether the environment variable is declared or not. 
+If declare is set to 1, the variable is declared; 
+if it is set to 0, the variable is not declared.
+next: a pointer to the next s_env struct in a linked list of 
+environment variables. */
 /* typedef struct s_env01
 {
 	char			*str;
@@ -52,7 +98,8 @@ typedef enum mod
 }				t_env01; */
 
 //executor.c
-int		big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid);
+int		big_executor(t_command_line **cmd,
+			t_command_line **original, pid_t *pid);
 int		execution(t_command_line **cmd_line);
 
 //utils_exec.c
@@ -91,6 +138,10 @@ void	free_all_env(t_env01 **env);
 void	particular_env_free(t_env01 *env);
 t_env01	*convert_env_to_list(char **env);
 t_env01	*noder(char *str);
+char	*ft_get_value_of_env(t_env01 **env, char *str);
+char	*ft_get_str_of_env(t_env01 **env, char *str);
+
+//unset.c
 void	ft_built_in_unset(char **tab, t_env01 **first);
 
 
@@ -123,7 +174,7 @@ void	ft_built_in_export(char **tab, t_env01 **first);
 
 
 //free
-void free_command_line(t_command_line *cmd);
+void	free_command_line(t_command_line *cmd);
 void	free_end(t_command_line **cmd, char *str);
 
 #endif
