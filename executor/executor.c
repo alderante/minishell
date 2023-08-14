@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 23:14:54 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 00:16:32 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	execution_execve(t_command_line **cmd, t_command_line **original,
 	(void)(pid);
 	free(str);
 	free(pid);
-	ft_env_deleter((*original)->env_list);
+	//ft_env_deleter((*original)->env_list);
 	free_all(original);
 	g_exit_status = 127;
 	exit(g_exit_status);

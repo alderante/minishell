@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/14 22:50:24 by rkhinchi         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/14 16:35:43 by cpopolan         ###   ########.fr       */
->>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
+/*   Updated: 2023/08/14 23:58:23 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +134,6 @@ int	func_fork(t_command_line **cmd, pid_t *pid)
 		updated = updated->next;
 	}
 	organise_arg(cmd);
-<<<<<<< HEAD
-=======
-	/* if ((*cmd)->argv)
-	{
-		printf("this is argv(organise): %s\n", (*cmd)->argv[0]);
-		printf("this is argv(organise01): %s\n", (*cmd)->argv[1]);
-	} */
->>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 	updated = *cmd;
 	if (len == 1 && cmd_is_builtin(updated->argv[0]))
 	{
