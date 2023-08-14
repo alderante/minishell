@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 20:22:06 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:35:43 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ int	execution_bd_fd(char *str, char **args,
 		ft_built_in_pwd_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("export", str))
 		ft_built_in_export(args, &(*original)->env_list);
-	
 	//ft_built_in_export_fd(args, (*original)->fd_out);
-	//else if (ft_strcmp01("unset", str))
-	//	ft_built_in_unset(args); */
+	else if (ft_strcmp01("unset", str))
+		ft_built_in_unset(args, &((*original)->env_list));
 	return (0);
 }
 

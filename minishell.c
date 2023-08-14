@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/14 12:28:03 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:36:22 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,14 +205,12 @@ t_command_line    *ft_new_matrix(char **matrix)
 	return (first_line);
 }
 
-void	ft_lexer(char *input, t_env01 *env_list)
+void	ft_lexer(char *input, t_env01 **env_list)
 {
 	int				i;
-	// char			*input_clone;
 	char			**matrix;
 	t_command_line	*first;
 
-	// input_clone = ft_strdup(input);
 	matrix = easy_split(input);
 	i = 0;
 	while (matrix[i])
@@ -220,9 +218,7 @@ void	ft_lexer(char *input, t_env01 *env_list)
 		printf("Easy split line %i: %s\n", i, matrix[i]);
 		i++;
 	}
-	// first = malloc(sizeof(t_command_line));
 	first = ft_new_matrix(matrix);
-	//ft_node_deleter(first->single_token);
 	i = 0;
 	while (matrix[i])
 	{
@@ -230,8 +226,9 @@ void	ft_lexer(char *input, t_env01 *env_list)
 		i++;
 	}
 	free(matrix);
-	ft_initialize(first, env_list);
+	ft_initialize(first, *env_list);
 	execution(&first);
+	*env_list = first->env_list;
 	free_all(&first);
 	// free_end(&first, NULL);
 	//free(input_clone);
@@ -248,7 +245,6 @@ int	main(int ac, char **av, char **envp)
 	g_exit_status = 0;
 	signal(SIGINT, signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
-	//env = ft_env_noder(envp);
 	env_list = ft_env_noder(envp);
 	input = NULL;
 	while (1)
@@ -268,7 +264,7 @@ int	main(int ac, char **av, char **envp)
 		else if (*input)
 		{
 			add_history(input);
-			ft_lexer(input, env_list);
+			ft_lexer(input, &env_list);
 		}
 	}
 	ft_env_deleter(env_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 19:11:50 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:39:45 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				ft_easy_split_rows_counter(char *input);
 t_env01			*ft_env_noder(char **envp);
 void			ft_env_deleter(t_env01 *first);
 int				ft_check_quote (char c, int check);
-void			ft_lexer(char *input, t_env01 *env_list);
+void			ft_lexer(char *input, t_env01 **env_list);
 t_token			*ft_newnode(char *token, int pos);
 t_token			*ft_initialize(t_command_line *first, t_env01 *env_list);
 void			ft_final_stamper(t_command_line *cmd_line);

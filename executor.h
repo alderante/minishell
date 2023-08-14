@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 12:34:03 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:48:38 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 # include "minishell.h"
 
 # include <stdbool.h>
-// # include "parsing.h"
-// # include "exec.h"
-// # include "builtin.h"
-//# include "libft_R/libft.h"
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -43,48 +39,6 @@ typedef enum mod
 	FREE,
 	ADD
 }			t_mod;
-
-/*
-typedef enum type
-{
-	NON,
-	ARG,
-	BUILTIN,
-	OPEN_FILE,
-	HERE_DOC,
-	LIMITOR, 
-	CREAT_FILE,
-	WRITE_FILE,
-	FILE_IN, 
-	FILE_OUT,
-	FILE_OUT_OVER, 
-	ENDS
-}				t_e_type;
-
-// cat file.txt
-// file.txt this should be str
-//token, sthe file name for open function, in redirect file-in
-struct			s_token
-{
-	char		*token;
-	t_e_type	type;
-	//bool		expanded;
-	t_token		*next;
-};
-
-struct				s_commande_line
-{
-	char			*new_matrix_string; //everything which is passed but till pipe
-	t_token			*single_token;
-	char			**envp;
-	char			**argv;
-	int				fd_in;
-	int				fd_out;
-	char			*name_file;
-	t_command_line	*next;
-};
-
-*/
 
 // str: a pointer to a string that represents the name and value of the environment variable, in the format name=value.
 // declare: an integer that indicates whether the environment variable is declared or not. 
@@ -137,6 +91,8 @@ void	free_all_env(t_env01 **env);
 void	particular_env_free(t_env01 *env);
 t_env01	*convert_env_to_list(char **env);
 t_env01	*noder(char *str);
+void	ft_built_in_unset(char **tab, t_env01 **first);
+
 
 //find_exec_file.c
 char	*find_if_executable(char *str, char *path, int i);
@@ -164,6 +120,7 @@ int		organise_arg(t_command_line **cmd);
 void	ft_built_in_env_fd(t_env01 *my_env, int fd);
 void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 void	ft_built_in_export(char **tab, t_env01 **first);
+
 
 //free
 void free_command_line(t_command_line *cmd);

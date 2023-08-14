@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
+#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/11 17:01:49 by rkhinchi         ###   ########.fr        #
+#    Updated: 2023/08/14 16:47:02 by cpopolan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRC = minishell.c \
 		builtin/builtin_echo.c \
 		builtin/builtin_cd.c \
 		builtin/builtin_env.c \
+		builtin/builtin_unset.c \
+		builtin/builtin_export.c \
 		executor/env_to_struct.c \
 		executor/env_utils.c \
 		executor/env.c \
