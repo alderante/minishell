@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:52:44 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/18 16:34:54 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:49:25 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int	using_pipe(int **nfd, int i, t_command_line *updated)
 }
 
 // total nfd will be needed, depending on the process
+// number of fd, nfd[0][0], *nfd[0][1]
 int	piping(t_command_line **cmd)
 {
 	int					i;
 	int					rtrn;
 	t_command_line		*updated;
-	int					**nfd; // number of fd, nfd[0][0], *nfd[0][1]
+	int					**nfd;
 
 	i = 0;
 	updated = *cmd;

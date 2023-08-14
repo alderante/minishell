@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:03:11 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/21 18:32:48 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:25:44 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*get_acces(char *str, char *path)
 		return (NULL);
 	return (new);
 }
+/* If the file can be executed by the calling process, 
+the access() function will return 0. */
 
 int	try_acces(char *str, char *path)
 {
@@ -71,23 +73,11 @@ char	*find_if_executable(char *str, char *path, int i)
 	char	**split_path;
 	char	*try;
 
-	/* write(1, str, ft_strlen(str));
-	write(1, "\n", 1);
-	write(1, path, ft_strlen(path));
-	write(1, "\n", 1); */
 	if (str && (str[0] == '.' || str[0] == '/'))
 		return (str);
 	split_path = ft_strsplit(path);
-	/* write(1, str, ft_strlen(str));
-	write(1, "\n", 1); */
 	if (split_path == NULL)
 		return (cmd_not_found_free(str));
-	
-/* 	for (int i = 0; split_path[i]; i++)
-	{
-		printf("%s\n", split_path[i]);
-	} */
-	
 	while (split_path[i] && str[0] != '\0')
 	{
 		ret = try_acces(str, split_path[i]);
@@ -95,8 +85,6 @@ char	*find_if_executable(char *str, char *path, int i)
 		{
 			try = get_acces(str, split_path[i]);
 			free_split(split_path);
-			/* write(1, try, ft_strlen(try));
-			write(1, "\n", 1); */
 			return (try);
 		}
 		if (ret == 50)
@@ -108,6 +96,9 @@ char	*find_if_executable(char *str, char *path, int i)
 	return (str);
 }
 
-//This function is used to search for an executable file in the directories listed in the PATH environment variable.
-/*The function original checks if the name of the command to execute contains a forward slash character (/). 
-If it does, the function assumes that the name is a path to an executable file and returns it.*/
+/* This function is used to search for an executable file in the 
+directories listed in the PATH environment variable.
+The function original checks if the name of the command to 
+execute contains a forward slash character (/). 
+If it does, the function assumes that the name is 
+a path to an executable file and returns it. */

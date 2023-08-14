@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:14:47 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/04 12:06:21 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:37:47 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	free_delete_add(NULL, FREE);
 } */
 
-void	free_all_env(t_env **env)
+/* void	free_all_env(t_env **env)
 {
 	t_env	*cpy;
 	t_env	*tmp;
@@ -31,7 +31,7 @@ void	free_all_env(t_env **env)
 		free(tmp->name);
 		free(tmp);
 	}
-}
+} */
 
 void	particular_env_free(t_env01 *env)
 {

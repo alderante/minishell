@@ -6,7 +6,7 @@
 #    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/11 17:01:49 by rkhinchi         ###   ########.fr        #
+#    Updated: 2023/08/14 23:18:55 by rkhinchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC = minishell.c \
 		builtin/builtin_env.c \
 		executor/env_to_struct.c \
 		executor/env_utils.c \
+		executor/value_env.c \
 		executor/env.c \
 		executor/executor.c \
 		executor/find_exec_file.c \

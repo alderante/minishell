@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:53:37 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/07 11:56:13 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:22:40 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	command_len(t_command_line *cmd)
 	return (i);
 }
 
-void freeing_matrix_nfd(int **nfd)
+void	freeing_matrix_nfd(int **nfd)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (nfd[i])

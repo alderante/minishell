@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 12:34:03 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:13:55 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,14 @@ struct				s_commande_line
 
 */
 
-// str: a pointer to a string that represents the name and value of the environment variable, in the format name=value.
-// declare: an integer that indicates whether the environment variable is declared or not. 
-// 	If declare is set to 1, the variable is declared; if it is set to 0, the variable is not declared.
-// next: a pointer to the next s_env struct in a linked list of environment variables.
+/* str: a pointer to a string that represents the name and 
+value of the environment variable, in the format name=value.
+declare: an integer that indicates 
+whether the environment variable is declared or not. 
+If declare is set to 1, the variable is declared; 
+if it is set to 0, the variable is not declared.
+next: a pointer to the next s_env struct in a linked list of 
+environment variables. */
 /* typedef struct s_env01
 {
 	char			*str;
@@ -98,7 +102,8 @@ struct				s_commande_line
 }				t_env01; */
 
 //executor.c
-int		big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid);
+int		big_executor(t_command_line **cmd,
+			t_command_line **original, pid_t *pid);
 int		execution(t_command_line **cmd_line);
 
 //utils_exec.c
@@ -137,6 +142,8 @@ void	free_all_env(t_env01 **env);
 void	particular_env_free(t_env01 *env);
 t_env01	*convert_env_to_list(char **env);
 t_env01	*noder(char *str);
+char	*ft_get_value_of_env(t_env01 **env, char *str);
+char	*ft_get_str_of_env(t_env01 **env, char *str);
 
 //find_exec_file.c
 char	*find_if_executable(char *str, char *path, int i);
@@ -166,7 +173,7 @@ void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 void	ft_built_in_export(char **tab, t_env01 **first);
 
 //free
-void free_command_line(t_command_line *cmd);
+void	free_command_line(t_command_line *cmd);
 void	free_end(t_command_line **cmd, char *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 17:54:21 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/10 11:06:59 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:57:56 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_is_equal(char *str)
 
 void	ft_built_in_show_env_fd(t_env01 **env, int fd)
 {
-	t_env01 *updated;
+	t_env01	*updated;
 
 	updated = *env;
 	while (updated)
