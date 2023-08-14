@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 17:55:51 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:54:50 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ char	*expander(char *str, t_env01 *env_list)
 	while (str[i])
 	{
 		check = ft_check_quote(str[i], check);
-		if (str[i] == '$' && ft_isalnum(str[i + 1]) == 1 && check != 1)
+		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 || str[i + 1] == '_') && check != 1 )
 		{
 			i++;
 			n = 0;
 			initial = i;
-			while (ft_isalnum(str[i]) == 1)
+			while (ft_isalnum(str[i]) == 1 || str[i] == '_')
 			{
 				n++;
 				i++;
@@ -109,12 +109,12 @@ char	*expander(char *str, t_env01 *env_list)
 	while (str[i])
 	{
 		check = ft_check_quote(str[i], check);
-		if (str[i] == '$' && ft_isalnum(str[i + 1]) == 1 && check != 1)
+		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 || str[i + 1] == '_') && check != 1)
 		{
 			n = 0;
 			i++;
 			initial = i;
-			while (ft_isalnum(str[i]) == 1)
+			while (ft_isalnum(str[i]) == 1 || str[i] == '_')
 			{
 				n++;
 				i++;
@@ -126,7 +126,6 @@ char	*expander(char *str, t_env01 *env_list)
 			{
 				value = ft_value_extractor(ft_env_search(env_list, searchname));
 				printf("Value is %s\n", value);
-				new_str[new_len] = '\0';
 				ft_strlcat(&new_str[new_len], value, ft_strlen(value) + 1);
 				new_len += ft_strlen(value);
 				printf("ESPANSIONE la stringa che ora is %s\n", new_str);

@@ -29,7 +29,7 @@ int g_exit_status;
 int create_heredoc_fd(t_command_line **cmd, t_token **token)
 {
 	int		fd;
-	size_t	heredoc_len;
+	//size_t	heredoc_len;
 	char	*delimiter;
 	char	*line;
 
@@ -39,15 +39,13 @@ int create_heredoc_fd(t_command_line **cmd, t_token **token)
 		return (-1);
 
 	delimiter = ft_strdup((*cmd)->heredoc_delimiter);
+	//heredoc_len = ft_strlen(delimiter);
 	fd = open(".heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0666);
 	if (fd == -1)
 	{
 		free(delimiter);
 		return (-1);
 	}
-
-	heredoc_len = ft_strlen(delimiter);
-
 	while (1)
 	{
 		line = readline("> ");
@@ -140,7 +138,7 @@ int handle_input_redirection(t_command_line **cmd)
 	return (0);
 }
 
-int handle_output_redirection(t_command_line **cmd)
+int handle_output_redirection(t_command_line **cmd, t_token *updated, t_e_type type)
 {
 	t_token		*token;
 	int			fd;
@@ -148,8 +146,76 @@ int handle_output_redirection(t_command_line **cmd)
 
 	if ((*cmd)->fd_out != 1)
 		close((*cmd)->fd_out);
+	token = updated;
+	if (type == FILE_OUT)
+	{
+		if (updated->next && updated->next->token)
+			{
+				fd = open(updated->next->token, O_WRONLY
+						| O_CREAT | O_TRUNC, 0666);
+				if (fd == -1)
+					return (-1);
+				(*cmd)->fd_out = fd;
+				next_token = token->next;
+				free(token->token);
+				token->token = NULL;
+				token->next = next_token->next;
+				free(next_token->token);
+				free(next_token);
+			}
+			else
+				return (-1);
+	}
+	else if (type == FILE_OUT_OVER)
+	{
+		if (token->next && token->next->token)
+			{
+				fd = open(token->next->token, O_WRONLY
+						| O_CREAT | O_APPEND, 0666);
+				if (fd == -1)
+					return (-1);
+				(*cmd)->fd_out = fd;
+				next_token = token->next;
+				free(token->token);
+				token->token = NULL;
+				token->next = next_token->next;
+				free(next_token->token);
+				free(next_token);
+			}
+			else
+				return (-1);
+	}
+	return (0);
+}
+
+int	redirections_fd(t_command_line **cmd)
+{
+	t_token			*updated;
+	t_command_line	**tmp;
+
+
+	tmp = cmd;
+	updated = (*cmd)->single_token;
+	while (updated)
+	{
+		if (updated->type == FILE_IN || updated->type == HERE_DOC)
+			handle_input_redirection(tmp);
+		if (updated->type == FILE_OUT || updated->type == FILE_OUT_OVER)
+			handle_output_redirection(cmd, updated, updated->type);
+		updated = updated->next;
+	}
+	return (0);
+}
+
+/* t_token		*token;
+	int			fd;
+	t_token		*next_token;
+
+	if ((*cmd)->fd_out != 1)
+		close((*cmd)->fd_out);
 
 	token = (*cmd)->single_token;
+	printf("token->token %s\n",token->token);
 	printf("token->next->token %s\n",token->next->token);
 	while (token)
 	{
@@ -196,24 +262,4 @@ int handle_output_redirection(t_command_line **cmd)
 		}
 		token = token->next;
 	}
-	return (0);
-}
-
-int	redirections_fd(t_command_line **cmd)
-{
-	t_token			*updated;
-	t_command_line	**tmp;
-
-
-	tmp = cmd;
-	updated = (*cmd)->single_token;
-	while (updated)
-	{
-		if (updated->type == FILE_IN || updated->type == HERE_DOC)
-			handle_input_redirection(tmp);
-		if (updated->type == FILE_OUT || updated->type == FILE_OUT_OVER)
-			handle_output_redirection(tmp);
-		updated = updated->next;
-	}
-	return (0);
-}
+	return (0); */

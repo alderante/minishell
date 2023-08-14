@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/14 23:13:55 by rkhinchi         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/14 16:48:38 by cpopolan         ###   ########.fr       */
+>>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +24,6 @@
 # include "minishell.h"
 
 # include <stdbool.h>
-// # include "parsing.h"
-// # include "exec.h"
-// # include "builtin.h"
-//# include "libft_R/libft.h"
 # include <string.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -44,6 +44,7 @@ typedef enum mod
 	ADD
 }			t_mod;
 
+<<<<<<< HEAD
 /*
 typedef enum type
 {
@@ -94,6 +95,12 @@ If declare is set to 1, the variable is declared;
 if it is set to 0, the variable is not declared.
 next: a pointer to the next s_env struct in a linked list of 
 environment variables. */
+=======
+// str: a pointer to a string that represents the name and value of the environment variable, in the format name=value.
+// declare: an integer that indicates whether the environment variable is declared or not. 
+// 	If declare is set to 1, the variable is declared; if it is set to 0, the variable is not declared.
+// next: a pointer to the next s_env struct in a linked list of environment variables.
+>>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 /* typedef struct s_env01
 {
 	char			*str;
@@ -142,8 +149,13 @@ void	free_all_env(t_env01 **env);
 void	particular_env_free(t_env01 *env);
 t_env01	*convert_env_to_list(char **env);
 t_env01	*noder(char *str);
+<<<<<<< HEAD
 char	*ft_get_value_of_env(t_env01 **env, char *str);
 char	*ft_get_str_of_env(t_env01 **env, char *str);
+=======
+void	ft_built_in_unset(char **tab, t_env01 **first);
+
+>>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 
 //find_exec_file.c
 char	*find_if_executable(char *str, char *path, int i);
@@ -171,6 +183,7 @@ int		organise_arg(t_command_line **cmd);
 void	ft_built_in_env_fd(t_env01 *my_env, int fd);
 void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 void	ft_built_in_export(char **tab, t_env01 **first);
+
 
 //free
 void	free_command_line(t_command_line *cmd);

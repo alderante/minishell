@@ -92,7 +92,7 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
-		printf("this is argv[0] %s\n", (*cmd)->argv[0]);
+		//printf("this is argv[0] %s\n", (*cmd)->argv[0]);
 		if ((*cmd)->argv[0] == NULL)
 		{
 			free(str);

@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/08/14 23:05:51 by rkhinchi         ###   ########.fr       */
+=======
+/*   Updated: 2023/08/14 16:41:50 by cpopolan         ###   ########.fr       */
+>>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
+<<<<<<< HEAD
 int	ft_export_checker(char *tab, int equal)
 {
 	int	i;
@@ -93,6 +98,8 @@ void	ft_built_in_export(char **tab, t_env01 **first)
 	}
 }
 
+=======
+>>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 int	execution_builtin(char *str, char **args,
 		t_command_line **original, pid_t *pid)
 {
@@ -112,26 +119,25 @@ int	execution_builtin(char *str, char **args,
 	else if (ft_strcmp01("pwd", str))
 		ft_built_in_pwd(args);
 	else if (ft_strcmp01("export", str))
-		ft_built_in_export(args, &(*original)->env_list);
-	// if (pid == NULL)
-	// {
-	// 	free(pid);
-	// 	free_delete_add(NULL, FREE);
-	// 	free_all(original);
-	// 	exit (0);
-	// }
-	// else if (ft_strcmp01("unset", str))
-	// 	ft_built_in_unset(args);
-	// free(pid);
-	// free_delete_add(NULL, FREE);
-	// free_all(original);
-	(void)pid;
+		ft_built_in_export(args, &((*original)->env_list));
+	else if (ft_strcmp01("unset", str))
+		ft_built_in_unset(args, &((*original)->env_list));
+	free(pid);
+	free_delete_add(NULL, FREE);
+	free_all(original);
 	return (0);
 }
 
 int	execute_builtin(t_command_line **cmd,
 	t_command_line **original, pid_t *pid)
 {
+<<<<<<< HEAD
 	execution_builtin((*cmd)->argv[0], (*cmd)->argv, original, pid);
+=======
+	//free(str);
+	if (execution_builtin((*cmd)->argv[0], (*cmd)->argv, original, pid) == 2)
+		exit(1);
+	exit(0);
+>>>>>>> 057bf85573f489041f9fec97e37cd615d067cab6
 	return (0);
 }
