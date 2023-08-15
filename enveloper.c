@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enveloper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/14 22:26:28 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:29:17 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,38 @@ t_env01	*noder(char *str)
 	return (node);
 }
 
-void	ft_built_in_env(t_env01 *my_env)
+void	ft_built_in_env(char **args, t_env01 *my_env)
 {
-	while (my_env)
+	if (args[1])
 	{
-		printf("%s\n", my_env->str);
-		my_env = my_env->next;
+		(void)(my_env);
+		printf("env: ‘%s’: No such file or directory", args[1]);
+	}
+	else
+	{
+		while (my_env)
+		{
+			printf("%s\n", my_env->str);
+			my_env = my_env->next;
+		}
 	}
 }
 
-void	ft_built_in_env_fd(t_env01 *my_env, int fd)
+void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd)
 {
 	(void)(fd);
-	while (my_env)
+	if (args[1])
 	{
-		printf("%s\n", my_env->str);
-		my_env = my_env->next;
+		(void)(my_env);
+		printf("env: ‘%s’: No such file or directory\n", args[1]);
+	}
+	else
+	{
+		while (my_env)
+		{
+			printf("%s\n", my_env->str);
+			my_env = my_env->next;
+		}
 	}
 }
 

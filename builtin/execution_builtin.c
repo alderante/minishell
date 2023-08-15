@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 00:07:30 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:11:05 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	execution_builtin(char *str, char **args,
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo(args);
 	else if (ft_strcmp01("env", str))
-		ft_built_in_env((*original)->env_list);
+		ft_built_in_env(args, (*original)->env_list);
 	else if (ft_strcmp01("pwd", str))
 		ft_built_in_pwd(args);
 	else if (ft_strcmp01("export", str))

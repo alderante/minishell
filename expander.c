@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 00:01:32 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 09:50:15 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,18 @@ char	*expander(char *str, t_env01 *env_list)
 				n++;
 				i++;
 			}
-			printf("n is %d\n", n);
+			//printf("n is %d\n", n);
 			searchname = ft_substr(str, initial, n);
-			printf("questo is searchname: %s\n", searchname);
+			//printf("questo is searchname: %s\n", searchname);
 			if (ft_env_search(env_list, searchname) != NULL)
 			{
 				value = ft_value_extractor(ft_env_search(env_list, searchname));
-				printf("Value is %s\n", value);
+				//printf("Value is %s\n", value);
 				new_len = new_len + ft_strlen(value);
 				free(value);
 			}
-			else
-				printf("env non trovato\n");
+			// else
+			// 	printf("env non trovato\n");
 			free(searchname);
 		}
 		else
@@ -99,7 +99,7 @@ char	*expander(char *str, t_env01 *env_list)
 			new_len++;
 		}
 	}
-	printf("new_len is %d\n", new_len);
+	//printf("new_len is %d\n", new_len);
 
 	new_str = malloc(sizeof(char) * new_len + 1);
 	new_str[new_len] = '\0';
@@ -119,20 +119,21 @@ char	*expander(char *str, t_env01 *env_list)
 				n++;
 				i++;
 			}
-			printf("n is %d\n", n);
+			//printf("n is %d\n", n);
 			searchname = ft_substr(str, initial, n);
-			printf("questo is searchname: %s\n", searchname);
+			//printf("questo is searchname: %s\n", searchname);
 			if (ft_env_search(env_list, searchname) != NULL)
 			{
 				value = ft_value_extractor(ft_env_search(env_list, searchname));
-				printf("Value is %s\n", value);
+				//printf("Value is %s\n", value);
+				new_str[new_len] = '\0';
 				ft_strlcat(&new_str[new_len], value, ft_strlen(value) + 1);
 				new_len += ft_strlen(value);
-				printf("ESPANSIONE la stringa che ora is %s\n", new_str);
+				//printf("ESPANSIONE la stringa che ora is %s\n", new_str);
 				free(value);
 			}
-			else
-				printf("env non trovato\n");
+			// else
+			// 	printf("env non trovato\n");
 			free(searchname);
 		}
 		else
@@ -142,6 +143,6 @@ char	*expander(char *str, t_env01 *env_list)
 			new_len++;
 		}
 	}
-	printf("ALLA FINE is %s\n", new_str);
+	//printf("ALLA FINE is %s\n", new_str);
 	return (new_str);
 }

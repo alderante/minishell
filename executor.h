@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 00:03:42 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:26:32 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int		wait_pid(t_command_line **cmd, pid_t *pid);
 int		organise_arg(t_command_line **cmd);
 
 //builtin_env
-void	ft_built_in_env_fd(t_env01 *my_env, int fd);
+void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd);
 void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 void	ft_built_in_export(char **tab, t_env01 **first);
 

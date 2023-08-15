@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/14 16:36:22 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:15:59 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 #include <string.h>
 
 extern int	g_exit_status;
+
+
+int ft_only_spaces_checker (char *input)
+{
+	int i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(input);
+	while(len > 0)
+	{
+		if(input[i] != ' ')
+			return(1);
+		i++;
+		len--;
+	}
+	return(0);
+}
 
 int	ft_check_quote (char c, int check)
 {
@@ -67,7 +85,6 @@ int	ft_easy_split_rows_counter(char *input)
 			i++;
 	}
 	rows++;
-	//printf("le rows per l'easy split sono all'incirca cio[ piu o meno eh nissenso %d\n", rows);
 	return (rows);
 }
 
@@ -197,7 +214,7 @@ t_command_line    *ft_new_matrix(char **matrix)
 	cmd_line = first_line;
 	while (cmd_line)
 	{
-		printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
+		//printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
 		cmd_line = cmd_line->next;
 	}
 	// if (temp)
@@ -215,7 +232,7 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	i = 0;
 	while (matrix[i])
 	{
-		printf("Easy split line %i: %s\n", i, matrix[i]);
+		//printf("Easy split line %i: %s\n", i, matrix[i]);
 		i++;
 	}
 	first = ft_new_matrix(matrix);
@@ -251,6 +268,8 @@ int	main(int ac, char **av, char **envp)
 	{
 		free(input);
 		input = readline("%>");
+		// if (ft_only_spaces_checker(input) == 0)
+		// 	add_history(input);
 		if (input == NULL)
 		{
 			printf("\n");

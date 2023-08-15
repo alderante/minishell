@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noder.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 19:26:36 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:41:04 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 	{
 		i = 0;
 		current_line = quote_cleaner_split(first_cmd->new_matrix_string, env_list);
-		printf("current_line: %s\n", current_line[i]);
+		//printf("current_line: %s\n", current_line[i]);
 		node = ft_newnode(current_line[i], i + 1);
 		first_token = NULL;
 		first_cmd->env_list = env_list;
@@ -176,6 +176,6 @@ t_token	*ft_initialize(t_command_line *first_cmd, t_env01 *env_list)
 	}
 	first_cmd = temp;
 	node = first_token;
-	ft_final_stamper(first_cmd);
+	//ft_final_stamper(first_cmd);
 	return (first_token);
 }
