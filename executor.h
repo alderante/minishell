@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 12:26:32 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:19:47 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <errno.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <fcntl.h>
 
 //typedef struct s_token			t_token;
 //typedef struct s_commande_line	t_command_line;
@@ -98,7 +99,7 @@ environment variables. */
 }				t_env01; */
 
 //executor.c
-int		big_executor(t_command_line **cmd,
+int		ft_big_executor(t_command_line **cmd,
 			t_command_line **original, pid_t *pid);
 int		execution(t_command_line **cmd_line);
 
@@ -126,8 +127,10 @@ int		process_forking(pid_t *pid, int i, t_command_line **cmd,
 			t_command_line **updated);
 int		func_fork(t_command_line **cmd, pid_t *pid);
 
-//redirection.c
+//redirection.c //01redirection.c //heredoc.c
 int		redirections_fd(t_command_line **cmd);
+int		handle_input_redirection(t_command_line **cmd);
+int		create_heredoc_fd(t_command_line **cmd, t_token **token);
 
 //env.c e env_utils.c
 char	**matrix_from_env(t_env01 **envp);

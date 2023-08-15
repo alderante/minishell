@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 00:16:32 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:05:07 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,6 @@ finish executing and then checks its exit status.
 If the exit status indicates an error, the function returns that error code. */
 
 char	*ft_get_value_of_env(t_env01 **env, char *str);
-
-int	wait_pid(t_command_line **cmd, pid_t *pid)
-{
-	t_command_line	*updated;
-	int				len;
-	int				i;
-
-	i = 0;
-	updated = *cmd;
-	len = command_len(updated);
-	if (len == 1 && cmd_is_builtin((*cmd)->argv[0]))
-	{
-		return (0);
-	}
-	while (i < len)
-	{
-		waitpid(pid[i], &g_exit_status, 0);
-		if (WIFEXITED(g_exit_status))
-			g_exit_status = WEXITSTATUS(g_exit_status);
-		else if (WIFSIGNALED(g_exit_status))
-			g_exit_status = 128 + WTERMSIG(g_exit_status);
-		i++;
-	}
-	return (0);
-}
 
 /* stat function is to check if file exists, 
 if it does not exist, it will return -1 */
@@ -77,19 +52,9 @@ int	execution_execve(t_command_line **cmd, t_command_line **original,
 
 //t_env01			*env_list;
 
-int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
+void	ft_big_executor01_continue(t_command_line **cmd,
+		t_command_line **original, pid_t *pid, char **str)
 {
-	char		**str;
-
-	(void)(pid);
-	dup2((*cmd)->fd_in, STDIN_FILENO);
-	dup2((*cmd)->fd_out, STDOUT_FILENO);
-	all_fd_close(original);
-	str = matrix_from_env(&(*cmd)->env_list);
-
-	if (str == NULL)
-		all_fd_close_n_exit(original);
-
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
 		//printf("this is argv[0] %s\n", (*cmd)->argv[0]);
@@ -104,6 +69,11 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 		(*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
 				ft_get_value_of_env(&(*cmd)->env_list, "PATH"), 0);
 	}
+}
+
+void	ft_big_executor02_continue(t_command_line **cmd,
+		t_command_line **original, pid_t *pid, char **str)
+{
 	if ((*cmd)->argv[0] == NULL)
 	{
 		free(str);
@@ -120,6 +90,22 @@ int	big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 		free_all(original);
 		exit(1);
 	}
+}
+
+int	ft_big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
+{
+	char		**str;
+
+	(void)(pid);
+	dup2((*cmd)->fd_in, STDIN_FILENO);
+	dup2((*cmd)->fd_out, STDOUT_FILENO);
+	all_fd_close(original);
+	str = matrix_from_env(&(*cmd)->env_list);
+
+	if (str == NULL)
+		all_fd_close_n_exit(original);
+	ft_big_executor01_continue(cmd, original, pid, str);
+	ft_big_executor02_continue(cmd, original, pid, str);
 	if (cmd_is_builtin((*cmd)->argv[0]))
 		execute_builtin(cmd, original, pid);
 	else
