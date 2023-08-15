@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 09:50:15 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:52:43 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_env_list_equal_position(t_env01 *env_list)
 	return (equal);
 }
 
-char *ft_value_extractor(t_env01 *env_list)
+char	*ft_value_extractor(t_env01 *env_list)
 {
 	char	*value;
 	int		equal;

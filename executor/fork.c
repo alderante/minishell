@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 12:25:03 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 17:05:04 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,31 @@ $2 = 0x555555598260 "-l"
 $3 = 0x0
 (gdb) p (*cmd_line)->next->argv[0]
 Cannot access memory at address 0x18 */
+
+int	wait_pid(t_command_line **cmd, pid_t *pid)
+{
+	t_command_line	*updated;
+	int				len;
+	int				i;
+
+	i = 0;
+	updated = *cmd;
+	len = command_len(updated);
+	if (len == 1 && cmd_is_builtin((*cmd)->argv[0]))
+	{
+		return (0);
+	}
+	while (i < len)
+	{
+		waitpid(pid[i], &g_exit_status, 0);
+		if (WIFEXITED(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
+		else if (WIFSIGNALED(g_exit_status))
+			g_exit_status = 128 + WTERMSIG(g_exit_status);
+		i++;
+	}
+	return (0);
+}
 
 int	execution_bd_fd(char *str, char **args,
 		t_command_line **original, pid_t *pid)
@@ -82,7 +107,7 @@ int	process_forking(pid_t *pid, int i, t_command_line **cmd,
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		big_executor(updated, cmd, pid);
+		ft_big_executor(updated, cmd, pid);
 	}
 	if ((*updated)->fd_in != 0)
 		close((*updated)->fd_in);

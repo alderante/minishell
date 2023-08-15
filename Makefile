@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
+#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/15 16:33:09 by cpopolan         ###   ########.fr        #
+#    Updated: 2023/08/15 18:21:36 by rkhinchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC = minishell.c \
 		executor/utils_exec01.c \
 		executor/utils_exec02.c \
 		executor/organise_arg.c \
+		executor/01redirections.c \
+		executor/heredoc.c \
 		noder.c \
 		noder_utils.c \
 		enveloper.c \
