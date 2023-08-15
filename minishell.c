@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 12:15:59 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:18:22 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 extern int	g_exit_status;
 
-
-int ft_only_spaces_checker (char *input)
+/* int ft_only_spaces_checker (char *input)
 {
 	int i;
 	int	len;
@@ -31,176 +30,23 @@ int ft_only_spaces_checker (char *input)
 		len--;
 	}
 	return(0);
-}
+} */
 
-int	ft_check_quote (char c, int check)
-{
-	if (c == '\"' && check != 1)
-		check = 2 - check;
-	else if (c == '\'' && check != 2)
-		check = 1 - check;
-	return (check);
-}
-
-int	ft_easy_split_rows_counter(char *input)
-{
-	int		i;
-	int		check;
-	int		rows;
-
-	i = 0;
-	rows = 0;
-	check = 0;
-	while (input[i] != '\0')
-	{
-		if (input[i] > 32)
-		{
-			while (input[i] > 32)
-			{
-				check = ft_check_quote (input[i], check);
-				if (check == 1 || check == 2)
-				{
-					while (check == 1 || check == 2)
-					{
-						rows++;
-						check = ft_check_quote(input[i], check);
-						if (check == 0)
-							i++;
-					}
-				}
-				else if (input[i] == 124)
-				{
-					if (input[i - 1] == 32)
-						rows--;
-					rows++;
-					i++;
-					break ;
-				}
-				else
-					i++;
-			}
-			rows++;
-		}
-		else
-			i++;
-	}
-	rows++;
-	return (rows);
-}
-
-char	**easy_split(char *str) //AHAHAHAHAHAHAHAHAHAHAHAHAH
-{
-	int		i;
-	int		y;
-	int		x;
-	int		check;
-	char	**tab;
-
-	i = 0;
-	y = 0;
-	check = 0;
-	tab = ft_calloc((ft_easy_split_rows_counter(str) + 1), sizeof(char *));
-	//printf("this is counter %d\n", easy_split_rows_counter(str));
-	while (str[i] != '\0')
-	{
-		if (str[i] != '\0' && str[i] > 32)
-		{
-			x = 0;
-			tab[y] = ft_calloc((strlen(str) + 1), sizeof(char));
-			while (str[i] != '\0' && str[i] > 32)
-			{
-				check = ft_check_quote(str[i], check);
-				if (check == 1 || check == 2)
-				{
-					while (str[i] != '\0' && (check == 1 || check == 2))
-					{
-						tab[y][x] = str[i];
-						i++;
-						x++;
-						check = ft_check_quote(str[i], check);
-						if (check == 0)
-						{
-							tab[y][x] = str[i];
-							i++;
-							x++;
-						}
-					}
-				}
-				else if (str[i] == '|')
-				{
-					if (tab[y][0] == 0)
-						y--;
-					y++;
-					free(tab[y]);
-					tab[y] = ft_calloc(2, 1);
-					tab[y][0] = '|';
-					x = 0;
-					i++;
-					break ;
-				}
-				else
-				{
-					tab[y][x] = str[i];
-					i++;
-					x++;
-				}
-			}
-			y++;
-		}
-		else
-			i++;
-	}
-	tab[y] = NULL;
-	return (tab);
-}
-
-int	pipe_counter(char **matrix)
-{
-	int	i;
-	int	j;
-	int	counter;
-
-	i = 0;
-	counter = 0;
-	while (matrix[i])
-	{
-		j = 0;
-		while (matrix[i][j])
-		{
-			if (matrix[i][j] == '|')
-				counter++;
-			j++;
-		}
-		i++;
-	}
-	//printf("Counter: %d\n", counter);
-	return (counter);
-}
-
-//  This fills new matrix_string in command line with the pipes as separators
-t_command_line    *ft_new_matrix(char **matrix)
+t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
+	t_command_line *first_line)
 {
 	int				i;
-	//char			*temp;
-	t_command_line	*first_line;
-	t_command_line	*cmd_line;
 
-	cmd_line = ft_calloc(sizeof(t_command_line), 1);
-	first_line = cmd_line;
-	cmd_line->new_matrix_string = NULL;
 	i = 0;
 	while (matrix[i])
 	{
-		// if (cmd_line->new_matrix_string)
-		// 	free(cmd_line->new_matrix_string);
-		// cmd_line->new_matrix_string = malloc(sizeof(char) * ft_strlen(matrix[i]) + 1);
-		//temp = NULL;
 		while (matrix[i] && matrix[i][0] != '|')
 		{
-			cmd_line->new_matrix_string = ft_strjoin01(cmd_line->new_matrix_string, matrix[i]);
+			cmd_line->new_matrix_string
+				= ft_strjoin01(cmd_line->new_matrix_string, matrix[i]);
 			if (matrix[i + 1] != NULL && matrix[i + 1][0] != '|')
-				cmd_line->new_matrix_string = ft_strjoin01(cmd_line->new_matrix_string, " ");
-			//temp = cmd_line->new_matrix_string;
+				cmd_line->new_matrix_string
+					= ft_strjoin01(cmd_line->new_matrix_string, " ");
 			i++;
 		}
 		if (matrix[i] && matrix[i][0] == '|')
@@ -212,14 +58,19 @@ t_command_line    *ft_new_matrix(char **matrix)
 	}
 	cmd_line->next = NULL;
 	cmd_line = first_line;
-	while (cmd_line)
-	{
-		//printf("cmd_line->new_matrix_string: %s\n", cmd_line->new_matrix_string);
-		cmd_line = cmd_line->next;
-	}
-	// if (temp)
-	// 	free(temp);
 	return (first_line);
+}
+
+//  This fills new matrix_string in command line with the pipes as separators
+t_command_line	*ft_new_matrix(char **matrix)
+{
+	t_command_line	*first_line;
+	t_command_line	*cmd_line;
+
+	cmd_line = ft_calloc(sizeof(t_command_line), 1);
+	first_line = cmd_line;
+	cmd_line->new_matrix_string = NULL;
+	return (ft_new_matrix_continue(matrix, cmd_line, first_line));
 }
 
 void	ft_lexer(char *input, t_env01 **env_list)
@@ -230,11 +81,6 @@ void	ft_lexer(char *input, t_env01 **env_list)
 
 	matrix = easy_split(input);
 	i = 0;
-	while (matrix[i])
-	{
-		//printf("Easy split line %i: %s\n", i, matrix[i]);
-		i++;
-	}
 	first = ft_new_matrix(matrix);
 	i = 0;
 	while (matrix[i])
@@ -244,6 +90,7 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	}
 	free(matrix);
 	ft_initialize(first, *env_list);
+	ft_final_stamper(first);
 	execution(&first);
 	*env_list = first->env_list;
 	free_all(&first);
@@ -252,18 +99,8 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	//free(first);
 }
 
-int	main(int ac, char **av, char **envp)
+void	ft_input(char *input, t_env01 *env_list)
 {
-	char	*input;
-	t_env01	*env_list;
-
-	(void)(ac);
-	(void)(av);
-	g_exit_status = 0;
-	signal(SIGINT, signal_cmd);
-	signal(SIGQUIT, SIG_IGN);
-	env_list = ft_env_noder(envp);
-	input = NULL;
 	while (1)
 	{
 		free(input);
@@ -288,5 +125,21 @@ int	main(int ac, char **av, char **envp)
 	}
 	ft_env_deleter(env_list);
 	free(input);
+}
+
+
+int	main(int ac, char **av, char **envp)
+{
+	char	*input;
+	t_env01	*env_list;
+
+	(void)(ac);
+	(void)(av);
+	g_exit_status = 0;
+	signal(SIGINT, signal_cmd);
+	signal(SIGQUIT, SIG_IGN);
+	env_list = ft_env_noder(envp);
+	input = NULL;
+	ft_input(input, env_list);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 12:14:30 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 16:32:30 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,12 @@ typedef enum type
 
 typedef struct s_token
 {
-	char *token;
-	t_e_type type;
-	int pos;
-	struct s_token *next;
-}	t_token;
+	char				*token;
+	int					pos;
+	t_e_type			type;
+	struct s_token		*next;
+}		t_token;
 
-// typedef struct s_env
-// {
-// 	char			*name;
-// 	char			*value;
-// 	//int				exp;	//0 = not exported, 1 = exported (both export and env) , 2 = exported but no value (only export)
-// 	struct s_env	*next;
-// }	t_env;
 
 typedef struct s_env01
 {
@@ -65,9 +58,7 @@ typedef struct s_command_line
 {
 	char					*new_matrix_string;
 	t_token					*single_token;
-	//t_env					*env;
 	t_env01					*env_list;
-	//char					**envp;
 	char					**argv;
 	int						fd_in;
 	int						fd_out;
@@ -76,12 +67,11 @@ typedef struct s_command_line
 	struct s_command_line	*next;
 }	t_command_line;
 
-int	ft_strcmp(char *str1, char *str2);
-
+int				ft_strcmp(char *str1, char *str2);
 int				ft_easy_split_rows_counter(char *input);
 t_env01			*ft_env_noder(char **envp);
 void			ft_env_deleter(t_env01 *first);
-int				ft_check_quote (char c, int check);
+int				ft_check_quote(char c, int check);
 void			ft_lexer(char *input, t_env01 **env_list);
 t_token			*ft_newnode(char *token, int pos);
 t_token			*ft_initialize(t_command_line *first, t_env01 *env_list);
@@ -97,5 +87,7 @@ void			ft_built_in_env(char **args, t_env01 *my_env);
 char			*ft_value_extractor(t_env01 *env_list);
 int				ft_env_list_equal_position(t_env01 *env_list);
 char			*ft_value_extractor(t_env01 *env_list);
-
+char			**easy_split(char *str);
+int				ft_easy_split_rows_counter(char *input);
+char			**quote_cleaner_split(char *str, t_env01 *env_list);
 #endif

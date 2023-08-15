@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
+#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/15 00:03:27 by rkhinchi         ###   ########.fr        #
+#    Updated: 2023/08/15 16:33:09 by cpopolan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,10 @@ SRC = minishell.c \
 		noder.c \
 		noder_utils.c \
 		enveloper.c \
-		expander.c
+		easy_split.c \
+		easy_split_rows_counter.c \
+		expander.c \
+		quote_cleaner_node_deleter.c
 
 
 LIBFT = libft/libft.a
