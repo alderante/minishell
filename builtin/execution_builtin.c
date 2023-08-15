@@ -15,6 +15,7 @@
 int	execution_builtin(char *str, char **args,
 		t_command_line **original, pid_t *pid)
 {
+	(void)(pid);
 	if (str == NULL)
 		return (0);
 	/* if (ft_strcmp("exit", str))
@@ -34,9 +35,6 @@ int	execution_builtin(char *str, char **args,
 		ft_built_in_export(args, &((*original)->env_list));
 	else if (ft_strcmp01("unset", str))
 		ft_built_in_unset(args, &((*original)->env_list));
-	free(pid);
-	//free_delete_add(NULL, FREE);
-	free_all(original);
 	return (0);
 }
 
