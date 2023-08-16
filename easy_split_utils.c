@@ -112,7 +112,5 @@ void	ft_easy_split_continue03(t_split *pippo, char *str)
 			pippo->i++;
 			pippo->x++;
 		}
-		printf("this is word %s\n", pippo->tab[pippo->y]);
-		printf("this is i %d\n", pippo->i);
 	}
 }

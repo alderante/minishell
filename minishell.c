@@ -52,7 +52,6 @@ t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
 					= ft_strjoin01(cmd_line->new_matrix_string, " ");
 			i++;
 		}
-		printf("esco dal ciclo\n");
 		if (matrix[i] && matrix[i][0] == '|')
 		{
 			i++;
@@ -88,18 +87,12 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	i = 0;
 	while (matrix[i])
 	{
-		printf("This is %d row of Matrix: %s \n", i, matrix[i]);
-		i++;
-	}
-	i = 0;
-	while (matrix[i])
-	{
 		free(matrix[i]);
 		i++;
 	}
 	free(matrix);
 	ft_initialize(first, *env_list);
-	ft_final_stamper(first);
+	//ft_final_stamper(first);
 	execution(&first);
 	*env_list = first->env_list;
 	free_all(&first);

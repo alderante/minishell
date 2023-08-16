@@ -53,12 +53,17 @@ int	ft_built_in_echo_fd(char **str, int fd)
 		y++;
 	while (str[i])
 	{
-		ft_putstr_fd(str[i], fd);
-		if (str[i + 1])
-			ft_putchar_fd(' ', fd);
+		if (ft_strcmp01(str[i], "$?") == 1)
+			printf("%d\n", g_exit_status);
+		else
+		{
+			ft_putstr_fd(str[i], fd);
+			if (str[i + 1])
+				ft_putchar_fd(' ', fd);
+		}
 		i++;
 	}
-	if (y == 0)
+	if (y == 0 && ft_strcmp01(str[0], "$?") != 1)
 		ft_putchar_fd('\n', fd);
 	g_exit_status = 0;
 	return (0);
