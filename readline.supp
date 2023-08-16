@@ -4,7 +4,7 @@
    ...
    ...
    fun:readline
-   fun:main
+   fun:ft_input
 }
 {
    readline
@@ -20,5 +20,5 @@
    ...
    ...
    fun:add_history
-   fun:main
+   fun:ft_input
 }

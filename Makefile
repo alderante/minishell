@@ -49,29 +49,34 @@ SRC = minishell.c \
 		expander.c \
 		quote_cleaner_node_deleter.c
 
+OBJ = $(SRC:.c=.o)
 
 LIBFT = libft/libft.a
+
+%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $@
+	@printf "creazione del file \e[92m $@ \e[0m\n"
 
 all: $(NAME)
 
 #-fsanitize=address
 
-$(NAME):
+$(NAME): $(OBJ)
 	make -C libft
-	$(CC) $(FLAGS) $(SRC) $(LIBFT) $(LIBFT2) -lreadline -o $(NAME);\
-	echo "\e[92m$(NAME) compiled\e[0m";\
+	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
+	@echo "\e[92m$(NAME) compiled\e[0m"
 
 re:	fclean all
 
 clean:
 	make clean -C libft
+	rm -rf $(OBJ)
 	@echo "\e[90mNothing to clean\e[0m"
 
 fclean:
 	make fclean -C libft
-	rm -rf $(NAME);\
-	echo "\e[92m$(NAME) removed\e[0m";\
+	rm -rf $(OBJ)
+	rm -rf $(NAME)
+	@echo "\e[92m$(NAME) removed\e[0m"
 
 .PHONY: all re clean fclean bonus
-
-.SILENT:

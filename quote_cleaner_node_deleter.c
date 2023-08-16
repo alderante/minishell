@@ -71,7 +71,6 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 	pluto.y = 0;
 	pluto.tab = ft_calloc((ft_easy_split_rows_counter(str) + 1),
 			sizeof(char *));
-	printf("this is row counter %d\n", ft_easy_split_rows_counter(str));
 	str = expander(str, env_list);
 	while (str[pluto.i] != '\0')
 	{

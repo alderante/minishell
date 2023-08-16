@@ -66,7 +66,8 @@ void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd)
 	{
 		while (my_env)
 		{
-			printf("%s\n", my_env->str);
+			ft_putstr_fd(my_env->str, fd);
+			ft_putchar_fd('\n', fd);
 			my_env = my_env->next;
 		}
 	}
