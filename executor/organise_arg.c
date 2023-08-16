@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organise_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:43:50 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 20:16:12 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:14:25 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	init_arg(t_command_line *cmd)
 	t_token	*updated_t;
 	int		i;
 
-	updated_t = cmd->single_token;
 	i = 0;
+	updated_t = cmd->single_token;
 	while (updated_t)
 	{
 		if (updated_t->type == ARG || updated_t->type == BUILTIN)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
+#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/15 18:21:36 by rkhinchi         ###   ########.fr        #
+#    Updated: 2023/08/16 11:56:32 by cpopolan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC = minishell.c \
 		noder_utils.c \
 		enveloper.c \
 		easy_split.c \
+		easy_split_utils.c \
 		easy_split_rows_counter.c \
 		expander.c \
 		quote_cleaner_node_deleter.c

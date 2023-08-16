@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:14:56 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 14:47:17 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:06:45 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_token(t_command_line **cmd_line)
 		tok = (*cmd_line)->single_token->next;
 		if ((*cmd_line)->single_token->token)
 			free((*cmd_line)->single_token->token);
-		free((*cmd_line)->single_token);
+		//free((*cmd_line)->single_token);
 		(*cmd_line)->single_token = tok;
 	}
 }

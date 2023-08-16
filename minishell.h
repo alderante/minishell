@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 16:32:30 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:44:37 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+typedef struct s_split
+{
+	int		i;
+	int		y;
+	int		x;
+	int		check;
+	char	**tab;
+}		t_split;
 
 typedef enum type
 {
@@ -90,4 +99,6 @@ char			*ft_value_extractor(t_env01 *env_list);
 char			**easy_split(char *str);
 int				ft_easy_split_rows_counter(char *input);
 char			**quote_cleaner_split(char *str, t_env01 *env_list);
+void			ft_easy_split_continue03(t_split *pippo, char *str);
+
 #endif

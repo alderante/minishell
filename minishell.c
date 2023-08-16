@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 16:18:22 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/16 13:59:22 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,21 @@ t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
 	int				i;
 
 	i = 0;
+	if (matrix == NULL)
+		return (NULL);
 	while (matrix[i])
 	{
 		while (matrix[i] && matrix[i][0] != '|')
 		{
 			cmd_line->new_matrix_string
 				= ft_strjoin01(cmd_line->new_matrix_string, matrix[i]);
+
 			if (matrix[i + 1] != NULL && matrix[i + 1][0] != '|')
 				cmd_line->new_matrix_string
 					= ft_strjoin01(cmd_line->new_matrix_string, " ");
 			i++;
 		}
+		printf("esco dal ciclo\n");
 		if (matrix[i] && matrix[i][0] == '|')
 		{
 			i++;
@@ -80,8 +84,13 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	t_command_line	*first;
 
 	matrix = easy_split(input);
-	i = 0;
 	first = ft_new_matrix(matrix);
+	i = 0;
+	while (matrix[i])
+	{
+		printf("This is %d row of Matrix: %s \n", i, matrix[i]);
+		i++;
+	}
 	i = 0;
 	while (matrix[i])
 	{

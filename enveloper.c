@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 12:29:17 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:09:03 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	ft_built_in_env(char **args, t_env01 *my_env)
 void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd)
 {
 	(void)(fd);
+	
+	// int i = 0;
+	// while(args[i])
+	// {
+	// 	printf("env args ‘%s’\n", args[i]);
+	// 	i++;
+	// }
 	if (args[1])
 	{
 		(void)(my_env);
