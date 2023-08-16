@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/16 13:59:22 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:41:59 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 extern int	g_exit_status;
 
-/* int ft_only_spaces_checker (char *input)
+int	ft_only_spaces_checker(char *input)
 {
-	int i;
+	int	i;
 	int	len;
 
 	i = 0;
 	len = ft_strlen(input);
-	while(len > 0)
+	while (len > 0)
 	{
-		if(input[i] != ' ')
-			return(1);
+		if (input[i] != ' ' && input[i] != '\t')
+			return (1);
 		i++;
 		len--;
 	}
-	return(0);
-} */
+	return (0);
+}
 
 t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
 	t_command_line *first_line)
@@ -114,13 +114,13 @@ void	ft_input(char *input, t_env01 *env_list)
 	{
 		free(input);
 		input = readline("%>");
-		// if (ft_only_spaces_checker(input) == 0)
-		// 	add_history(input);
 		if (input == NULL)
 		{
 			printf("\n");
 			break ;
 		}
+		else if (ft_only_spaces_checker(input) == 0)
+			add_history(input);
 		else if (ft_strcmp(input, "exit") == 0)
 		{
 			printf("exit\n");
