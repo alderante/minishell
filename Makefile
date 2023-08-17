@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
+#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/17 09:22:37 by cpopolan         ###   ########.fr        #
+#    Updated: 2023/08/17 12:13:41 by rkhinchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ LIBFT = libft/libft.a
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@
-	@printf "creazione del file \e[92m $@ \e[0m\n"
+	#@printf "creazione del file \e[92m $@ \e[0m\n"
 
 all: $(NAME)
 
@@ -81,3 +81,5 @@ fclean:
 	@echo "\e[92m$(NAME) removed\e[0m"
 
 .PHONY: all re clean fclean bonus
+
+.SILENT:

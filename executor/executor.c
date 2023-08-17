@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 17:05:07 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:03:14 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ The function waits for each child process to
 finish executing and then checks its exit status. 
 If the exit status indicates an error, the function returns that error code. */
 
-char	*ft_get_value_of_env(t_env01 **env, char *str);
+char	*ft_get_value_of_env(t_env01 **env, char *str, char *file_name);
 
 /* stat function is to check if file exists, 
 if it does not exist, it will return -1 */
@@ -28,22 +28,12 @@ if it does not exist, it will return -1 */
 int	execution_execve(t_command_line **cmd, t_command_line **original,
 	char **str, pid_t *pid)
 {
-	struct stat	buff;
-
 	execve((*cmd)->argv[0], (*cmd)->argv, str);
-	if (stat((*cmd)->argv[0], &buff) == -1)
-	{
-		write(2, "minishell: ", ft_strlen("minishell: "));
-		write(2, (*cmd)->argv[0], ft_strlen((*cmd)->argv[0]));
-		write(2, ": No such file or directory\n",
-			ft_strlen(": No such file or directory\n"));
-		//exit(126);
-	}
 	(void)(original);
 	(void)(pid);
 	free(str);
 	free(pid);
-	//ft_env_deleter((*original)->env_list);
+	ft_env_deleter((*original)->env_list);
 	free_all(original);
 	g_exit_status = 127;
 	exit(g_exit_status);
@@ -57,7 +47,6 @@ void	ft_big_executor01_continue(t_command_line **cmd,
 {
 	if (cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
-		//printf("this is argv[0] %s\n", (*cmd)->argv[0]);
 		if ((*cmd)->argv[0] == NULL)
 		{
 			free(str);
@@ -67,21 +56,14 @@ void	ft_big_executor01_continue(t_command_line **cmd,
 			exit(1);
 		}
 		(*cmd)->argv[0] = find_if_executable((*cmd)->argv[0],
-				ft_get_value_of_env(&(*cmd)->env_list, "PATH"), 0);
+				ft_get_value_of_env(&(*cmd)->env_list, "PATH",
+					(*cmd)->argv[0]), 0);
 	}
 }
 
 void	ft_big_executor02_continue(t_command_line **cmd,
 		t_command_line **original, pid_t *pid, char **str)
 {
-	if ((*cmd)->argv[0] == NULL)
-	{
-		free(str);
-		free(pid);
-		ft_env_deleter((*original)->env_list);
-		free_all(original);
-		exit(50);
-	}
 	if ((*cmd)->fd_in < 0 || (*cmd)->fd_out < 0)
 	{
 		free(str);
