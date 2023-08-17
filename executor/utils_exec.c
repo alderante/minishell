@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:53:37 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 22:22:40 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:57:20 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	cmd_is_builtin(char *str)
 	if (str == NULL)
 		return (0);
 	if (ft_strcmp01("exit", str))
-		return (2);
+		return (1);
 	if (ft_strcmp01("cd", str))
 		return (1);
 	else if (ft_strcmp01("echo", str))

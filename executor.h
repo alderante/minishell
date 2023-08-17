@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 15:38:15 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:04:00 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ int		ft_built_in_pwd_fd(char **str, int fd);
 int		ft_built_in_echo(char **str);
 int		ft_built_in_echo_fd(char **str, int fd);
 int		builtin_cd(char **args);
+int		ft_built_in_exit(char **args, t_command_line **cmd);
 
 //signal.c
 void	signal_cmd(int sig);

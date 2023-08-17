@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 15:38:12 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:01:54 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	execution(&first);
 	*env_list = first->env_list;
 	free_all(&first);
-	// free_end(&first, NULL);
 }
 
 void	ft_input(char *input, t_env01 *env_list)
@@ -112,11 +111,11 @@ void	ft_input(char *input, t_env01 *env_list)
 		}
 		else if (ft_only_spaces_checker(input) == 0)
 			;
-		else if (ft_strcmp(input, "exit") == 0)
+		/* else if (ft_strcmp(input, "exit") == 0)
 		{
 			printf("exit\n");
 			break ;
-		}
+		} */
 		else if (*input)
 		{
 			add_history(input);

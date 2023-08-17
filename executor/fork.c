@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 15:38:08 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:57:59 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	execution_bd_fd(char *str, char **args,
 		builtin_cd(args);
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo_fd(args, (*original)->fd_out);
+	else if (ft_strcmp01("exit", str))
+		ft_built_in_exit(args, original);
 	else if (ft_strcmp01("env", str))
 		ft_built_in_env_fd(args, (*original)->env_list, (*original)->fd_out);
 	else if (ft_strcmp01("pwd", str))

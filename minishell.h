@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 10:14:12 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:02:56 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <limits.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -73,6 +74,8 @@ typedef struct s_command_line
 	int						fd_out;
 	char					*name_file;
 	char					*heredoc_delimiter;
+	char					*input;
+	int						*pid;
 	struct s_command_line	*next;
 }	t_command_line;
 
