@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:06:51 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 23:28:11 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:05:53 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_exit_status;
 
-char	*ft_get_value_of_env(t_env01 **env, char *str);
+char	*ft_get_value_of_env(t_env01 **env, char *str, char *file_name);
 
 int	check_equal_or_null(char *env)
 {
@@ -51,15 +51,15 @@ char	*ft_get_str(char *str)
 	return (ft_get_str_of_env(env_list, str));
 }
 
-char	*ft_get_env(char *str)
+/* char	*ft_get_env(char *str)
 {
 	t_env01	**env_list;
 
 	env_list = address_of_env();
-	return (ft_get_value_of_env(env_list, str));
-}
+	return (ft_get_value_of_env(env_list, str, ));
+} */
 
-char	*ft_get_value_of_env(t_env01 **env, char *str)
+char	*ft_get_value_of_env(t_env01 **env, char *str, char *file_name)
 {
 	t_env01	*cpy;
 	int		len;
@@ -72,6 +72,14 @@ char	*ft_get_value_of_env(t_env01 **env, char *str)
 			&& !ft_strncmp(cpy->str, str, len))
 			return (cpy->str + len + 1);
 		cpy = cpy->next;
+	}
+	if (cpy == NULL)
+	{
+		write(2, "minishell: ", 11);
+		write(2, file_name, ft_strlen(file_name));
+		write(2, ": No such file or directory\n",
+			ft_strlen(": No such file or directory\n"));
+		return (NULL);
 	}
 	return (NULL);
 }

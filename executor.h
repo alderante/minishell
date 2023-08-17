@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 10:14:28 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/17 12:42:59 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	free_all_env(t_env01 **env);
 void	particular_env_free(t_env01 *env);
 t_env01	*convert_env_to_list(char **env);
 t_env01	*noder(char *str);
-char	*ft_get_value_of_env(t_env01 **env, char *str);
+char	*ft_get_value_of_env(t_env01 **env, char *str, char *file_name);
 char	*ft_get_str_of_env(t_env01 **env, char *str);
 
 //unset.c

@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:03:11 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 23:25:44 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 13:06:11 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,17 @@ extern int	g_exit_status;
 char	*cmd_not_found_free_split(char *str, char **split_path)
 {
 	free_split(split_path);
-	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
-	write(2, " : command not found\n",
-		ft_strlen(" : command not found\n"));
+	write(2, ": command not found\n",
+		ft_strlen(": command not found\n"));
 	return (NULL);
 }
 
 char	*cmd_not_found_free(char *str)
 {
-	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
-	write(2, " : command not found\n",
-		ft_strlen(" : command not found\n"));
+	write(2, ": command not found\n",
+		ft_strlen(": command not found\n"));
 	free(str);
 	return (NULL);
 }
@@ -75,6 +73,11 @@ char	*find_if_executable(char *str, char *path, int i)
 
 	if (str && (str[0] == '.' || str[0] == '/'))
 		return (str);
+	if (path == NULL)
+	{
+		//free(str);
+		return (NULL);
+	}
 	split_path = ft_strsplit(path);
 	if (split_path == NULL)
 		return (cmd_not_found_free(str));
