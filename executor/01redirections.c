@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 18:14:40 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 18:25:00 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:38:10 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_input_redir_over(t_command_line **cmd, t_token *token)
 	if (token->next && token->next->token)
 	{
 		(*cmd)->heredoc_delimiter = ft_strdup(token->next->token);
-		(*cmd)->fd_in = create_heredoc_fd(cmd, &token);
+		(*cmd)->fd_in = create_heredoc_fd(cmd, token);
 		if ((*cmd)->fd_in == -1)
 			return (-1);
 		return (1);
@@ -54,12 +54,12 @@ int	ft_input_redir_over(t_command_line **cmd, t_token *token)
 }
 
 int	ft_compare(t_command_line **cmd, t_token *token,
-		t_token *prev_token)
+		t_token *prev_token, t_e_type type)
 {
 	int			rtrn;
 
 	rtrn = 0;
-	if (ft_strcmp01(token->token, "<") == 1) 
+	if (type == FILE_IN)
 	{
 		if (token->next && token->next->token)
 		{
@@ -81,12 +81,15 @@ int	ft_compare(t_command_line **cmd, t_token *token,
 	return (0);
 }
 
-int	handle_input_redirection(t_command_line **cmd)
+int	handle_input_redirection(t_command_line **cmd,
+		t_token *updated, t_e_type type)
 {
 	t_token		*token;
 	t_token		*prev_token;
 	int			rtrn;
 
+	//(void)type;
+	(void)updated;
 	rtrn = 0;
 	if ((*cmd)->fd_in != 0) 
 		close((*cmd)->fd_in);
@@ -94,7 +97,7 @@ int	handle_input_redirection(t_command_line **cmd)
 	prev_token = NULL;
 	while (token)
 	{
-		rtrn = ft_compare(cmd, token, prev_token);
+		rtrn = ft_compare(cmd, token, prev_token, type);
 		if (rtrn == -1)
 			return (-1);
 		else if (rtrn == 1)

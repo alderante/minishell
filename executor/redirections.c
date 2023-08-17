@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 18:17:18 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:38:09 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,12 @@ int	handle_output_redirection(t_command_line **cmd,
 int	redirections_fd(t_command_line **cmd)
 {
 	t_token			*updated;
-	t_command_line	**tmp;
 
-
-	tmp = cmd;
 	updated = (*cmd)->single_token;
 	while (updated)
 	{
 		if (updated->type == FILE_IN || updated->type == HERE_DOC)
-			handle_input_redirection(tmp);
+			handle_input_redirection(cmd, updated, updated->type);
 		if (updated->type == FILE_OUT || updated->type == FILE_OUT_OVER)
 			handle_output_redirection(cmd, updated, updated->type);
 		updated = updated->next;

@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 18:16:42 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 18:25:13 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:38:10 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ void	heredoc_loop(char *line, char *delimiter, int fd)
 	}
 }
 
-int	create_heredoc_fd(t_command_line **cmd, t_token **token)
+int	create_heredoc_fd(t_command_line **cmd, t_token *token)
 {
 	int		fd;
 	char	*delimiter;
 	char	*line;
+	t_token	*next_token;
 
 	line = NULL;
 	fd = 0;
@@ -55,7 +56,10 @@ int	create_heredoc_fd(t_command_line **cmd, t_token **token)
 	free(delimiter);
 	close(fd);
 	fd = open(".heredoc_tmp", O_RDONLY);
-	(*token)->token = NULL;
-	(*token)->next->token = NULL;
+	next_token = token->next;
+	free(token->token);
+	free(next_token->token);
+	token->token = NULL;
+	token->next->token = NULL;
 	return (fd);
 }

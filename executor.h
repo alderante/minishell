@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 12:42:59 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:38:15 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,9 @@ int		func_fork(t_command_line **cmd, pid_t *pid);
 
 //redirection.c //01redirection.c //heredoc.c
 int		redirections_fd(t_command_line **cmd);
-int		handle_input_redirection(t_command_line **cmd);
-int		create_heredoc_fd(t_command_line **cmd, t_token **token);
+int		handle_input_redirection(t_command_line **cmd,
+			t_token *updated, t_e_type type);
+int		create_heredoc_fd(t_command_line **cmd, t_token *token);
 
 //env.c e env_utils.c
 char	**matrix_from_env(t_env01 **envp);
