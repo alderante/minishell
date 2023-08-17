@@ -6,11 +6,11 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/15 16:32:41 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:42:24 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "../executor.h"
 
 void	ft_final_stamper(t_command_line *cmd_line)
 {
@@ -65,16 +65,6 @@ t_token	*ft_newnode(char *token, int pos)
 	node->next = NULL;
 	return (node);
 }
-
-typedef struct s_init
-{
-	int				i;
-	int				j;
-	t_token			*node;
-	t_token			*first_token;
-	t_command_line	*temp;
-	char			**current_line;	
-}	t_init;
 
 void	ft_initialize01(t_init *ciccio, t_command_line *first_cmd,
 		t_env01 *env_list)

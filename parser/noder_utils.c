@@ -6,11 +6,11 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 11:21:38 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/16 14:54:21 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/17 09:14:19 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "executor.h"
+#include "../executor.h"
 
 int	ft_strcmp(char *str1, char *str2)
 {

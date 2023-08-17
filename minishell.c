@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/16 14:41:59 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:30:27 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	*env_list = first->env_list;
 	free_all(&first);
 	// free_end(&first, NULL);
-	//free(input_clone);
-	//free(first);
 }
 
 void	ft_input(char *input, t_env01 *env_list)
@@ -113,7 +111,7 @@ void	ft_input(char *input, t_env01 *env_list)
 			break ;
 		}
 		else if (ft_only_spaces_checker(input) == 0)
-			add_history(input);
+			;
 		else if (ft_strcmp(input, "exit") == 0)
 		{
 			printf("exit\n");

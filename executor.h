@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 18:19:47 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/17 10:14:28 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ typedef enum mod
 	FREE,
 	ADD
 }			t_mod;
+
+typedef struct s_init
+{
+	int				i;
+	int				j;
+	t_token			*node;
+	t_token			*first_token;
+	t_command_line	*temp;
+	char			**current_line;	
+}	t_init;
 
 /*
 typedef enum type

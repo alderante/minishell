@@ -6,7 +6,7 @@
 #    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/16 11:56:32 by cpopolan         ###   ########.fr        #
+#    Updated: 2023/08/17 09:22:37 by cpopolan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,14 +40,15 @@ SRC = minishell.c \
 		executor/organise_arg.c \
 		executor/01redirections.c \
 		executor/heredoc.c \
-		noder.c \
-		noder_utils.c \
-		enveloper.c \
-		easy_split.c \
-		easy_split_utils.c \
-		easy_split_rows_counter.c \
-		expander.c \
-		quote_cleaner_node_deleter.c
+		parser/easy_split_utils.c \
+		parser/easy_split.c \
+		parser/easy_split_rows_counter.c \
+		parser/enveloper.c \
+		parser/env_to_struct.c \
+		parser/expander.c \
+		parser/noder.c \
+		parser/noder_utils.c \
+		parser/quote_cleaner_node_deleter.c
 
 OBJ = $(SRC:.c=.o)
 
