@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 11:21:38 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 19:48:38 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:12:27 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,21 @@ t_e_type	ft_node_builtin_typer(char	*token)
 	return (type);
 }
 
+// else if (ft_strcmp(token, "|") == 0)
+// 	type = LIMITOR;
+
 t_e_type	ft_node_redirect_typer(char *token)
 {
 	t_e_type	type;
 
-	if (ft_strcmp(token, "<") == 0)
-		type = FILE_IN;
-	else if (ft_strcmp(token, "<<") == 0)
+	if (ft_strcmp(token, (char [3]){-2, -2, '\0'}) == 0)
 		type = HERE_DOC;
-	/* else if (ft_strcmp(token, "|") == 0)
-		type = LIMITOR; */
-	else if (ft_strcmp(token, ">") == 0)
-		type = FILE_OUT;
-	else if (ft_strcmp(token, ">>") == 0)
+	else if (ft_strcmp(token, (char [2]){-2, '\0'}) == 0)
+		type = FILE_IN;
+	else if (ft_strcmp(token, (char [3]){-1, -1, '\0'}) == 0)
 		type = FILE_OUT_OVER;
+	else if (ft_strcmp(token, (char [2]){-1, '\0'}) == 0)
+		type = FILE_OUT;
 	else
 		return (1);
 	return (type);

@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easy_split.c                                       :+:      :+:    :+:   */
+/*   majia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 14:44:29 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 11:24:34 by cpopolan         ###   ########.fr       */
+/*   Created: 2023/08/18 10:54:25 by cpopolan          #+#    #+#             */
+/*   Updated: 2023/08/18 11:14:03 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-char	**easy_split(char *str)
+void	ft_majia(char **matrix)
 {
-	t_split	pippo;
+	int	y;
 
-	pippo.i = 0;
-	pippo.y = 0;
-	pippo.check = 0;
-	pippo.tab = ft_calloc((ft_easy_split_rows_counter(str) + 1),
-			sizeof(char *));
-	while (str[pippo.i] != '\0')
+	y = 0;
+	while (matrix[y])
 	{
-		if (str[pippo.i] != 32)
+		if (ft_strcmp(matrix[y], ">>") == 0)
 		{
-			pippo.x = 0;
-			pippo.tab[pippo.y] = ft_calloc((strlen(str) + 1), sizeof(char));
-			ft_easy_split_continue03(&pippo, str);
-			pippo.y++;
+			matrix[y][0] = -1;
+			matrix[y][1] = -1;
 		}
-		else
-			pippo.i++;
+		else if (ft_strcmp(matrix[y], "<<") == 0)
+		{
+			matrix[y][0] = -2;
+			matrix[y][1] = -2;
+		}
+		else if (ft_strcmp(matrix[y], ">") == 0)
+			matrix[y][0] = -1;
+		else if (ft_strcmp(matrix[y], "<") == 0)
+			matrix[y][0] = -2;
+		y++;
 	}
-	pippo.tab[pippo.y] = NULL;
-	return (pippo.tab);
 }

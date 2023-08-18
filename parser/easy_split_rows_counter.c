@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:44:29 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:13:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:39:31 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_check_quote(char c, int check)
 void	ft_easy_split_rows_counter_continue(char *input,
 		int *i, int *rows, int check)
 {
-	while (input[*i] > 32)
+	while (input[*i] != 0 && input[*i] != 32 && input[*i] != '\t')
 	{
 		check = ft_check_quote (input[*i], check);
 		if (check == 1 || check == 2)
@@ -37,9 +37,9 @@ void	ft_easy_split_rows_counter_continue(char *input,
 					*i += 1;
 			}
 		}
-		else if (input[*i] == '|' || input[*i] == '>' || input[*i] == '<')
+		else if (input[*i] == '|' || input[*i] == '>' || input[*i] == '<' || input[*i] == -1 || input[*i] == -2)
 		{
-			if (input[*i - 1] == 32)
+			if (*i > 0 && input[*i - 1] == 32)
 				*rows -= 1;
 			*rows += 1;
 			*i += 1;
@@ -61,7 +61,7 @@ int	ft_easy_split_rows_counter(char *input)
 	check = 0;
 	while (input[i] != '\0')
 	{
-		if (input[i] > 32)
+		if (input[i] != 32 && input[i] != '\t')
 		{
 			ft_easy_split_rows_counter_continue(input, &i, &rows, check);
 			rows++;

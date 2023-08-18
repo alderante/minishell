@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 09:10:18 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:10:31 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	t_command_line	*first;
 
 	matrix = easy_split(input);
+	ft_majia(matrix);
 	first = ft_new_matrix(matrix);
 	i = 0;
 	while (matrix[i])

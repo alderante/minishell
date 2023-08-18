@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:44:29 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:11:50 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:24:29 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_easy_split_continue02_min(t_split **pippo, char *str)
 
 void	ft_easy_split_continue03(t_split *pippo, char *str)
 {
-	while (str[pippo->i] != '\0' && str[pippo->i] > 32)
+	while (str[pippo->i] != '\0' && str[pippo->i] != 32)
 	{
 		pippo->check = ft_check_quote(str[pippo->i], pippo->check);
 		if (pippo->check == 1 || pippo->check == 2)

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 19:15:45 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:04:41 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,9 @@ t_token	*ft_newnode(char *token, int pos)
 
 	node = (t_token *)malloc(sizeof(t_token));
 	if (ft_node_builtin_typer(token) != 1)
-	{
 		node->type = ft_node_builtin_typer(token);
-	}
 	else if (ft_node_redirect_typer(token) != 1)
-	{
 		node->type = ft_node_redirect_typer(token);
-	}
 	else
 		node->type = ARG;
 	node->pos = pos;

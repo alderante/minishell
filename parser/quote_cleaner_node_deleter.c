@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 19:48:46 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:46:39 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	quote_cleaner_split_continue03(t_quote_cleaner **pluto,
 void	quote_cleaner_split_continue01(t_quote_cleaner *pluto,
 		char *str)
 {
-	while (str[pluto->i] > 32)
+	while (str[pluto->i] != 0 && str[pluto->i] != 32 && str[pluto->i] != '\t')
 	{
 		if (str[pluto->i] == 34 && str[pluto->i + 1] != '\0')
 			quote_cleaner_split_continue02(&pluto, str);
@@ -74,7 +74,7 @@ char	**quote_cleaner_split(char *str, t_env01 *env_list)
 	str = expander(str, env_list);
 	while (str[pluto.i] != '\0')
 	{
-		if (str[pluto.i] > 32)
+		if (str[pluto.i] != ' ')
 		{
 			pluto.x = 0;
 			pluto.tab[pluto.y] = ft_calloc((ft_strlen(str) + 1), sizeof(char));
