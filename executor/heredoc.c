@@ -6,13 +6,13 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 18:16:42 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 15:38:10 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:17:35 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-void	heredoc_loop(char *line, char *delimiter, int fd)
+void	ft_heredoc_loop(char *line, char *delimiter, int fd)
 {
 	while (1)
 	{
@@ -34,7 +34,7 @@ void	heredoc_loop(char *line, char *delimiter, int fd)
 	}
 }
 
-int	create_heredoc_fd(t_command_line **cmd, t_token *token)
+int	ft_create_heredoc_fd(t_command_line **cmd, t_token *token)
 {
 	int		fd;
 	char	*delimiter;
@@ -52,7 +52,7 @@ int	create_heredoc_fd(t_command_line **cmd, t_token *token)
 		free(delimiter);
 		return (-1);
 	}
-	heredoc_loop(line, delimiter, fd);
+	ft_heredoc_loop(line, delimiter, fd);
 	free(delimiter);
 	close(fd);
 	fd = open(".heredoc_tmp", O_RDONLY);

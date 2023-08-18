@@ -6,18 +6,18 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 16:14:47 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 22:27:38 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 10:59:54 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-/* void	func_2_free_all_env(void)
+/* void	func_2_ft_free_all_env(void)
 {
 	free_delete_add(NULL, FREE);
 } */
 
-/* void	free_all_env(t_env01 **env)
+/* void	ft_free_all_env(t_env01 **env)
 {
 	t_env01	*cpy;
 	t_env01	*tmp;
@@ -33,8 +33,8 @@
 	}
 } */
 
-void	particular_env_free(t_env01 *env)
+/* void	particular_env_free(t_env01 *env)
 {
 	free(env->str);
 	free(env);
-}
+} */

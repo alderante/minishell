@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:39:27 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:00:56 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 10:59:54 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_if_ex(t_command_line **cmd)
 	free((*cmd)->input);
 	free((*cmd)->pid);
 	ft_env_deleter((*cmd)->env_list);
-	free_all(cmd);
+	ft_free_all(cmd);
 	exit(g_exit_status);
 }
 

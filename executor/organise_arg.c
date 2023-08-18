@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   organise_arg.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:43:50 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/16 14:14:25 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:18:58 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-static void	init_arg(t_command_line *cmd)
+static void	ft_init_arg(t_command_line *cmd)
 {
 	t_token	*updated_t;
 	int		i;
@@ -31,7 +31,7 @@ static void	init_arg(t_command_line *cmd)
 	cmd->argv[i] = NULL;
 }
 
-static int	nbr_arg_cmd(t_command_line *cmd)
+static int	ft_nbr_arg_cmd(t_command_line *cmd)
 {
 	t_token	*updated_t;
 	int		len;
@@ -47,7 +47,7 @@ static int	nbr_arg_cmd(t_command_line *cmd)
 	return (len);
 }
 
-int	organise_arg(t_command_line **cmd)
+int	ft_organise_arg(t_command_line **cmd)
 {
 	t_command_line	*updated_b;
 	int				len_arg;
@@ -56,12 +56,12 @@ int	organise_arg(t_command_line **cmd)
 	updated_b = *cmd;
 	while (updated_b)
 	{
-		len_arg = nbr_arg_cmd(updated_b);
+		len_arg = ft_nbr_arg_cmd(updated_b);
 		new = malloc(sizeof(char *) * (len_arg + 1));
 		if (new == NULL)
 			return (50);
 		updated_b->argv = new;
-		init_arg(updated_b);
+		ft_init_arg(updated_b);
 		updated_b = updated_b->next;
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 17:36:53 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/15 16:44:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 10:53:55 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <string.h>
 #include <errno.h>
 
-int	change_directory(char *path)
+int	ft_change_directory(char *path)
 {
 	char	*error_message;
 
@@ -33,7 +33,7 @@ int	change_directory(char *path)
 	return (0);
 }
 
-char	*get_home_directory(void)
+char	*ft_get_home_directory(void)
 {
 	char		*home_dir;
 
@@ -46,12 +46,12 @@ char	*get_home_directory(void)
 	return (home_dir);
 }
 
-int	builtin_cd(char **args)
+int	ft_builtin_cd(char **args)
 {
 	char		*path;
 
 	if (args[1] == NULL)
-		path = get_home_directory();
+		path = ft_get_home_directory();
 	else if (args[2])
 	{
 		write(STDERR_FILENO, "Minishell: cd: too many arguments\n",
@@ -63,7 +63,7 @@ int	builtin_cd(char **args)
 
 	if (path != NULL)
 	{
-		if (change_directory(path) != 0)
+		if (ft_change_directory(path) != 0)
 			return (1);
 	}
 	return (0);

@@ -11,6 +11,14 @@
    Memcheck:Leak
    ...
    ...
+   fun:readline
+   fun:ft_heredoc_loop
+}
+{
+   readline
+   Memcheck:Leak
+   ...
+   ...
    fun:rl_initialize
    fun:readline
 }

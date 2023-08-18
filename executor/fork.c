@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 15:57:59 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:46:27 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ $3 = 0x0
 (gdb) p (*cmd_line)->next->argv[0]
 Cannot access memory at address 0x18 */
 
-int	wait_pid(t_command_line **cmd, pid_t *pid)
+int	ft_wait_pid(t_command_line **cmd, pid_t *pid)
 {
 	t_command_line	*updated;
 	int				len;
@@ -39,8 +39,8 @@ int	wait_pid(t_command_line **cmd, pid_t *pid)
 
 	i = 0;
 	updated = *cmd;
-	len = command_len(updated);
-	if (len == 1 && cmd_is_builtin((*cmd)->argv[0]))
+	len = ft_command_len(updated);
+	if (len == 1 && ft_cmd_is_builtin((*cmd)->argv[0]))
 	{
 		return (0);
 	}
@@ -56,19 +56,14 @@ int	wait_pid(t_command_line **cmd, pid_t *pid)
 	return (0);
 }
 
-int	execution_bd_fd(char *str, char **args,
+int	ft_execution_bd_fd(char *str, char **args,
 		t_command_line **original, pid_t *pid)
 {
 	(void)(pid);
 	if (str == NULL)
 		return (0);
-	/* if (ft_strcmp01("exit", str))
-	{
-		exit_bltin(args, original, pid);
-		return (1);
-	} */
 	if (ft_strcmp01("cd", str))
-		builtin_cd(args);
+		ft_builtin_cd(args);
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("exit", str))
@@ -79,17 +74,16 @@ int	execution_bd_fd(char *str, char **args,
 		ft_built_in_pwd_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("export", str))
 		ft_built_in_export(args, &(*original)->env_list);
-	//ft_built_in_export_fd(args, (*original)->fd_out);
 	else if (ft_strcmp01("unset", str))
 		ft_built_in_unset(args, &((*original)->env_list));
 	return (0);
 }
 
-int	no_func_fork(t_command_line **cmd, pid_t *pid)
+int	ft_no_func_fork(t_command_line **cmd, pid_t *pid)
 {
 	if ((*cmd)->argv == NULL)
 		return (0);
-	else if (execution_bd_fd((*cmd)->argv[0],
+	else if (ft_execution_bd_fd((*cmd)->argv[0],
 			(*cmd)->argv, cmd, pid) != 0)
 	{
 		return (0);
@@ -97,7 +91,7 @@ int	no_func_fork(t_command_line **cmd, pid_t *pid)
 	return (0);
 }
 
-int	process_forking(pid_t *pid, int i, t_command_line **cmd, 
+int	ft_process_forking(pid_t *pid, int i, t_command_line **cmd, 
 			t_command_line **updated)
 {
 	signal(SIGINT, SIG_IGN);
@@ -144,9 +138,9 @@ int	process_forking(pid_t *pid, int i, t_command_line **cmd,
 } */
 
 //open fd for redirections
-// Command_len how many commands are there
+// ft_command_len how many commands are there
 
-int	func_fork(t_command_line **cmd, pid_t *pid)
+int	ft_func_fork(t_command_line **cmd, pid_t *pid)
 {
 	int				len;
 	int				i;
@@ -154,21 +148,21 @@ int	func_fork(t_command_line **cmd, pid_t *pid)
 
 	i = 0;
 	updated = *cmd;
-	len = command_len(updated);
+	len = ft_command_len(updated);
 	while (updated)
 	{
-		redirections_fd(&updated);
+		ft_redirections_fd(&updated);
 		updated = updated->next;
 	}
-	organise_arg(cmd);
+	ft_organise_arg(cmd);
 	updated = *cmd;
-	if (len == 1 && cmd_is_builtin(updated->argv[0]))
+	if (len == 1 && ft_cmd_is_builtin(updated->argv[0]))
 	{
-		return (no_func_fork(cmd, pid));
+		return (ft_no_func_fork(cmd, pid));
 	}
 	while (i < len)
 	{
-		process_forking(pid, i, cmd, &updated);
+		ft_process_forking(pid, i, cmd, &updated);
 		updated = updated->next;
 		i++;
 	}
