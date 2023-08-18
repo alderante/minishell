@@ -54,7 +54,12 @@ int	ft_built_in_echo_fd(char **str, int fd)
 	while (str[i])
 	{
 		if (ft_strcmp01(str[i], "$?") == 1)
-			printf("%d\n", g_exit_status);
+		{
+			ft_itoa01(g_exit_status, fd);
+			if (str[i + 1])
+				ft_putchar_fd(' ', fd);
+		}
+			//printf("%d ", g_exit_status);
 		else
 		{
 			ft_putstr_fd(str[i], fd);
@@ -63,7 +68,7 @@ int	ft_built_in_echo_fd(char **str, int fd)
 		}
 		i++;
 	}
-	if (y == 0 && ft_strcmp01(str[0], "$?") != 1)
+	if (y == 0)
 		ft_putchar_fd('\n', fd);
 	g_exit_status = 0;
 	return (0);

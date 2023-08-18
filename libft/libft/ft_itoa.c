@@ -56,7 +56,7 @@ static size_t	get_len(int n)
 	return (len);
 }
 
-char	*ft_itoa(int n)
+void	ft_itoa01(int n, int fd)
 {
 	char			*result;
 	size_t			len;
@@ -66,7 +66,7 @@ char	*ft_itoa(int n)
 	len = get_len(n);
 	result = malloc(sizeof(char) * (len + 1));
 	if (result == NULL)
-		return (NULL);
+		return ;
 	i = 0;
 	if (is_neg(n))
 		num = (unsigned int)-n;
@@ -80,5 +80,6 @@ char	*ft_itoa(int n)
 	if (is_neg(n))
 		result[0] = '-';
 	result[len] = '\0';
-	return (result);
+	write(fd, result, ft_strlen(result));
+	free(result);
 }

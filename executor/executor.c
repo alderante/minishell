@@ -28,15 +28,26 @@ if it does not exist, it will return -1 */
 int	ft_execution_execve(t_command_line **cmd, t_command_line **original,
 	char **str, pid_t *pid)
 {
-	execve((*cmd)->argv[0], (*cmd)->argv, str);
 	(void)(original);
 	(void)(pid);
-	free(str);
+	if ((*cmd)->argv[0] == NULL || access((*cmd)->argv[0], F_OK) == -1)
+	{
+    // handle error
+		free(str);
+		free(pid);
+		ft_env_deleter((*original)->env_list);
+		ft_free_all(original);
+		g_exit_status = 127;
+		exit(g_exit_status);
+	}
+	else
+		execve((*cmd)->argv[0], (*cmd)->argv, str);
+	/* free(str);
 	free(pid);
 	ft_env_deleter((*original)->env_list);
 	ft_free_all(original);
 	g_exit_status = 127;
-	exit(g_exit_status);
+	exit(g_exit_status); */
 	return (0);
 }
 

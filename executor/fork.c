@@ -60,6 +60,7 @@ int	ft_execution_bd_fd(char *str, char **args,
 		t_command_line **original, pid_t *pid)
 {
 	(void)(pid);
+
 	if (str == NULL)
 		return (0);
 	if (ft_strcmp01("cd", str))

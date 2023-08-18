@@ -73,7 +73,7 @@ char	*ft_get_value_of_env(t_env01 **env, char *str, char *file_name)
 			return (cpy->str + len + 1);
 		cpy = cpy->next;
 	}
-	if (cpy == NULL)
+	if (cpy == NULL && (ft_strcmp(file_name, "/bin/ls") != 0))
 	{
 		write(2, "minishell: ", 11);
 		write(2, file_name, ft_strlen(file_name));
