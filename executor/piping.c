@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:52:44 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 22:49:25 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:21:01 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //int	g_exit_status;
 
-int	using_pipe(int **nfd, int i, t_command_line *updated)
+int	ft_using_pipe(int **nfd, int i, t_command_line *updated)
 {
 	nfd[i] = malloc(sizeof(int) * 2);
 	if (nfd == NULL)
@@ -38,7 +38,7 @@ int	using_pipe(int **nfd, int i, t_command_line *updated)
 
 // total nfd will be needed, depending on the process
 // number of fd, nfd[0][0], *nfd[0][1]
-int	piping(t_command_line **cmd)
+int	ft_piping(t_command_line **cmd)
 {
 	int					i;
 	int					rtrn;
@@ -47,21 +47,21 @@ int	piping(t_command_line **cmd)
 
 	i = 0;
 	updated = *cmd;
-	nfd = malloc(sizeof(int *) * (command_len(updated) + 1));
+	nfd = malloc(sizeof(int *) * (ft_command_len(updated) + 1));
 	if (nfd == NULL)
 		return (50);
-	nfd[command_len(updated)] = NULL;
+	nfd[ft_command_len(updated)] = NULL;
 	while (updated)
 	{
-		rtrn = using_pipe(nfd, i, updated);
+		rtrn = ft_using_pipe(nfd, i, updated);
 		if (rtrn != 0)
 		{
-			freeing_matrix_nfd(nfd);
+			ft_freeing_matrix_nfd(nfd);
 			return (rtrn);
 		}
 		updated = updated->next;
 		i++;
 	}
-	freeing_matrix_nfd(nfd);
+	ft_freeing_matrix_nfd(nfd);
 	return (0);
 }

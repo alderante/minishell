@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 09:10:18 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:53:16 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	}
 	free(matrix);
 	ft_initialize(first, *env_list);
-	//ft_final_stamper(first);
-	execution(&first);
+	ft_final_stamper(first);
+	ft_execution(&first);
 	*env_list = first->env_list;
-	free_all(&first);
+	ft_free_all(&first);
 }
 
 void	ft_input(char *input, t_env01 *env_list)
@@ -112,7 +112,7 @@ int	main(int ac, char **av, char **envp)
 	(void)(ac);
 	(void)(av);
 	g_exit_status = 0;
-	signal(SIGINT, signal_cmd);
+	signal(SIGINT, ft_signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
 	env_list = ft_env_noder(envp);
 	input = NULL;
