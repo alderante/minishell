@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 11:14:32 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:55:06 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	ft_big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 		ft_execution_execve(cmd, original, str, pid);
 	free(str);
 	free(pid);
+	free((*original)->input);
 	ft_env_deleter((*original)->env_list);
 	ft_free_all(original);
 	exit(0);

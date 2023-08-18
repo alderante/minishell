@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:44:29 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 11:39:31 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:30:58 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	ft_easy_split_rows_counter_continue(char *input,
 					*i += 1;
 			}
 		}
-		else if (input[*i] == '|' || input[*i] == '>' || input[*i] == '<' || input[*i] == -1 || input[*i] == -2)
+		else if (input[*i] == '|' || input[*i] == '>'
+			|| input[*i] == '<' || input[*i] == -1 || input[*i] == -2)
 		{
 			if (*i > 0 && input[*i - 1] == 32)
 				*rows -= 1;

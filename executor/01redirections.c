@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01redirections.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 18:14:40 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 11:54:30 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:10:45 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_compare(t_command_line **cmd, t_token *token,
 		else
 			return (-1);
 	}
-	else if (ft_strcmp01(token->token, "<<") == 1)
+	else if (ft_strcmp01(token->token, (char [3]){-2, -2, '\0'}) == 1)
 	{
 		rtrn = ft_input_redir_over(cmd, token);
 		if (rtrn == -1)

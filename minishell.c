@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 12:16:02 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:13:24 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	}
 	free(matrix);
 	ft_initialize(first, *env_list);
-	ft_final_stamper(first);
+	//ft_final_stamper(first);
 	ft_execution(&first);
 	*env_list = first->env_list;
 	ft_free_all(&first);

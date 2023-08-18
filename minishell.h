@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 11:13:46 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:30:33 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,18 @@ typedef struct s_split
 
 typedef enum type
 {
-	NON,			// 0 BOOOOOOH
-	ARG,			// 1 ls -l o wc -l cat
-	BUILTIN,		// 2 echo, cd, pwd, export, unset, env, exit
-	OPEN_FILE,		// 3 <
-	HERE_DOC,		// 4 <<
-	LIMITOR,		// 5 ???
-	CREAT_FILE,		// 6 >
-	WRITE_FILE,		// 7 >>
-	FILE_IN,		// 8 ls -l < file.txt quindi il tipo del file.txt e' FILE_IN
-	FILE_OUT,		// 9 ls -l > file.txt quindi il tipo del file.txt e' FILE_OUT
-	FILE_OUT_OVER,	// 10 ls -l >> file.txt quindi il tipo del file.txt e' FILE_OUT_OVER
-	ENDS 			// 11 ; ???
-	//WRONG,		// 0 ERROR
+	NON,			
+	ARG,			
+	BUILTIN,		
+	OPEN_FILE,
+	HERE_DOC,
+	LIMITOR,
+	CREAT_FILE,
+	WRITE_FILE,
+	FILE_IN,
+	FILE_OUT,
+	FILE_OUT_OVER,
+	ENDS
 }	t_e_type;
 
 typedef struct s_token
