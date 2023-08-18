@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 16:02:56 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 09:08:36 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ char			**easy_split(char *str);
 int				ft_easy_split_rows_counter(char *input);
 char			**quote_cleaner_split(char *str, t_env01 *env_list);
 void			ft_easy_split_continue03(t_split *pippo, char *str);
+int				ft_symbol_checker(char *input);
+int				ft_only_spaces_checker(char *input);
 
 #endif

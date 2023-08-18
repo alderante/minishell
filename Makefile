@@ -6,7 +6,7 @@
 #    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/17 15:56:52 by cpopolan         ###   ########.fr        #
+#    Updated: 2023/08/18 09:09:36 by cpopolan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRC = minishell.c \
 		executor/organise_arg.c \
 		executor/01redirections.c \
 		executor/heredoc.c \
+		parser/parser_check01.c \
+		parser/parser_check02.c \
 		parser/easy_split_utils.c \
 		parser/easy_split.c \
 		parser/easy_split_rows_counter.c \
