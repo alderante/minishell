@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:23:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/14 23:27:32 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:15:16 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern int	g_exit_status;
 This value is commonly used to indicate that
 the program was terminated by a SIGINT*/
 
-void	signal_cmd(int sig)
+void	ft_signal_cmd(int sig)
 {
 	g_exit_status += sig;
 	if (sig == 2)

@@ -3,28 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 17:03:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 15:58:37 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:37:48 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-int	execution_builtin(char *str, char **args,
+int	ft_execution_builtin(char *str, char **args,
 		t_command_line **original, pid_t *pid)
 {
 	(void)(pid);
 	if (str == NULL)
 		return (0);
-	/* if (ft_strcmp("exit", str))
-	{
-		exit_bltin(args, original, pid);
-		return (free_in_builin(original, pid, 1));
-	} */
 	if (ft_strcmp01("cd", str))
-		builtin_cd(args);
+		ft_builtin_cd(args);
 	else if (ft_strcmp01("echo", str))
 		ft_built_in_echo(args);
 	else if (ft_strcmp01("exit", str))
@@ -40,9 +35,9 @@ int	execution_builtin(char *str, char **args,
 	return (0);
 }
 
-int	execute_builtin(t_command_line **cmd,
+int	ft_execute_builtin(t_command_line **cmd,
 	t_command_line **original, pid_t *pid)
 {
-	execution_builtin((*cmd)->argv[0], (*cmd)->argv, original, pid);
+	ft_execution_builtin((*cmd)->argv[0], (*cmd)->argv, original, pid);
 	return (0);
 }

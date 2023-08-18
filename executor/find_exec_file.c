@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:03:11 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/17 15:38:18 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:06:26 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_exit_status;
 
-char	*cmd_not_found_free_split(char *str, char **split_path)
+char	*ft_cmd_not_found_free_split(char *str, char **split_path)
 {
 	free_split(split_path);
 	write(2, str, ft_strlen(str));
@@ -23,7 +23,7 @@ char	*cmd_not_found_free_split(char *str, char **split_path)
 	return (NULL);
 }
 
-char	*cmd_not_found_free(char *str)
+char	*ft_cmd_not_found_free(char *str)
 {
 	write(2, str, ft_strlen(str));
 	write(2, ": command not found\n",
@@ -32,7 +32,7 @@ char	*cmd_not_found_free(char *str)
 	return (NULL);
 }
 
-char	*get_acces(char *str, char *path)
+char	*ft_get_access(char *str, char *path)
 {
 	char	*back_slash;
 	char	*new;
@@ -49,11 +49,11 @@ char	*get_acces(char *str, char *path)
 /* If the file can be executed by the calling process, 
 the access() function will return 0. */
 
-int	try_acces(char *str, char *path)
+int	ft_try_access(char *str, char *path)
 {
 	char	*try;
 
-	try = get_acces(str, path);
+	try = ft_get_access(str, path);
 	if (try == NULL)
 		return (50);
 	if (access(try, X_OK) == 0)
@@ -65,7 +65,7 @@ int	try_acces(char *str, char *path)
 	return (0);
 }
 
-char	*find_if_executable(char *str, char *path, int i)
+char	*ft_find_if_executable(char *str, char *path, int i)
 {
 	int		ret;
 	char	**split_path;
@@ -80,13 +80,13 @@ char	*find_if_executable(char *str, char *path, int i)
 	}
 	split_path = ft_strsplit(path);
 	if (split_path == NULL)
-		return (cmd_not_found_free(str));
+		return (ft_cmd_not_found_free(str));
 	while (split_path[i] && str[0] != '\0')
 	{
-		ret = try_acces(str, split_path[i]);
+		ret = ft_try_access(str, split_path[i]);
 		if (ret == 1)
 		{
-			try = get_acces(str, split_path[i]);
+			try = ft_get_access(str, split_path[i]);
 			free_split(split_path);
 			return (try);
 		}
@@ -94,7 +94,7 @@ char	*find_if_executable(char *str, char *path, int i)
 			return (free_split_ret_null(split_path));
 		i++;
 	}
-	cmd_not_found_free_split(str, split_path);
+	ft_cmd_not_found_free_split(str, split_path);
 	g_exit_status = 127;
 	return (str);
 }

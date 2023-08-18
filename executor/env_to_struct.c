@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:31:35 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/11 16:36:00 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/18 10:57:46 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 	struct s_env	*next;
 }				t_env01;
  */
-t_env01	*create_env_node(char *str, int declare)
+t_env01	*ft_create_env_node(char *str, int declare)
 {
 	t_env01	*node;
 
@@ -33,11 +33,11 @@ t_env01	*create_env_node(char *str, int declare)
 	return (node);
 }
 
-void	add_env_node(t_env01 **env_list, char *str, int declare)
+void	ft_add_env_node(t_env01 **env_list, char *str, int declare)
 {
 	t_env01	*node;
 
-	node = create_env_node(str, declare);
+	node = ft_create_env_node(str, declare);
 	if (node)
 	{
 		node->next = *env_list;
@@ -45,7 +45,7 @@ void	add_env_node(t_env01 **env_list, char *str, int declare)
 	}
 }
 
-t_env01	*convert_env_to_list(char **env)
+t_env01	*ft_convert_env_to_list(char **env)
 {
 	t_env01	*env_list;
 	int		i;
@@ -56,7 +56,7 @@ t_env01	*convert_env_to_list(char **env)
 	{
 		while (env[i] != NULL)
 		{
-			add_env_node(&env_list, env[i], 1);
+			ft_add_env_node(&env_list, env[i], 1);
 			i++;
 		}
 	}
