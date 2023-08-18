@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 10:00:21 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 15:04:20 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_check_pipe_after(char *input)
 				return (1 + ft_putstr_fd
 					("minishell: syntax error near unexpected token `|'\n", 2));
 		}
-		else
+		else if (input[i])
 			i++;
 	}
 	return (0);
@@ -76,7 +76,7 @@ int	ft_check_maj(char *input)
 				return (1 + ft_putstr_fd
 					("minishell: syntax error near unexpected token `>'\n", 2));
 		}
-		else
+		else if (input[i])
 			i++;
 	}
 	return (0);
@@ -105,7 +105,7 @@ int	ft_check_min(char *input)
 				return (1 + ft_putstr_fd
 					("minishell: syntax error near unexpected token `<'\n", 2));
 		}
-		else
+		else if (input[i])
 			i++;
 	}
 	return (0);

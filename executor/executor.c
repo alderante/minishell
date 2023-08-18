@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 12:55:06 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 16:04:48 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	ft_execution(t_command_line **cmd_line)
 		return (rtrn);
 	if (pid == NULL)
 		return (50);
+	(*cmd_line)->pid = pid;
 	ft_func_fork(cmd_line, pid);
 	ft_wait_pid(cmd_line, pid);
 	signal(SIGINT, ft_signal_cmd);

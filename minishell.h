@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 12:30:33 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/18 15:58:26 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_command_line
 	char					*name_file;
 	char					*heredoc_delimiter;
 	char					*input;
-	int						*pid;
+	pid_t					*pid;
 	struct s_command_line	*next;
 }	t_command_line;
 
