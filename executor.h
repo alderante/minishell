@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 11:26:20 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:40:41 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ char	*ft_get_str_of_env(t_env01 **env, char *str);
 //unset.c
 void	ft_built_in_unset(char **tab, t_env01 **first);
 
-
 //find_exec_file.c
 char	*ft_find_if_executable(char *str, char *path, int i);
 
@@ -186,7 +185,6 @@ int		ft_organise_arg(t_command_line **cmd);
 void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd);
 void	ft_built_in_show_env_fd(t_env01 **env, int fd);
 void	ft_built_in_export(char **tab, t_env01 **first);
-
 
 //free
 void	free_command_line(t_command_line *cmd);

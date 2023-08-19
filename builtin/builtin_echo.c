@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:58:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/24 16:44:47 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:25:35 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	ft_built_in_echo_fd(char **str, int fd)
 			if (str[i + 1])
 				ft_putchar_fd(' ', fd);
 		}
-			//printf("%d ", g_exit_status);
 		else
 		{
 			ft_putstr_fd(str[i], fd);

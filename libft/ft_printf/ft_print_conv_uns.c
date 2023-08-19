@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_conv_uns.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:44:49 by cpopolan          #+#    #+#             */
-/*   Updated: 2022/12/15 15:43:07 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:37:45 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,4 @@ int	ft_print_conv_uns(unsigned int n)
 		l++;
 	}
 	return (l);
-}	
+}

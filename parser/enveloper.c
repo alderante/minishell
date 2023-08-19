@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enveloper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 09:14:25 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:42:42 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@ void	ft_built_in_env(char **args, t_env01 *my_env)
 void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd)
 {
 	(void)(fd);
-	
-	// int i = 0;
-	// while(args[i])
-	// {
-	// 	printf("env args ‘%s’\n", args[i]);
-	// 	i++;
-	// }
 	if (args[1])
 	{
 		(void)(my_env);

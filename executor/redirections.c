@@ -6,13 +6,13 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 11:21:52 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:34:17 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-int g_exit_status;
+int	g_exit_status;
 
 int	ft_file_out(t_command_line **cmd,
 		t_token *updated, t_token *token)
@@ -24,7 +24,6 @@ int	ft_file_out(t_command_line **cmd,
 	{
 		fd = open(updated->next->token, O_WRONLY
 				| O_CREAT | O_TRUNC, 0666);
-
 		if (fd == -1)
 			return (-1);
 		(*cmd)->fd_out = fd;
@@ -49,7 +48,6 @@ int	ft_file_out_over(t_command_line **cmd, t_token *token)
 	{
 		fd = open(token->next->token, O_WRONLY
 				| O_CREAT | O_APPEND, 0666);
-
 		if (fd == -1)
 			return (-1);
 		(*cmd)->fd_out = fd;

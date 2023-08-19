@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 15:58:26 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:41:39 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_token
 	t_e_type			type;
 	struct s_token		*next;
 }		t_token;
-
 
 typedef struct s_env01
 {
@@ -108,6 +107,5 @@ int				ft_symbol_quote_checker(char *input, int i);
 int				ft_symbol_double_check(char *input, int *i);
 int				ft_saltaspazi(char *input, int i);
 void			ft_majia(char **matrix);
-
 
 #endif

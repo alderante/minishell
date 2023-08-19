@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 15:16:16 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:47:02 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
 		{
 			cmd_line->new_matrix_string
 				= ft_strjoin01(cmd_line->new_matrix_string, matrix[i]);
-
 			if (matrix[i + 1] != NULL && matrix[i + 1][0] != '|')
 				cmd_line->new_matrix_string
 					= ft_strjoin01(cmd_line->new_matrix_string, " ");
@@ -103,7 +102,6 @@ void	ft_input(char *input, t_env01 *env_list)
 	ft_env_deleter(env_list);
 	free(input);
 }
-
 
 int	main(int ac, char **av, char **envp)
 {
