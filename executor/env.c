@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:06:51 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 10:59:54 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:30:02 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,3 @@ int	free_delete_add(char *str, int mode)
 	} 
 	return (0);
 } */
-

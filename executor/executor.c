@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:50:57 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 16:04:48 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:06:40 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../executor.h"
 
 extern int	g_exit_status;
 
-/* The ft_wait_pid function takes the pid array and the cmd argument as arguments. 
+/* The ft_wait_pid function takes the pid array and
+the cmd argument as arguments. 
 The function waits for each child process to 
 finish executing and then checks its exit status. 
 If the exit status indicates an error, the function returns that error code. */
@@ -32,7 +32,6 @@ int	ft_execution_execve(t_command_line **cmd, t_command_line **original,
 	(void)(pid);
 	if ((*cmd)->argv[0] == NULL || access((*cmd)->argv[0], F_OK) == -1)
 	{
-    // handle error
 		free(str);
 		free(pid);
 		ft_env_deleter((*original)->env_list);
@@ -42,12 +41,6 @@ int	ft_execution_execve(t_command_line **cmd, t_command_line **original,
 	}
 	else
 		execve((*cmd)->argv[0], (*cmd)->argv, str);
-	/* free(str);
-	free(pid);
-	ft_env_deleter((*original)->env_list);
-	ft_free_all(original);
-	g_exit_status = 127;
-	exit(g_exit_status); */
 	return (0);
 }
 
@@ -56,6 +49,8 @@ int	ft_execution_execve(t_command_line **cmd, t_command_line **original,
 void	ft_big_executor01_continue(t_command_line **cmd,
 		t_command_line **original, pid_t *pid, char **str)
 {
+	char	*path;
+
 	if (ft_cmd_is_builtin((*cmd)->argv[0]) == 0)
 	{
 		if ((*cmd)->argv[0] == NULL)
@@ -66,9 +61,15 @@ void	ft_big_executor01_continue(t_command_line **cmd,
 			ft_free_all(original);
 			exit(1);
 		}
-		(*cmd)->argv[0] = ft_find_if_executable((*cmd)->argv[0],
-				ft_get_value_of_env(&(*cmd)->env_list, "PATH",
-					(*cmd)->argv[0]), 0);
+		if ((*cmd)->argv && ((*cmd)->argv[0][0] == '.'
+			|| (*cmd)->argv[0][0] == '/'))
+			return ;
+		path = ft_get_value_of_env(&(*cmd)->env_list, "PATH", (*cmd)->argv[0]);
+		if (path == NULL)
+			(*cmd)->argv[0] = NULL;
+		else
+			(*cmd)->argv[0] = ft_find_if_executable((*cmd)->argv[0],
+					path, 0);
 	}
 }
 
@@ -94,7 +95,6 @@ int	ft_big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 	dup2((*cmd)->fd_out, STDOUT_FILENO);
 	ft_all_fd_close(original);
 	str = ft_matrix_from_env(&(*cmd)->env_list);
-
 	if (str == NULL)
 		ft_all_fd_close_n_exit(original);
 	ft_big_executor01_continue(cmd, original, pid, str);
@@ -108,10 +108,9 @@ int	ft_big_executor(t_command_line **cmd, t_command_line **original, pid_t *pid)
 	free((*original)->input);
 	ft_env_deleter((*original)->env_list);
 	ft_free_all(original);
-	exit(0);
+	exit(g_exit_status);
 	return (0);
 }
-
 
 // function to set up pipes for inter-process communication
 //for each command in the commad line

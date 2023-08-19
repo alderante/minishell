@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01redirections.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 18:14:40 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 15:49:26 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:08:45 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	ft_input_redir(t_command_line **cmd,
 		free(next_token->token);
 		free(next_token);
 		if (fd == -1)
-			return (ft_putstr_fd("minishell: No such file or directory\n", 2) - 1);
+			return (ft_putstr_fd
+				("minishell: No such file or directory\n", 2) - 1);
 		return (0);
 	}
 	else
@@ -65,11 +66,13 @@ int	ft_input_redir(t_command_line **cmd,
 
 int	ft_input_redir_over(t_command_line **cmd, t_token *token)
 {
-	//token = token->next;
 	if (token->next && token->next->token)
 	{
 		(*cmd)->heredoc_delimiter = ft_strdup(token->next->token);
-		(*cmd)->fd_in = ft_create_heredoc_fd(cmd, token);
+		if ((*cmd)->heredoc_delimiter)
+			(*cmd)->fd_in = ft_create_heredoc_fd(cmd, token);
+		else
+			(*cmd)->fd_in = -1;
 		if ((*cmd)->fd_in == -1)
 			return (-1);
 		return (1);

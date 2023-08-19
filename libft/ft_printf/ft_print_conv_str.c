@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_conv_str.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpopolan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 11:43:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2022/12/15 16:14:32 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:37:55 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_print_conv_str(char *str)
 	else
 	{
 		while (str[i] != '\0')
-		{	
+		{
 			write(1, &str[i], 1);
 			i++;
 		}

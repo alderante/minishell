@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:03:11 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 11:06:26 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:04:01 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*ft_cmd_not_found_free_split(char *str, char **split_path)
 	write(2, str, ft_strlen(str));
 	write(2, ": command not found\n",
 		ft_strlen(": command not found\n"));
+	g_exit_status = 127;
 	return (NULL);
 }
 
@@ -29,6 +30,7 @@ char	*ft_cmd_not_found_free(char *str)
 	write(2, ": command not found\n",
 		ft_strlen(": command not found\n"));
 	free(str);
+	g_exit_status = 127;
 	return (NULL);
 }
 
@@ -71,13 +73,13 @@ char	*ft_find_if_executable(char *str, char *path, int i)
 	char	**split_path;
 	char	*try;
 
-	if (str && (str[0] == '.' || str[0] == '/'))
+	/* if (str && (str[0] == '.' || str[0] == '/'))
 		return (str);
 	if (path == NULL)
 	{
 		//free(str);
 		return (NULL);
-	}
+	} */
 	split_path = ft_strsplit(path);
 	if (split_path == NULL)
 		return (ft_cmd_not_found_free(str));

@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:40:27 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/11 14:48:24 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:36:53 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	while (s2[j] != '\0')
-	{	
+	{
 		dest[i + j] = s2[j];
 		j++;
 	}
@@ -58,7 +58,7 @@ char	*ft_strjoin01(char *s1, char *s2)
 		i++;
 	}
 	while (s2[j] != '\0')
-	{	
+	{
 		dest[i + j] = s2[j];
 		j++;
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
+#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/18 11:03:33 by cpopolan         ###   ########.fr        #
+#    Updated: 2023/08/19 16:27:06 by rkhinchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,10 @@ SRC = minishell.c \
 
 OBJ = $(SRC:.c=.o)
 
+TEMP = .heredoc_tmp
+
+TXT = .txt
+
 LIBFT = libft/libft.a
 
 %.o: %.c
@@ -68,10 +72,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
+	rm -rf $(TEMP)
 	@$(CC) $(FLAGS) $(OBJ) $(LIBFT) -lreadline -o $(NAME)
 	@echo "\e[92m$(NAME) compiled\e[0m"
 
 re:	fclean all
+	rm -rf $(TEMP)
 
 clean:
 	make clean -C libft
@@ -82,6 +88,8 @@ fclean:
 	make fclean -C libft
 	rm -rf $(OBJ)
 	rm -rf $(NAME)
+	rm -rf $(TEMP)
+	rm -rf $(TXT)
 	@echo "\e[92m$(NAME) removed\e[0m"
 
 .PHONY: all re clean fclean bonus

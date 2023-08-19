@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:49:27 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/07/04 16:49:31 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:36:35 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 unsigned int	ft_xstrlen(char const *s)
 {
-	unsigned int 	i;
-	
+	unsigned int	i;
+
 	i = 0;
-	while(s)
+	while (s)
 		i++;
-	return(i);
+	return (i);
 }
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)

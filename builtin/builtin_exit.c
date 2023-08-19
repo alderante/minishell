@@ -6,13 +6,13 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:39:27 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 10:59:54 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:27:28 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 static int	ft_llong_limit_ret(char *str)
 {

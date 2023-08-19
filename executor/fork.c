@@ -6,7 +6,7 @@
 /*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:10:14 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/18 11:46:27 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:32:43 by rkhinchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	ft_execution_bd_fd(char *str, char **args,
 		t_command_line **original, pid_t *pid)
 {
 	(void)(pid);
-
 	if (str == NULL)
 		return (0);
 	if (ft_strcmp01("cd", str))
