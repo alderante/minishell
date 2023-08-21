@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/21 15:38:00 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:36:56 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_expander_new_string(t_expander **exp, char *str, t_env01 *env_list)
 	}
 	free((*exp)->searchname);
 }
-
 
 char	*ft_expander01(t_expander *exp, char *str, t_env01 *env_list)
 {

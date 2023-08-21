@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   enveloper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:55:56 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/19 17:42:42 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/21 16:04:29 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
+
+extern int	g_exit_status;
 
 void	ft_env_deleter(t_env01 *first)
 {
@@ -35,6 +37,7 @@ void	ft_built_in_env(char **args, t_env01 *my_env)
 	if (args[1])
 	{
 		(void)(my_env);
+		g_exit_status = 127;
 		printf("env: ‘%s’: No such file or directory", args[1]);
 	}
 	else
@@ -53,6 +56,7 @@ void	ft_built_in_env_fd(char **args, t_env01 *my_env, int fd)
 	if (args[1])
 	{
 		(void)(my_env);
+		g_exit_status = 127;
 		printf("env: ‘%s’: No such file or directory\n", args[1]);
 	}
 	else

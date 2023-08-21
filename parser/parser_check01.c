@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/21 10:28:50 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:30:59 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_check_maj(char *input)
 		i = ft_saltaspazi(input, i);
 		if (input[i] == '>' && input[i + 1] == '>')
 		{
-			if (ft_symbol_double_check(input, &i))
+			if (ft_symbol_double_check_maj(input, &i))
 				return (1);
 		}
 		else if (input[i] == '>')
@@ -97,7 +97,7 @@ int	ft_check_min(char *input)
 		i = ft_saltaspazi(input, i);
 		if (input[i] == '<' && input[i + 1] == '<')
 		{
-			if (ft_symbol_double_check(input, &i))
+			if (ft_symbol_double_check_min(input, &i))
 				return (1);
 		}
 		else if (input[i] == '<')

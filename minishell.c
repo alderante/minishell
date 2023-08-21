@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/21 15:44:07 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:34:39 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 int	g_exit_status = 0;
 
 t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
-		t_command_line *first_line)
+		t_command_line *first_line, int i)
 {
-	int				i;
-
-	i = 0;
 	if (matrix == NULL)
 		return (NULL);
 	while (matrix[i])
@@ -34,8 +31,9 @@ t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
 					= ft_strjoin01(cmd_line->new_matrix_string, " ");
 			i++;
 		}
-		if (matrix[i] && matrix[++i][0] == '|')
+		if (matrix[i] && matrix[i][0] == '|')
 		{
+			i++;
 			cmd_line->next = ft_calloc(sizeof(t_command_line), 1);
 			cmd_line = cmd_line->next;
 		}
@@ -50,11 +48,13 @@ t_command_line	*ft_new_matrix(char **matrix)
 {
 	t_command_line	*first_line;
 	t_command_line	*cmd_line;
+	int				i;
 
+	i = 0;
 	cmd_line = ft_calloc(sizeof(t_command_line), 1);
 	first_line = cmd_line;
 	cmd_line->new_matrix_string = NULL;
-	return (ft_new_matrix_continue(matrix, cmd_line, first_line));
+	return (ft_new_matrix_continue(matrix, cmd_line, first_line, i));
 }
 
 void	ft_lexer(char *input, t_env01 **env_list)
@@ -74,7 +74,6 @@ void	ft_lexer(char *input, t_env01 **env_list)
 	}
 	free(matrix);
 	ft_initialize(first, *env_list);
-	//ft_final_stamper(first);
 	ft_execution(&first);
 	*env_list = first->env_list;
 	ft_free_all(&first);

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/21 15:37:59 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:31:35 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void			ft_easy_split_continue03(t_split *pippo, char *str);
 int				ft_symbol_checker(char *input);
 int				ft_only_spaces_checker(char *input);
 int				ft_symbol_quote_checker(char *input, int i);
-int				ft_symbol_double_check(char *input, int *i);
+int				ft_symbol_double_check_maj(char *input, int *i);
+int				ft_symbol_double_check_min(char *input, int *i);
 int				ft_saltaspazi(char *input, int i);
 void			ft_majia(char **matrix);
 int				ft_check_maj_error(void);

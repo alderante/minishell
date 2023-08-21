@@ -6,13 +6,13 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 11:04:41 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 17:39:09 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-void	ft_final_stamper(t_command_line *cmd_line)
+/* void	ft_final_stamper(t_command_line *cmd_line)
 {
 	t_token	*node;
 
@@ -43,7 +43,7 @@ void	ft_final_stamper(t_command_line *cmd_line)
 		else
 			break ;
 	}
-}
+} */
 
 t_token	*ft_newnode(char *token, int pos)
 {
