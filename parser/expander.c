@@ -6,143 +6,110 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:01:31 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/17 09:14:25 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:38:00 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-t_env01	*ft_env_search(t_env01 *env_list, char *searchname)
-{
-	char	*temp;
+extern int	g_exit_status;
 
-	temp = ft_strjoin(searchname, "=");
-	while (env_list != NULL)
+void	ft_expander_new_string(t_expander **exp, char *str, t_env01 *env_list)
+{
+	(*exp)->n = 0;
+	(*exp)->i++;
+	(*exp)->initial = (*exp)->i;
+	while (ft_isalnum(str[(*exp)->i]) == 1 || str[(*exp)->i] == '_')
 	{
-		if (!ft_strncmp(temp, env_list->str, ft_strlen(temp)))
-			break ;
-		env_list = env_list->next;
+		(*exp)->n++;
+		(*exp)->i++;
 	}
-	free(temp);
-	if (env_list)
-		return (env_list);
-	return (NULL);
+	(*exp)->searchname = ft_substr(str, (*exp)->initial, (*exp)->n);
+	if (ft_env_search(env_list, (*exp)->searchname) != NULL)
+	{
+		(*exp)->value = ft_value_extractor
+			(ft_env_search(env_list, (*exp)->searchname));
+		(*exp)->new_str[(*exp)->new_len] = '\0';
+		ft_strlcat(&(*exp)->new_str[(*exp)->new_len], (*exp)->value,
+			ft_strlen((*exp)->value) + 1);
+		(*exp)->new_len += ft_strlen((*exp)->value);
+		free((*exp)->value);
+	}
+	free((*exp)->searchname);
 }
 
-int	ft_env_list_equal_position(t_env01 *env_list)
-{
-	int	equal;
 
-	equal = 0;
-	while (env_list->str[equal] != '=')
+char	*ft_expander01(t_expander *exp, char *str, t_env01 *env_list)
+{
+	(*exp).new_str = malloc(sizeof(char) * (*exp).new_len + 1);
+	(*exp).new_str[(*exp).new_len] = '\0';
+	(*exp).new_len = 0;
+	(*exp).check = 0;
+	(*exp).i = 0;
+	while (str[(*exp).i])
 	{
-		equal++;
+		(*exp).check = ft_check_quote(str[(*exp).i], (*exp).check);
+		if (str[(*exp).i] == '$' && str[(*exp).i + 1] == '?'
+			&& (*exp).check != 1)
+			ft_exit_expander(&exp);
+		else if (ft_dollar_checker(str, exp) == 1)
+			ft_expander_new_string(&exp, str, env_list);
+		else
+		{
+			(*exp).new_str[(*exp).new_len] = str[(*exp).i];
+			(*exp).i++;
+			(*exp).new_len++;
+		}
 	}
-	equal++;
-	return (equal);
+	return ((*exp).new_str);
 }
 
-char	*ft_value_extractor(t_env01 *env_list)
+void	ft_expander02(char *str, t_expander *exp, t_env01 *env_list)
 {
-	char	*value;
-	int		equal;
-
-	equal = ft_env_list_equal_position(env_list);
-	value = ft_substr(env_list->str, equal, ft_strlen(env_list->str));
-	return (value);
+	(*exp).i++;
+	(*exp).n = 0;
+	(*exp).initial = (*exp).i;
+	while (ft_isalnum(str[(*exp).i]) == 1 || str[(*exp).i] == '_')
+	{
+		(*exp).n++;
+		(*exp).i++;
+	}
+	(*exp).searchname = ft_substr(str, (*exp).initial, (*exp).n);
+	if (ft_env_search(env_list, (*exp).searchname) != NULL)
+	{
+		(*exp).value = ft_value_extractor
+			(ft_env_search(env_list, (*exp).searchname));
+		(*exp).new_len = (*exp).new_len + ft_strlen((*exp).value);
+		free((*exp).value);
+	}
+	free((*exp).searchname);
 }
 
 char	*expander(char *str, t_env01 *env_list)
 {
-	char	*value;
-	int		check;
-	int		i;
-	int		n;
-	int		new_len;
-	int		initial;
-	char	*searchname;
-	char	*new_str;
+	t_expander	exp;
 
-	i = 0;
-	new_len = 0;
-	check = 0;
-	while (str[i])
+	exp.i = 0;
+	exp.new_len = 0;
+	exp.check = 0;
+	while (str[exp.i])
 	{
-		check = ft_check_quote(str[i], check);
-		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 || str[i + 1] == '_') && check != 1 )
+		exp.check = ft_check_quote(str[exp.i], exp.check);
+		if (str[exp.i] == '$' && str[exp.i + 1] == '?'
+			&& exp.check != 1)
 		{
-			i++;
-			n = 0;
-			initial = i;
-			while (ft_isalnum(str[i]) == 1 || str[i] == '_')
-			{
-				n++;
-				i++;
-			}
-			//printf("n is %d\n", n);
-			searchname = ft_substr(str, initial, n);
-			//printf("questo is searchname: %s\n", searchname);
-			if (ft_env_search(env_list, searchname) != NULL)
-			{
-				value = ft_value_extractor(ft_env_search(env_list, searchname));
-				//printf("Value is %s\n", value);
-				new_len = new_len + ft_strlen(value);
-				free(value);
-			}
-			// else
-			// 	printf("env non trovato\n");
-			free(searchname);
+			exp.i += 2;
+			exp.value = ft_itoa_original(g_exit_status);
+			exp.new_len = exp.new_len + ft_strlen(exp.value);
+			free(exp.value);
 		}
+		else if (ft_dollar_checker(str, &exp) == 1)
+			ft_expander02(str, &exp, env_list);
 		else
 		{
-			i++;
-			new_len++;
+			exp.i++;
+			exp.new_len++;
 		}
 	}
-	//printf("new_len is %d\n", new_len);
-
-	new_str = malloc(sizeof(char) * new_len + 1);
-	new_str[new_len] = '\0';
-	new_len = 0;
-	check = 0;
-	i = 0;
-	while (str[i])
-	{
-		check = ft_check_quote(str[i], check);
-		if (str[i] == '$' && (ft_isalnum(str[i + 1]) == 1 || str[i + 1] == '_') && check != 1)
-		{
-			n = 0;
-			i++;
-			initial = i;
-			while (ft_isalnum(str[i]) == 1 || str[i] == '_')
-			{
-				n++;
-				i++;
-			}
-			//printf("n is %d\n", n);
-			searchname = ft_substr(str, initial, n);
-			//printf("questo is searchname: %s\n", searchname);
-			if (ft_env_search(env_list, searchname) != NULL)
-			{
-				value = ft_value_extractor(ft_env_search(env_list, searchname));
-				//printf("Value is %s\n", value);
-				new_str[new_len] = '\0';
-				ft_strlcat(&new_str[new_len], value, ft_strlen(value) + 1);
-				new_len += ft_strlen(value);
-				//printf("ESPANSIONE la stringa che ora is %s\n", new_str);
-				free(value);
-			}
-			// else
-			// 	printf("env non trovato\n");
-			free(searchname);
-		}
-		else
-		{
-			new_str[new_len] = str[i];
-			i++;
-			new_len++;
-		}
-	}
-	//printf("ALLA FINE is %s\n", new_str);
-	return (new_str);
+	return (ft_expander01(&exp, str, env_list));
 }

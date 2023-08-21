@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+         #
+#    By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/18 17:05:49 by rkhinchi          #+#    #+#              #
-#    Updated: 2023/08/19 16:27:06 by rkhinchi         ###   ########.fr        #
+#    Updated: 2023/08/21 15:39:08 by cpopolan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRC = minishell.c \
 		builtin/builtin_unset.c \
 		builtin/builtin_export.c \
 		builtin/builtin_exit.c \
+		builtin/original_itoa.c \
+		builtin/builtin_export_utils.c \
 		executor/env_to_struct.c \
 		executor/env_utils.c \
 		executor/value_env.c \
@@ -43,6 +45,7 @@ SRC = minishell.c \
 		executor/heredoc.c \
 		parser/parser_check01.c \
 		parser/parser_check02.c \
+		parser/parser_check03.c \
 		parser/majia.c \
 		parser/easy_split_utils.c \
 		parser/easy_split.c \
@@ -50,6 +53,7 @@ SRC = minishell.c \
 		parser/enveloper.c \
 		parser/env_to_struct.c \
 		parser/expander.c \
+		parser/expander_utils.c \
 		parser/noder.c \
 		parser/noder_utils.c \
 		parser/quote_cleaner_node_deleter.c

@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 09:04:31 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:45:45 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	ft_check_pipe_before(char *input)
 		i++;
 	if (input[i] == '|')
 	{
-		printf("bash: syntax error near unexpected token `|'\n");
-		return (1);
+		g_exit_status = 2;
+		return (1 + ft_putstr_fd
+			("minishell: syntax error near unexpected token `|'\n", 2));
 	}
 	return (0);
 }
@@ -55,16 +56,18 @@ int	ft_check_pipe_after(char *input)
 			i++;
 			while ((input[i] >= 9 && input[i] <= 13) || input[i] == 32)
 				i++;
-			if (input[i] == '|' || input[i] == '>' || input[i] == '<' || input[i] == '\0')
+			if (input[i] == '|' || input[i] == '>'
+				|| input[i] == '<' || input[i] == '\0')
 			{
-				printf("bash: syntax error near unexpected token `|'\n");
-				return (1);
+				g_exit_status = 2;
+				return (1 + ft_putstr_fd
+					("minishell: syntax error near unexpected token `|'\n", 2));
 			}
 		}
 		else
 			i++;
 	}
-	return(0);
+	return (0);
 }
 
 int	ft_check_maj(char *input)
@@ -96,8 +99,9 @@ int	ft_check_maj(char *input)
 				i++;
 			if (input[i] == '|' || input[i] == '>' || input[i] == '<' || input[i] == '\0')
 			{
-				printf("bash: syntax error near unexpected token `>'\n");
-				return (1);
+				g_exit_status = 2;
+				return (1 + ft_putstr_fd
+					("minishell: syntax error near unexpected token `>'\n", 2));
 			}
 		}
 		else if (input[i] == '>')
@@ -107,14 +111,15 @@ int	ft_check_maj(char *input)
 				i++;
 			if (input[i] == '|' || input[i] == '>' || input[i] == '<' || input[i] == '\0')
 			{
-				printf("bash: syntax error near unexpected token `>'\n");
-				return (1);
+				g_exit_status = 2;
+				return (1 + ft_putstr_fd
+					("minishell: syntax error near unexpected token `>'\n", 2));
 			}
 		}
 		else
 			i++;
 	}
-	return(0);
+	return (0);
 }
 
 int	ft_check_min(char *input)
@@ -146,8 +151,9 @@ int	ft_check_min(char *input)
 				i++;
 			if (input[i] == '|' || input[i] == '>' || input[i] == '<' || input[i] == '\0')
 			{
-				printf("bash: syntax error near unexpected token `<'\n");
-				return (1);
+				g_exit_status = 2;
+				return (1 + ft_putstr_fd
+					("minishell: syntax error near unexpected token `<'\n", 2));
 			}
 		}
 		else if (input[i] == '<')
@@ -156,15 +162,16 @@ int	ft_check_min(char *input)
 			while ((input[i] >= 9 && input[i] <= 13) || input[i] == 32)
 				i++;
 			if (input[i] == '|' || input[i] == '>' || input[i] == '<' || input[i] == '\0')
-			{
-				printf("bash: syntax error near unexpected token `<'\n");
-				return (1);
+			{	
+				g_exit_status = 2;
+				return (1 + ft_putstr_fd
+					("minishell: syntax error near unexpected token `<'\n", 2));
 			}
 		}
 		else
 			i++;
 	}
-	return(0);
+	return (0);
 }
 
 int	ft_symbol_checker(char *input)

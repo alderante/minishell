@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 16:58:05 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/19 17:25:35 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:27:46 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,9 @@ int	ft_built_in_echo_fd(char **str, int fd)
 		y++;
 	while (str[i])
 	{
-		if (ft_strcmp01(str[i], "$?") == 1)
-		{
-			ft_itoa01(g_exit_status, fd);
-			if (str[i + 1])
-				ft_putchar_fd(' ', fd);
-		}
-		else
-		{
-			ft_putstr_fd(str[i], fd);
-			if (str[i + 1])
-				ft_putchar_fd(' ', fd);
-		}
+		ft_putstr_fd(str[i], fd);
+		if (str[i + 1])
+			ft_putchar_fd(' ', fd);
 		i++;
 	}
 	if (y == 0)

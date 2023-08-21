@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/19 17:47:02 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:44:07 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 #include <string.h>
 
-extern int	g_exit_status;
+int	g_exit_status = 0;
 
 t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
-	t_command_line *first_line)
+		t_command_line *first_line)
 {
 	int				i;
 
@@ -34,9 +34,8 @@ t_command_line	*ft_new_matrix_continue(char **matrix, t_command_line *cmd_line,
 					= ft_strjoin01(cmd_line->new_matrix_string, " ");
 			i++;
 		}
-		if (matrix[i] && matrix[i][0] == '|')
+		if (matrix[i] && matrix[++i][0] == '|')
 		{
-			i++;
 			cmd_line->next = ft_calloc(sizeof(t_command_line), 1);
 			cmd_line = cmd_line->next;
 		}
@@ -110,7 +109,6 @@ int	main(int ac, char **av, char **envp)
 
 	(void)(ac);
 	(void)(av);
-	g_exit_status = 0;
 	signal(SIGINT, ft_signal_cmd);
 	signal(SIGQUIT, SIG_IGN);
 	env_list = ft_env_noder(envp);

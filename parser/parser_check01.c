@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 15:04:20 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:28:50 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ int	ft_check_pipe_before(char *input)
 	while ((input[i] >= 9 && input[i] <= 13) || input[i] == 32)
 		i++;
 	if (input[i] == '|')
+	{
+		g_exit_status = 2;
 		return (1 + ft_putstr_fd
 			("minishell: syntax error near unexpected token `|'\n", 2));
+	}
 	return (0);
 }
 
@@ -35,8 +38,7 @@ int	ft_check_pipe_after(char *input)
 	while (input[i])
 	{
 		i = ft_symbol_quote_checker(input, i);
-		while ((input[i] >= 9 && input[i] <= 13) || input[i] == 32)
-			i++;
+		i = ft_saltaspazi(input, i);
 		if (input[i] == '|')
 		{
 			i++;
@@ -44,8 +46,11 @@ int	ft_check_pipe_after(char *input)
 				i++;
 			if (input[i] == '|' || input[i] == '>'
 				|| input[i] == '<' || input[i] == '\0')
+			{
+				g_exit_status = 2;
 				return (1 + ft_putstr_fd
 					("minishell: syntax error near unexpected token `|'\n", 2));
+			}
 		}
 		else if (input[i])
 			i++;
@@ -73,8 +78,7 @@ int	ft_check_maj(char *input)
 			i = ft_saltaspazi(input, i);
 			if (input[i] == '|' || input[i] == '>'
 				|| input[i] == '<' || input[i] == '\0')
-				return (1 + ft_putstr_fd
-					("minishell: syntax error near unexpected token `>'\n", 2));
+				return (ft_check_maj_error());
 		}
 		else if (input[i])
 			i++;
@@ -102,8 +106,7 @@ int	ft_check_min(char *input)
 			i = ft_saltaspazi(input, i);
 			if (input[i] == '|' || input[i] == '>'
 				|| input[i] == '<' || input[i] == '\0')
-				return (1 + ft_putstr_fd
-					("minishell: syntax error near unexpected token `<'\n", 2));
+				return (ft_check_min_error());
 		}
 		else if (input[i])
 			i++;

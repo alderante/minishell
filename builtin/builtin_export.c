@@ -6,29 +6,11 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:40:39 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/16 15:50:35 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:21:13 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
-
-int	ft_export_checker(char *tab, int equal)
-{
-	int	i;
-
-	if (equal < 1)
-		return (1);
-	if (ft_isalpha(tab[0]) == 0 && tab[0] != '_')
-		return (1);
-	i = 1;
-	while (tab[i] != '=')
-	{
-		if (ft_isalnum(tab[i]) == 0 && tab[i] != '_')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	ft_input_equal_position(char *tab)
 {
@@ -97,8 +79,7 @@ void	ft_built_in_export01(char **tab, t_env01 **first)
 			}
 			else
 				ft_built_in_export02(tab, first, env_list);
-			free(name);
-			free(value);
+			ft_free_built_in_export01(name, value);
 		}
 		tab++;
 	}

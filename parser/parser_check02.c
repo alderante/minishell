@@ -6,11 +6,13 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:06:44 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 09:55:15 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:47:08 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
+
+extern int g_exit_status;
 
 int	ft_only_spaces_checker(char *input)
 {
@@ -54,8 +56,11 @@ int	ft_symbol_double_check(char *input, int *i)
 		*i += 1;
 	if (input[*i] == '|' || input[*i] == '>'
 		|| input[*i] == '<' || input[*i] == '\0')
+	{
+		g_exit_status = 2;
 		return (1 + ft_putstr_fd
-			("bash: syntax error near unexpected token `>'\n", 2));
+			("minishell: syntax error near unexpected token `>'\n", 2));
+	}
 	return (0);
 }
 

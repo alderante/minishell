@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:23:50 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/19 17:41:39 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:37:59 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,17 @@ typedef struct s_env01
 	struct s_env01	*next;
 }				t_env01;
 
+typedef struct s_expander {
+	char	*value;
+	int		check;
+	int		i;
+	int		n;
+	int		new_len;
+	int		initial;
+	char	*searchname;
+	char	*new_str;
+}	t_expander;
+
 typedef struct s_command_line
 {
 	char					*new_matrix_string;
@@ -107,5 +118,15 @@ int				ft_symbol_quote_checker(char *input, int i);
 int				ft_symbol_double_check(char *input, int *i);
 int				ft_saltaspazi(char *input, int i);
 void			ft_majia(char **matrix);
+int				ft_check_maj_error(void);
+int				ft_check_min_error(void);
+char			*ft_itoa_original(int n);
+
+//expander_UTILS
+void			ft_exit_expander(t_expander **exp);
+int				ft_dollar_checker(char *str, t_expander *exp);
+char			*ft_value_extractor(t_env01 *env_list);
+int				ft_env_list_equal_position(t_env01 *env_list);
+t_env01			*ft_env_search(t_env01 *env_list, char *searchname);
 
 #endif

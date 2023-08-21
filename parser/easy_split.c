@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:44:29 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/18 12:31:29 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:35:02 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**easy_split(char *str)
 			sizeof(char *));
 	while (str[pippo.i] != '\0')
 	{
-		if (str[pippo.i] != 32)
+		if (str[pippo.i] != 32 && str[pippo.i] != '\t')
 		{
 			pippo.x = 0;
 			pippo.tab[pippo.y] = ft_calloc((strlen(str) + 1), sizeof(char));

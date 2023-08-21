@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 18:50:36 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/19 17:34:17 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:28:45 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../executor.h"
 
-int	g_exit_status;
+extern int	g_exit_status;
 
 int	ft_file_out(t_command_line **cmd,
 		t_token *updated, t_token *token)

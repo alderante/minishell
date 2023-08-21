@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkhinchi <rkhinchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:09:52 by rkhinchi          #+#    #+#             */
-/*   Updated: 2023/08/19 17:40:41 by rkhinchi         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:20:22 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,9 @@ void	ft_built_in_export(char **tab, t_env01 **first);
 //free
 void	free_command_line(t_command_line *cmd);
 void	ft_free_end(t_command_line **cmd, char *str);
+
+//BUILTIN export utils
+int		ft_export_checker(char *tab, int equal);
+void	ft_free_built_in_export01(char *name, char *value);
 
 #endif
