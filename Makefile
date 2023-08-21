@@ -98,4 +98,4 @@ fclean:
 
 .PHONY: all re clean fclean bonus
 
-.SILENT:
+#.SILENT:
