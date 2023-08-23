@@ -6,7 +6,7 @@
 /*   By: cpopolan <cpopolan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:54:09 by cpopolan          #+#    #+#             */
-/*   Updated: 2023/08/21 11:26:39 by cpopolan         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:19:44 by cpopolan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,28 @@ typedef struct s_quote_cleaner
 void	quote_cleaner_split_continue02(t_quote_cleaner **pluto, char *str)
 {
 	(*pluto)->i++;
-	while (str[(*pluto)->i] != 34)
+	while (str[(*pluto)->i] != 34 && str[(*pluto)->i] != 0)
 	{
 		(*pluto)->tab[(*pluto)->y][(*pluto)->x] = str[(*pluto)->i];
 		(*pluto)->i++;
 		(*pluto)->x++;
 	}
-	(*pluto)->i++;
+	if (str[(*pluto)->i])
+		(*pluto)->i++;
 }
 
 void	quote_cleaner_split_continue03(t_quote_cleaner **pluto,
 		char *str)
 {
 	(*pluto)->i++;
-	while (str[(*pluto)->i] != 39)
+	while (str[(*pluto)->i] != 39 && str[(*pluto)->i] != 0)
 	{
 		(*pluto)->tab[(*pluto)->y][(*pluto)->x] = str[(*pluto)->i];
 		(*pluto)->i++;
 		(*pluto)->x++;
 	}
-	(*pluto)->i++;
+	if (str[(*pluto)->i])
+		(*pluto)->i++;
 }
 
 void	quote_cleaner_split_continue01(t_quote_cleaner *pluto,
